@@ -1,13 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import TwitterFeed from '../components/TwitterFeed.astro';
 
-// Get featured articles and events
+// Get featured articles, publications and events
 const allArticles = await getCollection('articoli');
+const allPublications = await getCollection('pubblicazioni');
 const allEvents = await getCollection('eventi');
 
 // Sort by date and get latest
 const featuredArticles = allArticles
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
+
+const featuredPublications = allPublications
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
   .slice(0, 3);
 
@@ -25,15 +31,16 @@ const upcomingEvents = allEvents
         Rete Italiana Studi Curdi
       </h1>
       <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-        Promuoviamo la ricerca e la conoscenza della cultura curda attraverso 
-        eventi, pubblicazioni e collaborazioni accademiche.
+        Un network di accademici, ricercatori e studenti interessati allo studio 
+        di tutti i temi attinenti agli studi curdi. Promuoviamo un confronto e 
+        una discussione accademica rigorosi.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/articoli" class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-          Scopri gli Articoli
+        <a href="/pubblicazioni" class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          Pubblicazioni
         </a>
         <a href="/eventi" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-red-600 transition-colors">
-          Prossimi Eventi
+          Conferenze ed Eventi
         </a>
       </div>
     </div>
@@ -80,6 +87,54 @@ const upcomingEvents = allEvents
     </section>
   )}
 
+  <!-- Featured Publications -->
+  {featuredPublications.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Pubblicazioni Recenti</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredPublications.map((publication) => (
+            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  <a href={`/pubblicazioni/${publication.slug}`} class="hover:text-red-600 transition-colors">
+                    {publication.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 text-sm mb-3 font-medium">
+                  {publication.data.authors.join(', ')}
+                </p>
+                <p class="text-gray-600 text-sm mb-4">
+                  {publication.data.publisher} • {publication.data.pubDate.toLocaleDateString('it-IT')}
+                </p>
+                <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                  {publication.data.abstract}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  {publication.data.doi && (
+                    <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">
+                      DOI
+                    </span>
+                  )}
+                  {publication.data.tags && publication.data.tags.slice(0, 2).map((tag) => (
+                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a href="/pubblicazioni" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+            Vedi Tutte le Pubblicazioni
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- Upcoming Events -->
   {upcomingEvents.length > 0 && (
     <section class="py-16 bg-gray-50">
@@ -112,15 +167,31 @@ const upcomingEvents = allEvents
     </section>
   )}
 
+  <!-- Social Media Section -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">Seguici sui Social</h2>
+        <p class="text-lg text-gray-600">
+          Resta aggiornato sui nostri eventi, pubblicazioni e attività
+        </p>
+      </div>
+      
+      <div class="max-w-2xl mx-auto">
+        <TwitterFeed />
+      </div>
+    </div>
+  </section>
+
   <!-- About Section -->
   <section class="py-16 bg-white">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-gray-900 mb-8">Chi Siamo</h2>
       <p class="text-lg text-gray-600 leading-relaxed mb-8">
-        La Rete Italiana Studi Curdi è un'associazione che promuove la ricerca accademica 
-        e la divulgazione della cultura curda in Italia. Organizziamo conferenze, seminari, 
-        pubblicazioni e collaboriamo con università e centri di ricerca per approfondire 
-        la conoscenza della storia, della letteratura, della politica e della società curda.
+        La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti 
+        interessati allo studio di tutti i temi attinenti agli studi curdi. Il network nasce 
+        per promuovere un confronto e una discussione accademica rigorosi, favorendo l'incontro 
+        tra ricercatori, lo scambio di conoscenze e possibili collaborazioni tra i propri membri.
       </p>
       <a href="/chi-siamo" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
         Scopri di Più

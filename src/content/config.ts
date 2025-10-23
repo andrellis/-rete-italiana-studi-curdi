@@ -39,8 +39,24 @@ const eventiCollection = defineCollection({
   }),
 });
 
+const pubblicazioniCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    authors: z.array(z.string()),
+    pubDate: z.coerce.date(),
+    publisher: z.string(),
+    abstract: z.string(),
+    doi: z.string().optional(),
+    pdfUrl: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    featured: z.boolean().optional(),
+  }),
+});
+
 export const collections = {
   'articoli': articoliCollection,
   'pagine': pagineCollection,
   'eventi': eventiCollection,
+  'pubblicazioni': pubblicazioniCollection,
 };
