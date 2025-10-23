@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Pagina Non Trovata - Rete Italiana Studi Curdi" description="La pagina che stai cercando non esiste">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+    <div class="mb-8">
+      <h1 class="text-6xl font-bold text-red-600 mb-4">404</h1>
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Pagina Non Trovata</h2>
+      <p class="text-xl text-gray-600 mb-8">
+        La pagina che stai cercando non esiste o è stata spostata.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <a 
+        href="/" 
+        class="inline-block bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+      >
+        Torna alla Homepage
+      </a>
+      
+      <div class="text-gray-500 text-sm">
+        <p>Oppure prova a navigare:</p>
+        <div class="flex flex-wrap justify-center gap-4 mt-4">
+          <a href="/articoli" class="text-red-600 hover:underline">Articoli</a>
+          <a href="/pubblicazioni" class="text-red-600 hover:underline">Pubblicazioni</a>
+          <a href="/eventi" class="text-red-600 hover:underline">Conferenze ed Eventi</a>
+          <a href="/chi-siamo" class="text-red-600 hover:underline">Chi Siamo</a>
+          <a href="/contatti" class="text-red-600 hover:underline">Contatti</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
