@@ -3,9 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import SocialMediaFeeds from '../components/SocialMediaFeeds.astro';
 
-// Get homepage settings
-const homepageSettings = await getCollection('homepage');
-const settings = homepageSettings[0]?.data;
+// Get homepage settings with error handling
+let homepageSettings: any[] = [];
+try {
+  homepageSettings = await getCollection('homepage');
+} catch (error) {
+  console.warn('Homepage collection not found or empty:', error);
+}
+
+const settings = homepageSettings.length > 0 ? homepageSettings[0]?.data : null;
 
 // Get featured articles, publications and events
 const allArticles = await getCollection('articoli');

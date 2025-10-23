@@ -92,12 +92,14 @@ collections:
           - {label: "Sito Web", name: "website", widget: "string", hint: "URL del sito web"}
           - {label: "Username Twitter", name: "twitterUsername", widget: "string", required: false, hint: "Username Twitter (senza @)"}
           - {label: "Mostra Feed Twitter", name: "showTwitter", widget: "boolean", required: false, hint: "Mostra il feed Twitter nella homepage"}
-          - {label: "Altezza Feed Twitter", name: "twitterHeight", widget: "number", required: false, hint: "Altezza del feed Twitter in pixel"}
+          - {label: "Altezza Feed Twitter", name: "twitterHeight", widget: "number", required: false, hint: "Altezza del feed Twitter in pixel (raccomandato: 300-600)"}
           - {label: "Tema Twitter", name: "twitterTheme", widget: "select", options: ["light", "dark"], required: false, hint: "Tema del feed Twitter"}
-          - {label: "Username LinkedIn", name: "linkedinUsername", widget: "string", required: false, hint: "Username LinkedIn (senza @)"}
+          - {label: "Username LinkedIn", name: "linkedinUsername", widget: "string", required: false, hint: "Username LinkedIn (senza @, es: company-name)"}
           - {label: "Mostra Feed LinkedIn", name: "showLinkedin", widget: "boolean", required: false, hint: "Mostra il feed LinkedIn nella homepage"}
-          - {label: "Username Facebook", name: "facebookUsername", widget: "string", required: false, hint: "Username Facebook"}
+          - {label: "Altezza Feed LinkedIn", name: "linkedinHeight", widget: "number", required: false, hint: "Altezza del componente LinkedIn in pixel (raccomandato: 200-400)"}
+          - {label: "Username Facebook", name: "facebookUsername", widget: "string", required: false, hint: "Username Facebook (es: page-name)"}
           - {label: "Mostra Feed Facebook", name: "showFacebook", widget: "boolean", required: false, hint: "Mostra il feed Facebook nella homepage"}
+          - {label: "Altezza Feed Facebook", name: "facebookHeight", widget: "number", required: false, hint: "Altezza del feed Facebook in pixel (raccomandato: 300-600)"}
           - {label: "Testo Footer", name: "footerText", widget: "text", required: false, hint: "Testo descrittivo nel footer"}
           - {label: "Anno Copyright", name: "copyrightYear", widget: "number", required: false, hint: "Anno per il copyright"}
 

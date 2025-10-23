@@ -1,15 +1,31 @@
 ---
 import { getCollection } from 'astro:content';
 
-// Get navigation items and site settings
-const navigationItems = await getCollection('navigation');
-const siteSettings = await getCollection('settings');
+// Get navigation items and site settings with error handling
+let navigationItems: any[] = [];
+let siteSettings: any[] = [];
+
+try {
+  navigationItems = await getCollection('navigation');
+} catch (error) {
+  console.warn('Navigation collection not found or empty:', error);
+}
+
+try {
+  siteSettings = await getCollection('settings');
+} catch (error) {
+  console.warn('Settings collection not found or empty:', error);
+}
 
 // Sort navigation by order
-const sortedNavigation = navigationItems.sort((a, b) => a.data.order - b.data.order);
+const sortedNavigation = navigationItems.length > 0 
+  ? navigationItems.sort((a, b) => a.data.order - b.data.order)
+  : [];
 
 // Get site name from settings
-const siteName = siteSettings[0]?.data.logoText || 'Rete Italiana Studi Curdi';
+const siteName = siteSettings.length > 0 && siteSettings[0]?.data?.logoText 
+  ? siteSettings[0].data.logoText 
+  : 'Rete Italiana Studi Curdi';
 ---
 
 <header class="bg-white shadow-sm border-b border-gray-200">

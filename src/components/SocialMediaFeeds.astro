@@ -3,30 +3,45 @@ import { getCollection } from 'astro:content';
 import TwitterFeed from './TwitterFeed.astro';
 import LinkedInFeed from './LinkedInFeed.astro';
 import FacebookFeed from './FacebookFeed.astro';
+import { getSafeUsername, isValidTwitterUsername, isValidLinkedInUsername, isValidFacebookUsername } from '../utils/validation';
 
-// Get site settings
-const siteSettings = await getCollection('settings');
-const settings = siteSettings[0]?.data;
+// Get site settings with error handling
+let siteSettings: any[] = [];
+try {
+  siteSettings = await getCollection('settings');
+} catch (error) {
+  console.warn('Settings collection not found or empty:', error);
+}
+
+const settings = siteSettings.length > 0 ? siteSettings[0]?.data : null;
 
 // Get social media configuration
 const showTwitter = settings?.showTwitter || false;
 const showLinkedin = settings?.showLinkedin || false;
 const showFacebook = settings?.showFacebook || false;
 
-const twitterUsername = settings?.twitterUsername;
-const linkedinUsername = settings?.linkedinUsername;
-const facebookUsername = settings?.facebookUsername;
+// Get and validate usernames
+const twitterUsername = settings?.twitterUsername ? getSafeUsername(settings.twitterUsername) : '';
+const linkedinUsername = settings?.linkedinUsername ? getSafeUsername(settings.linkedinUsername) : '';
+const facebookUsername = settings?.facebookUsername ? getSafeUsername(settings.facebookUsername) : '';
+
+// Validate usernames and update show flags accordingly
+const validTwitter = twitterUsername && isValidTwitterUsername(twitterUsername);
+const validLinkedin = linkedinUsername && isValidLinkedInUsername(linkedinUsername);
+const validFacebook = facebookUsername && isValidFacebookUsername(facebookUsername);
 
 const twitterHeight = settings?.twitterHeight || 400;
 const twitterTheme = settings?.twitterTheme || 'light';
+const linkedinHeight = settings?.linkedinHeight || 400;
+const facebookHeight = settings?.facebookHeight || 400;
 
-// Only show if at least one social media is enabled
-const hasSocialMedia = showTwitter || showLinkedin || showFacebook;
+// Only show if at least one social media is enabled and has valid username
+const hasSocialMedia = (showTwitter && validTwitter) || (showLinkedin && validLinkedin) || (showFacebook && validFacebook);
 ---
 
 {hasSocialMedia && (
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-    {showTwitter && twitterUsername && (
+    {showTwitter && validTwitter && (
       <div class="lg:col-span-2 xl:col-span-1">
         <TwitterFeed 
           username={twitterUsername}
@@ -37,21 +52,21 @@ const hasSocialMedia = showTwitter || showLinkedin || showFacebook;
       </div>
     )}
     
-    {showLinkedin && linkedinUsername && (
+    {showLinkedin && validLinkedin && (
       <div>
         <LinkedInFeed 
           username={linkedinUsername}
-          height={twitterHeight}
+          height={linkedinHeight}
           title="Seguici su LinkedIn"
         />
       </div>
     )}
     
-    {showFacebook && facebookUsername && (
+    {showFacebook && validFacebook && (
       <div>
         <FacebookFeed 
           username={facebookUsername}
-          height={twitterHeight}
+          height={facebookHeight}
           title="Seguici su Facebook"
         />
       </div>

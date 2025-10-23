@@ -1,15 +1,29 @@
 ---
 import { getCollection } from 'astro:content';
 
-// Get site settings and navigation
-const siteSettings = await getCollection('settings');
-const navigationItems = await getCollection('navigation');
+// Get site settings and navigation with error handling
+let siteSettings: any[] = [];
+let navigationItems: any[] = [];
+
+try {
+  siteSettings = await getCollection('settings');
+} catch (error) {
+  console.warn('Settings collection not found or empty:', error);
+}
+
+try {
+  navigationItems = await getCollection('navigation');
+} catch (error) {
+  console.warn('Navigation collection not found or empty:', error);
+}
 
 // Sort navigation by order
-const sortedNavigation = navigationItems.sort((a, b) => a.data.order - b.data.order);
+const sortedNavigation = navigationItems.length > 0 
+  ? navigationItems.sort((a, b) => a.data.order - b.data.order)
+  : [];
 
-// Get settings data
-const settings = siteSettings[0]?.data;
+// Get settings data with fallbacks
+const settings = siteSettings.length > 0 ? siteSettings[0]?.data : null;
 const siteName = settings?.logoText || 'Rete Italiana Studi Curdi';
 const contactEmail = settings?.contactEmail || 'rete.italiana.studi.curdi@gmail.com';
 const website = settings?.website || 'www.reteitalianastudicurdi.it';

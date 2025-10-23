@@ -9,8 +9,10 @@
   "twitterTheme": "light",
   "linkedinUsername": "YOUR_LINKEDIN_USERNAME",
   "showLinkedin": false,
+  "linkedinHeight": 400,
   "facebookUsername": "YOUR_FACEBOOK_USERNAME",
   "showFacebook": false,
+  "facebookHeight": 400,
   "footerText": "Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi.",
   "copyrightYear": 2024
 }
