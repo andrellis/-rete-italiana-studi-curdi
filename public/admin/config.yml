@@ -1,0 +1,80 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Enable immediate publishing (no editorial workflow)
+publish_mode: simple
+
+# Media library settings
+media_folder: "public/images"
+public_folder: "/images"
+
+# Site URL for previews
+site_url: https://reteitalianastudicurdi.netlify.app
+
+collections:
+  - name: "articoli"
+    label: "Articoli"
+    folder: "src/content/articoli"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} - {{pubDate}}"
+    fields:
+      - {label: "Titolo", name: "title", widget: "string", hint: "Titolo principale dell'articolo"}
+      - {label: "Descrizione", name: "description", widget: "text", required: false, hint: "Breve descrizione che apparirà nelle anteprime"}
+      - {label: "Data Pubblicazione", name: "pubDate", widget: "datetime", hint: "Data di pubblicazione dell'articolo"}
+      - {label: "Data Aggiornamento", name: "updatedDate", widget: "datetime", required: false, hint: "Data dell'ultimo aggiornamento (opzionale)"}
+      - {label: "Immagine Hero", name: "heroImage", widget: "image", required: false, hint: "Immagine principale dell'articolo (raccomandato 1200x630px)"}
+      - {label: "Tags", name: "tags", widget: "list", required: false, hint: "Tag per categorizzare l'articolo (es: letteratura, storia, cultura)"}
+      - {label: "Autore", name: "author", widget: "string", required: false, hint: "Nome dell'autore dell'articolo"}
+      - {label: "In Evidenza", name: "featured", widget: "boolean", required: false, hint: "Seleziona per mostrare l'articolo in evidenza nella homepage"}
+      - {label: "Contenuto", name: "body", widget: "markdown", hint: "Contenuto principale dell'articolo in formato Markdown"}
+
+  - name: "pagine"
+    label: "Pagine"
+    folder: "src/content/pagine"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    fields:
+      - {label: "Titolo", name: "title", widget: "string", hint: "Titolo della pagina"}
+      - {label: "Descrizione", name: "description", widget: "text", required: false, hint: "Descrizione SEO della pagina"}
+      - {label: "Data Aggiornamento", name: "updatedDate", widget: "datetime", required: false, hint: "Data dell'ultimo aggiornamento (opzionale)"}
+      - {label: "Immagine Hero", name: "heroImage", widget: "image", required: false, hint: "Immagine principale della pagina (raccomandato 1200x630px)"}
+      - {label: "Ordine", name: "order", widget: "number", required: false, hint: "Ordine di visualizzazione nel menu (opzionale)"}
+      - {label: "Contenuto", name: "body", widget: "markdown", hint: "Contenuto della pagina in formato Markdown"}
+
+  - name: "eventi"
+    label: "Eventi"
+    folder: "src/content/eventi"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} - {{eventDate}}"
+    fields:
+      - {label: "Titolo", name: "title", widget: "string", hint: "Titolo dell'evento"}
+      - {label: "Descrizione", name: "description", widget: "text", required: false, hint: "Breve descrizione dell'evento per le anteprime"}
+      - {label: "Data Evento", name: "eventDate", widget: "datetime", hint: "Data e ora di inizio dell'evento"}
+      - {label: "Data Fine", name: "endDate", widget: "datetime", required: false, hint: "Data e ora di fine (per eventi di più giorni)"}
+      - {label: "Luogo", name: "location", widget: "string", required: false, hint: "Dove si terrà l'evento (es: Università di Milano, Sala Aula Magna)"}
+      - {label: "Immagine Hero", name: "heroImage", widget: "image", required: false, hint: "Immagine promozionale dell'evento (raccomandato 1200x630px)"}
+      - {label: "In Evidenza", name: "featured", widget: "boolean", required: false, hint: "Seleziona per mostrare l'evento in evidenza nella homepage"}
+      - {label: "URL Registrazione", name: "registrationUrl", widget: "string", required: false, hint: "Link per la registrazione all'evento (opzionale)"}
+      - {label: "Contenuto", name: "body", widget: "markdown", hint: "Dettagli completi dell'evento in formato Markdown"}
+
+  - name: "pubblicazioni"
+    label: "Pubblicazioni"
+    folder: "src/content/pubblicazioni"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} - {{pubDate}}"
+    fields:
+      - {label: "Titolo", name: "title", widget: "string", hint: "Titolo della pubblicazione"}
+      - {label: "Autori", name: "authors", widget: "list", hint: "Lista degli autori (uno per riga)"}
+      - {label: "Data Pubblicazione", name: "pubDate", widget: "datetime", hint: "Data di pubblicazione"}
+      - {label: "Editore", name: "publisher", widget: "string", hint: "Casa editrice o rivista"}
+      - {label: "Abstract", name: "abstract", widget: "text", hint: "Riassunto della pubblicazione"}
+      - {label: "DOI", name: "doi", widget: "string", required: false, hint: "DOI della pubblicazione (opzionale)"}
+      - {label: "URL PDF", name: "pdfUrl", widget: "string", required: false, hint: "Link al PDF (opzionale)"}
+      - {label: "Tags", name: "tags", widget: "list", required: false, hint: "Tag per categorizzare (es: letteratura, politica, storia)"}
+      - {label: "In Evidenza", name: "featured", widget: "boolean", required: false, hint: "Seleziona per mostrare in homepage"}
+      - {label: "Contenuto", name: "body", widget: "markdown", hint: "Contenuto completo della pubblicazione in formato Markdown"}
