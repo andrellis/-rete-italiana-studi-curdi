@@ -41,8 +41,6 @@ const { title, description = "Rete Italiana Studi Curdi - Promuoviamo la ricerca
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body class="min-h-screen bg-gray-50 text-gray-900">
     <Header />
@@ -53,17 +51,6 @@ const { title, description = "Rete Italiana Studi Curdi - Promuoviamo la ricerca
   </body>
 </html>
 
-<script>
-  if ((window as any).netlifyIdentity) {
-    (window as any).netlifyIdentity.on("init", (user: any) => {
-      if (!user) {
-        (window as any).netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
 
 <style is:global>
   html {
