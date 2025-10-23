@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import TwitterFeed from './TwitterFeed.astro';
+import LinkedInFeed from './LinkedInFeed.astro';
+import FacebookFeed from './FacebookFeed.astro';
+
+// Get site settings
+const siteSettings = await getCollection('settings');
+const settings = siteSettings[0]?.data;
+
+// Get social media configuration
+const showTwitter = settings?.showTwitter || false;
+const showLinkedin = settings?.showLinkedin || false;
+const showFacebook = settings?.showFacebook || false;
+
+const twitterUsername = settings?.twitterUsername;
+const linkedinUsername = settings?.linkedinUsername;
+const facebookUsername = settings?.facebookUsername;
+
+const twitterHeight = settings?.twitterHeight || 400;
+const twitterTheme = settings?.twitterTheme || 'light';
+
+// Only show if at least one social media is enabled
+const hasSocialMedia = showTwitter || showLinkedin || showFacebook;
+---
+
+{hasSocialMedia && (
+  <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+    {showTwitter && twitterUsername && (
+      <div class="lg:col-span-2 xl:col-span-1">
+        <TwitterFeed 
+          username={twitterUsername}
+          height={twitterHeight}
+          theme={twitterTheme}
+          title="Seguici su Twitter"
+        />
+      </div>
+    )}
+    
+    {showLinkedin && linkedinUsername && (
+      <div>
+        <LinkedInFeed 
+          username={linkedinUsername}
+          height={twitterHeight}
+          title="Seguici su LinkedIn"
+        />
+      </div>
+    )}
+    
+    {showFacebook && facebookUsername && (
+      <div>
+        <FacebookFeed 
+          username={facebookUsername}
+          height={twitterHeight}
+          title="Seguici su Facebook"
+        />
+      </div>
+    )}
+  </div>
+)}

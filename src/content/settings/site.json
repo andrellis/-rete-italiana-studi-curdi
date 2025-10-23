@@ -1,0 +1,16 @@
+{
+  "siteName": "Rete Italiana Studi Curdi",
+  "logoText": "Rete Italiana Studi Curdi",
+  "contactEmail": "rete.italiana.studi.curdi@gmail.com",
+  "website": "www.reteitalianastudicurdi.it",
+  "twitterUsername": "YOUR_TWITTER_USERNAME",
+  "showTwitter": true,
+  "twitterHeight": 400,
+  "twitterTheme": "light",
+  "linkedinUsername": "YOUR_LINKEDIN_USERNAME",
+  "showLinkedin": false,
+  "facebookUsername": "YOUR_FACEBOOK_USERNAME",
+  "showFacebook": false,
+  "footerText": "Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi.",
+  "copyrightYear": 2024
+}

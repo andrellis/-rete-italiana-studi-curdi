@@ -78,3 +78,66 @@ collections:
       - {label: "Tags", name: "tags", widget: "list", required: false, hint: "Tag per categorizzare (es: letteratura, politica, storia)"}
       - {label: "In Evidenza", name: "featured", widget: "boolean", required: false, hint: "Seleziona per mostrare in homepage"}
       - {label: "Contenuto", name: "body", widget: "markdown", hint: "Contenuto completo della pubblicazione in formato Markdown"}
+
+  - name: "settings"
+    label: "Impostazioni Sito"
+    files:
+      - file: "src/content/settings/site.json"
+        label: "Impostazioni Globali"
+        name: "site"
+        fields:
+          - {label: "Nome Sito", name: "siteName", widget: "string", hint: "Nome principale del sito"}
+          - {label: "Testo Logo", name: "logoText", widget: "string", hint: "Testo visualizzato nel logo"}
+          - {label: "Email Contatto", name: "contactEmail", widget: "string", hint: "Email principale per i contatti"}
+          - {label: "Sito Web", name: "website", widget: "string", hint: "URL del sito web"}
+          - {label: "Username Twitter", name: "twitterUsername", widget: "string", required: false, hint: "Username Twitter (senza @)"}
+          - {label: "Mostra Feed Twitter", name: "showTwitter", widget: "boolean", required: false, hint: "Mostra il feed Twitter nella homepage"}
+          - {label: "Altezza Feed Twitter", name: "twitterHeight", widget: "number", required: false, hint: "Altezza del feed Twitter in pixel"}
+          - {label: "Tema Twitter", name: "twitterTheme", widget: "select", options: ["light", "dark"], required: false, hint: "Tema del feed Twitter"}
+          - {label: "Username LinkedIn", name: "linkedinUsername", widget: "string", required: false, hint: "Username LinkedIn (senza @)"}
+          - {label: "Mostra Feed LinkedIn", name: "showLinkedin", widget: "boolean", required: false, hint: "Mostra il feed LinkedIn nella homepage"}
+          - {label: "Username Facebook", name: "facebookUsername", widget: "string", required: false, hint: "Username Facebook"}
+          - {label: "Mostra Feed Facebook", name: "showFacebook", widget: "boolean", required: false, hint: "Mostra il feed Facebook nella homepage"}
+          - {label: "Testo Footer", name: "footerText", widget: "text", required: false, hint: "Testo descrittivo nel footer"}
+          - {label: "Anno Copyright", name: "copyrightYear", widget: "number", required: false, hint: "Anno per il copyright"}
+
+  - name: "navigation"
+    label: "Menu di Navigazione"
+    folder: "src/content/navigation"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{label}} - {{url}}"
+    fields:
+      - {label: "Etichetta", name: "label", widget: "string", hint: "Testo del menu item"}
+      - {label: "URL", name: "url", widget: "string", hint: "Link del menu item (es: /articoli, https://example.com)"}
+      - {label: "Ordine", name: "order", widget: "number", hint: "Posizione nel menu (1, 2, 3...)"}
+      - {label: "Mostra Desktop", name: "showDesktop", widget: "boolean", required: false, hint: "Mostra nel menu desktop"}
+      - {label: "Mostra Mobile", name: "showMobile", widget: "boolean", required: false, hint: "Mostra nel menu mobile"}
+      - {label: "Link Esterno", name: "isExternal", widget: "boolean", required: false, hint: "Seleziona se è un link esterno"}
+
+  - name: "homepage"
+    label: "Homepage"
+    files:
+      - file: "src/content/homepage/sections.json"
+        label: "Sezioni Homepage"
+        name: "sections"
+        fields:
+          - {label: "Titolo Hero", name: "heroTitle", widget: "string", hint: "Titolo principale della sezione hero"}
+          - {label: "Sottotitolo Hero", name: "heroSubtitle", widget: "text", hint: "Sottotitolo della sezione hero"}
+          - {label: "Colore Sfondo Hero (da)", name: "heroBgFrom", widget: "string", required: false, hint: "Classe Tailwind per colore sfondo (es: from-red-600)"}
+          - {label: "Colore Sfondo Hero (a)", name: "heroBgTo", widget: "string", required: false, hint: "Classe Tailwind per colore sfondo (es: to-red-700)"}
+          - {label: "Pulsante 1 - Etichetta", name: "ctaButton1Label", widget: "string", required: false, hint: "Testo del primo pulsante CTA"}
+          - {label: "Pulsante 1 - URL", name: "ctaButton1Url", widget: "string", required: false, hint: "Link del primo pulsante CTA"}
+          - {label: "Pulsante 2 - Etichetta", name: "ctaButton2Label", widget: "string", required: false, hint: "Testo del secondo pulsante CTA"}
+          - {label: "Pulsante 2 - URL", name: "ctaButton2Url", widget: "string", required: false, hint: "Link del secondo pulsante CTA"}
+          - {label: "Mostra Sezione About", name: "showAboutSection", widget: "boolean", required: false, hint: "Mostra la sezione Chi Siamo nella homepage"}
+          - {label: "Titolo About", name: "aboutTitle", widget: "string", required: false, hint: "Titolo della sezione About"}
+          - {label: "Contenuto About", name: "aboutContent", widget: "text", required: false, hint: "Contenuto della sezione About"}
+          - {label: "Numero Articoli in Evidenza", name: "featuredArticlesCount", widget: "number", required: false, hint: "Quanti articoli mostrare nella homepage"}
+          - {label: "Numero Pubblicazioni in Evidenza", name: "featuredPublicationsCount", widget: "number", required: false, hint: "Quante pubblicazioni mostrare nella homepage"}
+          - {label: "Numero Eventi in Evidenza", name: "featuredEventsCount", widget: "number", required: false, hint: "Quanti eventi mostrare nella homepage"}
+          - {label: "Titolo Sezione Articoli", name: "articlesSectionTitle", widget: "string", required: false, hint: "Titolo della sezione articoli"}
+          - {label: "Titolo Sezione Pubblicazioni", name: "publicationsSectionTitle", widget: "string", required: false, hint: "Titolo della sezione pubblicazioni"}
+          - {label: "Titolo Sezione Eventi", name: "eventsSectionTitle", widget: "string", required: false, hint: "Titolo della sezione eventi"}
+          - {label: "Mostra Social Media", name: "showSocialMedia", widget: "boolean", required: false, hint: "Mostra la sezione social media"}
+          - {label: "Titolo Social Media", name: "socialMediaTitle", widget: "string", required: false, hint: "Titolo della sezione social media"}

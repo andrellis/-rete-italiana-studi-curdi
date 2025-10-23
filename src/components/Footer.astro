@@ -1,5 +1,20 @@
 ---
-// Footer component
+import { getCollection } from 'astro:content';
+
+// Get site settings and navigation
+const siteSettings = await getCollection('settings');
+const navigationItems = await getCollection('navigation');
+
+// Sort navigation by order
+const sortedNavigation = navigationItems.sort((a, b) => a.data.order - b.data.order);
+
+// Get settings data
+const settings = siteSettings[0]?.data;
+const siteName = settings?.logoText || 'Rete Italiana Studi Curdi';
+const contactEmail = settings?.contactEmail || 'rete.italiana.studi.curdi@gmail.com';
+const website = settings?.website || 'www.reteitalianastudicurdi.it';
+const footerText = settings?.footerText || 'Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi.';
+const copyrightYear = settings?.copyrightYear || new Date().getFullYear();
 ---
 
 <footer class="bg-gray-900 text-white">
@@ -7,10 +22,9 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- About Section -->
       <div>
-        <h3 class="text-lg font-semibold mb-4">Rete Italiana Studi Curdi</h3>
+        <h3 class="text-lg font-semibold mb-4">{siteName}</h3>
         <p class="text-gray-300 text-sm leading-relaxed">
-          Promuoviamo la ricerca e la conoscenza della cultura curda attraverso 
-          eventi, pubblicazioni e collaborazioni accademiche.
+          {footerText}
         </p>
       </div>
       
@@ -18,11 +32,17 @@
       <div>
         <h3 class="text-lg font-semibold mb-4">Link Utili</h3>
         <ul class="space-y-2">
-          <li><a href="/articoli" class="text-gray-300 hover:text-white text-sm transition-colors">Articoli</a></li>
-          <li><a href="/pubblicazioni" class="text-gray-300 hover:text-white text-sm transition-colors">Pubblicazioni</a></li>
-          <li><a href="/eventi" class="text-gray-300 hover:text-white text-sm transition-colors">Conferenze ed Eventi</a></li>
-          <li><a href="/chi-siamo" class="text-gray-300 hover:text-white text-sm transition-colors">Chi Siamo</a></li>
-          <li><a href="/contatti" class="text-gray-300 hover:text-white text-sm transition-colors">Contatti</a></li>
+          {sortedNavigation.map((item) => (
+            <li>
+              <a 
+                href={item.data.url} 
+                class="text-gray-300 hover:text-white text-sm transition-colors"
+                {...(item.data.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {item.data.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
       
@@ -30,15 +50,15 @@
       <div>
         <h3 class="text-lg font-semibold mb-4">Contatti</h3>
         <div class="text-gray-300 text-sm space-y-2">
-          <p>Email: rete.italiana.studi.curdi@gmail.com</p>
-          <p>Website: www.reteitalianastudicurdi.it</p>
+          <p>Email: {contactEmail}</p>
+          <p>Website: {website}</p>
         </div>
       </div>
     </div>
     
     <div class="border-t border-gray-800 mt-8 pt-8 text-center">
       <p class="text-gray-400 text-sm">
-        © 2024 Rete Italiana Studi Curdi. Tutti i diritti riservati.
+        © {copyrightYear} {siteName}. Tutti i diritti riservati.
       </p>
     </div>
   </div>

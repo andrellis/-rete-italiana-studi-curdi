@@ -1,5 +1,15 @@
 ---
-// Header component
+import { getCollection } from 'astro:content';
+
+// Get navigation items and site settings
+const navigationItems = await getCollection('navigation');
+const siteSettings = await getCollection('settings');
+
+// Sort navigation by order
+const sortedNavigation = navigationItems.sort((a, b) => a.data.order - b.data.order);
+
+// Get site name from settings
+const siteName = siteSettings[0]?.data.logoText || 'Rete Italiana Studi Curdi';
 ---
 
 <header class="bg-white shadow-sm border-b border-gray-200">
@@ -8,31 +18,24 @@
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="/" class="text-xl font-bold text-red-600">
-          Rete Italiana Studi Curdi
+          {siteName}
         </a>
       </div>
       
       <!-- Desktop Navigation -->
       <div class="hidden md:block">
         <div class="ml-10 flex items-baseline space-x-4">
-          <a href="/" class="text-gray-900 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Home
-          </a>
-          <a href="/articoli" class="text-gray-900 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Articoli
-          </a>
-          <a href="/pubblicazioni" class="text-gray-900 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Pubblicazioni
-          </a>
-          <a href="/eventi" class="text-gray-900 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Conferenze ed Eventi
-          </a>
-          <a href="/chi-siamo" class="text-gray-900 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Chi Siamo
-          </a>
-          <a href="/contatti" class="text-gray-900 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-            Contatti
-          </a>
+          {sortedNavigation
+            .filter(item => item.data.showDesktop !== false)
+            .map((item) => (
+              <a 
+                href={item.data.url} 
+                class="text-gray-900 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                {...(item.data.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {item.data.label}
+              </a>
+            ))}
         </div>
       </div>
       
@@ -51,24 +54,17 @@
     <!-- Mobile menu -->
     <div class="md:hidden" id="mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-        <a href="/" class="text-gray-900 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium">
-          Home
-        </a>
-        <a href="/articoli" class="text-gray-900 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium">
-          Articoli
-        </a>
-        <a href="/pubblicazioni" class="text-gray-900 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium">
-          Pubblicazioni
-        </a>
-        <a href="/eventi" class="text-gray-900 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium">
-          Conferenze ed Eventi
-        </a>
-        <a href="/chi-siamo" class="text-gray-900 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium">
-          Chi Siamo
-        </a>
-        <a href="/contatti" class="text-gray-900 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium">
-          Contatti
-        </a>
+        {sortedNavigation
+          .filter(item => item.data.showMobile !== false)
+          .map((item) => (
+            <a 
+              href={item.data.url} 
+              class="text-gray-900 hover:text-red-600 block px-3 py-2 rounded-md text-base font-medium"
+              {...(item.data.isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {item.data.label}
+            </a>
+          ))}
       </div>
     </div>
   </nav>

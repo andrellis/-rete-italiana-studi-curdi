@@ -1,0 +1,8 @@
+{
+  "label": "Home",
+  "url": "/",
+  "order": 1,
+  "showDesktop": true,
+  "showMobile": true,
+  "isExternal": false
+}
