@@ -1,0 +1,138 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allEvents = await getCollection('eventi');
+const now = new Date();
+
+// Separate upcoming and past events
+const upcomingEvents = allEvents
+  .filter(event => event.data.eventDate >= now)
+  .sort((a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime());
+
+const pastEvents = allEvents
+  .filter(event => event.data.eventDate < now)
+  .sort((a, b) => b.data.eventDate.getTime() - a.data.eventDate.getTime());
+---
+
+<Layout title="Eventi - Rete Italiana Studi Curdi" description="Eventi, conferenze e seminari sulla cultura curda">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Eventi</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Partecipa ai nostri eventi, conferenze e seminari sulla cultura curda
+      </p>
+    </div>
+
+    <!-- Upcoming Events -->
+    {upcomingEvents.length > 0 && (
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Prossimi Eventi</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {upcomingEvents.map((event) => (
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              {event.data.heroImage && (
+                <img 
+                  src={event.data.heroImage} 
+                  alt={event.data.title}
+                  class="w-full h-48 object-cover"
+                />
+              )}
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  <a href={`/eventi/${event.slug}`} class="hover:text-red-600 transition-colors">
+                    {event.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                  {event.data.description || event.body.slice(0, 150) + '...'}
+                </p>
+                <div class="space-y-2 text-sm text-gray-500 mb-4">
+                  <div class="flex items-center gap-2">
+                    <span>📅</span>
+                    <span>{event.data.eventDate.toLocaleDateString('it-IT', { 
+                      weekday: 'long', 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}</span>
+                  </div>
+                  {event.data.endDate && (
+                    <div class="flex items-center gap-2">
+                      <span>📅</span>
+                      <span>Fino al {event.data.endDate.toLocaleDateString('it-IT')}</span>
+                    </div>
+                  )}
+                  {event.data.location && (
+                    <div class="flex items-center gap-2">
+                      <span>📍</span>
+                      <span>{event.data.location}</span>
+                    </div>
+                  )}
+                </div>
+                {event.data.registrationUrl && (
+                  <a 
+                    href={event.data.registrationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                  >
+                    Registrati
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Past Events -->
+    {pastEvents.length > 0 && (
+      <section>
+        <h2 class="text-3xl font-bold text-gray-900 mb-8">Eventi Passati</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {pastEvents.map((event) => (
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow opacity-75">
+              {event.data.heroImage && (
+                <img 
+                  src={event.data.heroImage} 
+                  alt={event.data.title}
+                  class="w-full h-48 object-cover"
+                />
+              )}
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  <a href={`/eventi/${event.slug}`} class="hover:text-red-600 transition-colors">
+                    {event.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                  {event.data.description || event.body.slice(0, 150) + '...'}
+                </p>
+                <div class="space-y-2 text-sm text-gray-500">
+                  <div class="flex items-center gap-2">
+                    <span>📅</span>
+                    <span>{event.data.eventDate.toLocaleDateString('it-IT')}</span>
+                  </div>
+                  {event.data.location && (
+                    <div class="flex items-center gap-2">
+                      <span>📍</span>
+                      <span>{event.data.location}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {allEvents.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-gray-500 text-lg">Nessun evento disponibile al momento.</p>
+      </div>
+    )}
+  </div>
+</Layout>

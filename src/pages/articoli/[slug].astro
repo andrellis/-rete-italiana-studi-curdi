@@ -1,0 +1,160 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articoli');
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+---
+
+<Layout 
+  title={`${article.data.title} - Rete Italiana Studi Curdi`}
+  description={article.data.description}
+  image={article.data.heroImage}
+>
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Article Header -->
+    <header class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">{article.data.title}</h1>
+      
+      <div class="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-6">
+        <time datetime={article.data.pubDate.toISOString()}>
+          {article.data.pubDate.toLocaleDateString('it-IT')}
+        </time>
+        {article.data.author && (
+          <span>di {article.data.author}</span>
+        )}
+        {article.data.updatedDate && (
+          <span>Aggiornato il {article.data.updatedDate.toLocaleDateString('it-IT')}</span>
+        )}
+      </div>
+
+      {article.data.tags && article.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mb-6">
+          {article.data.tags.map((tag) => (
+            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {article.data.heroImage && (
+        <img 
+          src={article.data.heroImage} 
+          alt={article.data.title}
+          class="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
+        />
+      )}
+    </header>
+
+    <!-- Article Content -->
+    <div class="prose prose-lg max-w-none">
+      <Content />
+    </div>
+
+    <!-- Article Footer -->
+    <footer class="mt-12 pt-8 border-t border-gray-200">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">Condividi questo articolo</h3>
+          <div class="flex gap-2">
+            <a 
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.data.title)}&url=${encodeURIComponent(Astro.url)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors"
+            >
+              Twitter
+            </a>
+            <a 
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors"
+            >
+              Facebook
+            </a>
+            <a 
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-blue-700 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-800 transition-colors"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </div>
+        
+        <a 
+          href="/articoli" 
+          class="text-red-600 hover:text-red-700 font-medium"
+        >
+          ← Torna agli articoli
+        </a>
+      </div>
+    </footer>
+  </article>
+</Layout>
+
+<style>
+  .prose {
+    color: #374151;
+  }
+  
+  .prose h2 {
+    color: #111827;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .prose h3 {
+    color: #111827;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .prose p {
+    margin-bottom: 1.25rem;
+    line-height: 1.75;
+  }
+  
+  .prose ul, .prose ol {
+    margin-bottom: 1.25rem;
+  }
+  
+  .prose li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .prose blockquote {
+    border-left: 4px solid #dc2626;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #6b7280;
+  }
+  
+  .prose a {
+    color: #dc2626;
+    text-decoration: none;
+  }
+  
+  .prose a:hover {
+    text-decoration: underline;
+  }
+  
+  .prose img {
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+  }
+</style>

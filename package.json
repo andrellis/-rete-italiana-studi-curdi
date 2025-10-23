@@ -1,0 +1,25 @@
+{
+  "name": "rete-italiana-studi-curdi",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "verify": "node scripts/verify-deployment.cjs",
+    "deploy:prep": "node scripts/deploy-prep.cjs",
+    "deploy:checklist": "node scripts/deployment-checklist.cjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.15.12",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2"
+  }
+}

@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get featured articles and events
+const allArticles = await getCollection('articoli');
+const allEvents = await getCollection('eventi');
+
+// Sort by date and get latest
+const featuredArticles = allArticles
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
+
+const upcomingEvents = allEvents
+  .filter(event => event.data.eventDate >= new Date())
+  .sort((a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime())
+  .slice(0, 3);
+---
+
+<Layout title="Rete Italiana Studi Curdi - Home">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-red-600 to-red-700 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        Rete Italiana Studi Curdi
+      </h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        Promuoviamo la ricerca e la conoscenza della cultura curda attraverso 
+        eventi, pubblicazioni e collaborazioni accademiche.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/articoli" class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+          Scopri gli Articoli
+        </a>
+        <a href="/eventi" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-red-600 transition-colors">
+          Prossimi Eventi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Articles -->
+  {featuredArticles.length > 0 && (
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Articoli Recenti</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredArticles.map((article) => (
+            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              {article.data.heroImage && (
+                <img 
+                  src={article.data.heroImage} 
+                  alt={article.data.title}
+                  class="w-full h-48 object-cover"
+                />
+              )}
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  <a href={`/articoli/${article.slug}`} class="hover:text-red-600 transition-colors">
+                    {article.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">
+                  {article.data.description || article.body.slice(0, 150) + '...'}
+                </p>
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                  <span>{article.data.pubDate.toLocaleDateString('it-IT')}</span>
+                  {article.data.author && <span>di {article.data.author}</span>}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a href="/articoli" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+            Vedi Tutti gli Articoli
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Upcoming Events -->
+  {upcomingEvents.length > 0 && (
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Prossimi Eventi</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {upcomingEvents.map((event) => (
+            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                <a href={`/eventi/${event.slug}`} class="hover:text-red-600 transition-colors">
+                  {event.data.title}
+                </a>
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                {event.data.description || event.body.slice(0, 150) + '...'}
+              </p>
+              <div class="text-sm text-gray-500 space-y-1">
+                <p>📅 {event.data.eventDate.toLocaleDateString('it-IT')}</p>
+                {event.data.location && <p>📍 {event.data.location}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="text-center mt-8">
+          <a href="/eventi" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+            Vedi Tutti gli Eventi
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- About Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8">Chi Siamo</h2>
+      <p class="text-lg text-gray-600 leading-relaxed mb-8">
+        La Rete Italiana Studi Curdi è un'associazione che promuove la ricerca accademica 
+        e la divulgazione della cultura curda in Italia. Organizziamo conferenze, seminari, 
+        pubblicazioni e collaboriamo con università e centri di ricerca per approfondire 
+        la conoscenza della storia, della letteratura, della politica e della società curda.
+      </p>
+      <a href="/chi-siamo" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+        Scopri di Più
+      </a>
+    </div>
+  </section>
+</Layout>
