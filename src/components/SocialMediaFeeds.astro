@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import TwitterFeed from './TwitterFeed.astro';
 import LinkedInFeed from './LinkedInFeed.astro';
 import FacebookFeed from './FacebookFeed.astro';
-import { getSafeUsername, isValidTwitterUsername, isValidLinkedInUsername, isValidFacebookUsername } from '../utils/validation';
+import { parseUsernames, isValidTwitterUsername, isValidLinkedInUsername, isValidFacebookUsername } from '../utils/validation';
 
 // Get site settings with error handling
 let siteSettings: any[] = [];
@@ -21,14 +21,14 @@ const showLinkedin = settings?.showLinkedin || false;
 const showFacebook = settings?.showFacebook || false;
 
 // Get and validate usernames
-const twitterUsername = settings?.twitterUsername ? getSafeUsername(settings.twitterUsername) : '';
-const linkedinUsername = settings?.linkedinUsername ? getSafeUsername(settings.linkedinUsername) : '';
-const facebookUsername = settings?.facebookUsername ? getSafeUsername(settings.facebookUsername) : '';
+const twitterUsernames = parseUsernames(settings?.twitterUsernames, isValidTwitterUsername);
+const linkedinUsernames = parseUsernames(settings?.linkedinUsernames, isValidLinkedInUsername);
+const facebookUsernames = parseUsernames(settings?.facebookUsernames, isValidFacebookUsername);
 
-// Validate usernames and update show flags accordingly
-const validTwitter = twitterUsername && isValidTwitterUsername(twitterUsername);
-const validLinkedin = linkedinUsername && isValidLinkedInUsername(linkedinUsername);
-const validFacebook = facebookUsername && isValidFacebookUsername(facebookUsername);
+// Check if we have valid usernames for each platform
+const validTwitter = twitterUsernames.length > 0;
+const validLinkedin = linkedinUsernames.length > 0;
+const validFacebook = facebookUsernames.length > 0;
 
 const twitterHeight = settings?.twitterHeight || 400;
 const twitterTheme = settings?.twitterTheme || 'light';
@@ -43,32 +43,44 @@ const hasSocialMedia = (showTwitter && validTwitter) || (showLinkedin && validLi
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
     {showTwitter && validTwitter && (
       <div class="lg:col-span-2 xl:col-span-1">
-        <TwitterFeed 
-          username={twitterUsername}
-          height={twitterHeight}
-          theme={twitterTheme}
-          title="Seguici su Twitter"
-        />
+        {twitterUsernames.map((username) => (
+          <div class={twitterUsernames.length > 1 ? "mb-6 last:mb-0" : ""}>
+            <TwitterFeed 
+              username={username}
+              height={twitterHeight}
+              theme={twitterTheme}
+              title={twitterUsernames.length > 1 ? `@${username}` : "Seguici su Twitter"}
+            />
+          </div>
+        ))}
       </div>
     )}
     
     {showLinkedin && validLinkedin && (
       <div>
-        <LinkedInFeed 
-          username={linkedinUsername}
-          height={linkedinHeight}
-          title="Seguici su LinkedIn"
-        />
+        {linkedinUsernames.map((username) => (
+          <div class={linkedinUsernames.length > 1 ? "mb-6 last:mb-0" : ""}>
+            <LinkedInFeed 
+              username={username}
+              height={linkedinHeight}
+              title={linkedinUsernames.length > 1 ? `${username}` : "Seguici su LinkedIn"}
+            />
+          </div>
+        ))}
       </div>
     )}
     
     {showFacebook && validFacebook && (
       <div>
-        <FacebookFeed 
-          username={facebookUsername}
-          height={facebookHeight}
-          title="Seguici su Facebook"
-        />
+        {facebookUsernames.map((username) => (
+          <div class={facebookUsernames.length > 1 ? "mb-6 last:mb-0" : ""}>
+            <FacebookFeed 
+              username={username}
+              height={facebookHeight}
+              title={facebookUsernames.length > 1 ? `${username}` : "Seguici su Facebook"}
+            />
+          </div>
+        ))}
       </div>
     )}
   </div>

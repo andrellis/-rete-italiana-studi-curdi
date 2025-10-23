@@ -97,3 +97,24 @@ export function getSafeUsername(username: string): string {
   
   return sanitized;
 }
+
+/**
+ * Parses a comma-separated string of usernames and returns valid ones
+ * @param usernamesString - Comma-separated string of usernames
+ * @param validator - Function to validate each username
+ * @returns Array of valid, sanitized usernames
+ */
+export function parseUsernames(
+  usernamesString: string | undefined, 
+  validator: (username: string) => boolean
+): string[] {
+  if (!usernamesString || usernamesString.trim() === '') {
+    return [];
+  }
+  
+  return usernamesString
+    .split(',')
+    .map(username => getSafeUsername(username.trim()))
+    .filter(username => username && validator(username))
+    .filter((username, index, array) => array.indexOf(username) === index); // Remove duplicates
+}
