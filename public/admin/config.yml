@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: master
 
 # Enable immediate publishing (no editorial workflow)
 publish_mode: simple
