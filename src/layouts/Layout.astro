@@ -54,10 +54,10 @@ const { title, description = "Rete Italiana Studi Curdi - Promuoviamo la ricerca
 </html>
 
 <script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
+  if ((window as any).netlifyIdentity) {
+    (window as any).netlifyIdentity.on("init", (user: any) => {
       if (!user) {
-        window.netlifyIdentity.on("login", () => {
+        (window as any).netlifyIdentity.on("login", () => {
           document.location.href = "/admin/";
         });
       }

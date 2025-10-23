@@ -77,7 +77,7 @@
     if (mobileMenuButton && mobileMenu) {
       mobileMenuButton.addEventListener('click', () => {
         const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-        mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+        mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
         mobileMenu.style.display = isExpanded ? 'none' : 'block';
       });
     }
