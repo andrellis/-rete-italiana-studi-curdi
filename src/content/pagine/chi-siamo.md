@@ -24,7 +24,7 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
 * Davide Grasso — International University College
 * Camilla Insom — Università di Roma "La Sapienza"
 * Andrea Novellis — Università di Milano
-* Alessandro Tinti — Università di Roma "La Sapienza"
+* Alessandro Tinti — Università di Torino
 * Federico Venturini — Università di Udine
 
 ## Come Partecipare
