@@ -1,21 +1,58 @@
 {
-  "heroTitle": "Rete Italiana Studi Curdi",
-  "heroSubtitle": "Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Promuoviamo un confronto e una discussione accademica rigorosi.",
+  "ctaButton1Url": "/chi-siamo",
+  "socialMediaTitle": "Seguici sui Social",
+  "ctaButton2Label": "",
+  "featuredArticlesCount": 3,
+  "ctaButton1Label": "Chi Siamo",
+  "featuredEventsCount": 3,
   "heroBgFrom": "from-red-600",
-  "heroBgTo": "to-red-700",
-  "ctaButton1Label": "Pubblicazioni",
-  "ctaButton1Url": "/pubblicazioni",
-  "ctaButton2Label": "Conferenze ed Eventi",
-  "ctaButton2Url": "/eventi",
-  "showAboutSection": true,
   "aboutTitle": "Chi Siamo",
   "aboutContent": "La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Il network nasce per promuovere un confronto e una discussione accademica rigorosi, favorendo l'incontro tra ricercatori, lo scambio di conoscenze e possibili collaborazioni tra i propri membri.",
-  "featuredArticlesCount": 3,
-  "featuredPublicationsCount": 3,
-  "featuredEventsCount": 3,
-  "articlesSectionTitle": "Articoli Recenti",
-  "publicationsSectionTitle": "Pubblicazioni Recenti",
   "eventsSectionTitle": "Prossimi Eventi",
+  "sections": [
+    {
+      "type": "hero",
+      "enabled": true
+    },
+    {
+      "type": "brand",
+      "enabled": true,
+      "logoVariant": "full",
+      "align": "center",
+      "maxWidth": "md",
+      "showLogoImage": true,
+      "showLogoText": true
+    },
+    {
+      "type": "articles",
+      "enabled": true
+    },
+    {
+      "type": "publications",
+      "enabled": true
+    },
+    {
+      "type": "events",
+      "enabled": true
+    },
+    {
+      "type": "social",
+      "enabled": true
+    },
+    {
+      "type": "about",
+      "enabled": true
+    }
+  ],
+  "articlesSectionTitle": "Articoli Recenti",
+  "heroSubtitle": "Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Promuoviamo un confronto e una discussione accademica rigorosi.",
+  "heroBackgroundImage": "/images/backgrounds/landscape-hero.jpg",
+  "heroOverlayOpacity": 60,
+  "showAboutSection": true,
+  "heroBgTo": "to-red-700",
   "showSocialMedia": true,
-  "socialMediaTitle": "Seguici sui Social"
+  "featuredPublicationsCount": 3,
+  "publicationsSectionTitle": "Pubblicazioni Recenti",
+  "heroTitle": "Rete Italiana Studi Curdi",
+  "ctaButton2Url": ""
 }

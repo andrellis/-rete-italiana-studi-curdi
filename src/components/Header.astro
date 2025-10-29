@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Logo from './Logo.astro';
 
 // Get navigation items and site settings with error handling
 let navigationItems: any[] = [];
@@ -22,10 +23,14 @@ const sortedNavigation = navigationItems.length > 0
   ? navigationItems.sort((a, b) => a.data.order - b.data.order)
   : [];
 
-// Get site name from settings
-const siteName = siteSettings.length > 0 && siteSettings[0]?.data?.logoText 
-  ? siteSettings[0].data.logoText 
-  : 'Rete Italiana Studi Curdi';
+// Get site settings with fallbacks
+const settings = siteSettings.length > 0 ? siteSettings[0]?.data : null;
+const siteName = settings?.logoText || 'Rete Italiana Studi Curdi';
+const logoImage = settings?.logoImage;
+const logoVariant = settings?.logoVariant || 'full';
+const showLogoImage = settings?.showLogoImage !== false;
+const showLogoText = settings?.showLogoText !== false;
+const logoAlt = settings?.logoAlt || 'Rete Italiana Studi Curdi Logo';
 ---
 
 <header class="bg-white shadow-sm border-b border-gray-200">
@@ -33,8 +38,16 @@ const siteName = siteSettings.length > 0 && siteSettings[0]?.data?.logoText
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
       <div class="flex-shrink-0">
-        <a href="/" class="text-xl font-bold text-red-600">
-          {siteName}
+        <a href="/" class="hover:opacity-80 transition-opacity">
+          <Logo 
+            variant={logoVariant}
+            size="md"
+            logoImage={logoImage}
+            logoAlt={logoAlt}
+            showLogoImage={showLogoImage}
+            showLogoText={showLogoText}
+            siteName={siteName}
+          />
         </a>
       </div>
       

@@ -1,47 +1,40 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { getEntryBySlug } from 'astro:content';
+
+const entry = await getEntryBySlug('pagine', 'chi-siamo');
+const data = entry?.data;
+let ContentComponent: any = null;
+if (entry) {
+  const rendered = await entry.render();
+  ContentComponent = rendered.Content;
+}
+
+const title = data?.title || 'Chi Siamo';
+const description = data?.description || 'Scopri la missione e i membri della Rete Italiana Studi Curdi';
+const bgImage = data?.backgroundImage || data?.heroImage;
+const overlay = typeof data?.backgroundOverlay === 'number' ? data?.backgroundOverlay : 60;
 ---
 
-<Layout title="Chi Siamo - Rete Italiana Studi Curdi" description="Scopri la missione e i membri della Rete Italiana Studi Curdi">
+<Layout title={`${title} - Rete Italiana Studi Curdi`} description={description}>
+  <PageHero 
+    title={title}
+    subtitle={description}
+    backgroundImage={bgImage}
+    overlayOpacity={overlay}
+    minHeight="py-16"
+  />
+  
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="prose prose-lg max-w-none">
-      <h1 class="text-4xl font-bold text-gray-900 mb-8">Chi Siamo</h1>
-      
-      <p class="text-xl text-gray-600 mb-8">
-        La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti 
-        interessati allo studio di tutti i temi attinenti agli studi curdi.
-      </p>
-
-      <h2 class="text-2xl font-semibold text-gray-900 mb-4">La Nostra Missione</h2>
-      <p class="mb-6">
-        Il network nasce per promuovere un confronto e una discussione accademica rigorosi. 
-        La rete si pone l'obiettivo di favorire l'incontro tra ricercatori, lo scambio di 
-        conoscenze e possibili collaborazioni tra i propri membri. Sono benvenuti tutti i 
-        ricercatori che si occupano di studi curdi, in ogni ambito disciplinare.
-      </p>
-
-      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Comitato Fondatore</h2>
-      <p class="mb-4">Il comitato fondatore è composto da:</p>
-      <ul class="list-disc pl-6 mb-6 space-y-2">
-        <li><strong>Nicola Degli Esposti</strong>, Università di Padova</li>
-        <li><strong>Sevgi Doğan</strong>, Scuola Normale Superiore</li>
-        <li><strong>Davide Grasso</strong>, International University College</li>
-        <li><strong>Camilla Insom</strong>, Università di Roma "La Sapienza"</li>
-        <li><strong>Andrea Novellis</strong>, Università di Milano</li>
-        <li><strong>Alessandro Tinti</strong>, Università di Roma "La Sapienza"</li>
-        <li><strong>Federico Venturini</strong>, Università di Udine</li>
-      </ul>
-
-      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Come Partecipare</h2>
-      <p class="mb-4">
-        Per unirti alla mailing list e partecipare agli eventi, inviaci il tuo curriculum 
-        e un breve messaggio di presentazione.
-      </p>
-      
-      <div class="bg-gray-50 rounded-lg p-6">
-        <p class="mb-2"><strong>Email:</strong> rete.italiana.studi.curdi@gmail.com</p>
-        <p class="text-sm text-gray-600">Per saperne di più, scrivici per ricevere informazioni sui prossimi eventi e attività.</p>
-      </div>
+      {ContentComponent ? <ContentComponent /> : (
+        <>
+          <p class="text-xl text-gray-600 mb-8">
+            La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi.
+          </p>
+        </>
+      )}
     </div>
   </div>
 </Layout>

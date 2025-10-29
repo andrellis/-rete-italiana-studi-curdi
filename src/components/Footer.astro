@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Logo from './Logo.astro';
 
 // Get site settings and navigation with error handling
 let siteSettings: any[] = [];
@@ -25,6 +26,9 @@ const sortedNavigation = navigationItems.length > 0
 // Get settings data with fallbacks
 const settings = siteSettings.length > 0 ? siteSettings[0]?.data : null;
 const siteName = settings?.logoText || 'Rete Italiana Studi Curdi';
+const logoImage = settings?.logoImage;
+const showLogoImage = settings?.showLogoImage !== false;
+const logoAlt = settings?.logoAlt || 'Rete Italiana Studi Curdi Logo';
 const contactEmail = settings?.contactEmail || 'rete.italiana.studi.curdi@gmail.com';
 const website = settings?.website || 'www.reteitalianastudicurdi.it';
 const footerText = settings?.footerText || 'Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi.';
@@ -36,6 +40,20 @@ const copyrightYear = settings?.copyrightYear || new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- About Section -->
       <div>
+        {showLogoImage && (
+          <div class="mb-4">
+            <Logo 
+              variant="icon"
+              size="sm"
+              logoImage={logoImage}
+              logoAlt={logoAlt}
+              showLogoImage={true}
+              showLogoText={false}
+              siteName={siteName}
+              className="text-white"
+            />
+          </div>
+        )}
         <h3 class="text-lg font-semibold mb-4">{siteName}</h3>
         <p class="text-gray-300 text-sm leading-relaxed">
           {footerText}

@@ -1,0 +1,73 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  backgroundImage?: string;
+  overlayOpacity?: number;
+  minHeight?: string;
+  className?: string;
+  showButtons?: boolean;
+  ctaButton1Label?: string;
+  ctaButton1Url?: string;
+  ctaButton2Label?: string;
+  ctaButton2Url?: string;
+}
+
+const {
+  title,
+  subtitle,
+  backgroundImage = '/images/backgrounds/landscape-hero.jpg',
+  overlayOpacity = 60,
+  minHeight = 'py-20',
+  className = '',
+  showButtons = false,
+  ctaButton1Label,
+  ctaButton1Url,
+  ctaButton2Label,
+  ctaButton2Url
+} = Astro.props;
+
+const overlayStyle = `background-color: rgba(0, 0, 0, ${overlayOpacity / 100});`;
+---
+
+<section 
+  class={`relative bg-gradient-to-r from-red-600 to-red-700 text-white ${minHeight} ${className}`}
+  style={backgroundImage ? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;` : ''}
+>
+  <!-- Background overlay for text readability -->
+  <div class="absolute inset-0" style={overlayStyle}></div>
+  
+  <!-- Content -->
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+      {title}
+    </h1>
+    
+    {subtitle && (
+      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+        {subtitle}
+      </p>
+    )}
+    
+    {showButtons && (ctaButton1Label || ctaButton2Label) && (
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        {ctaButton1Label && ctaButton1Url && (
+          <a 
+            href={ctaButton1Url} 
+            class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
+            {ctaButton1Label}
+          </a>
+        )}
+        {ctaButton2Label && ctaButton2Url && (
+          <a 
+            href={ctaButton2Url} 
+            class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-red-600 transition-colors"
+          >
+            {ctaButton2Label}
+          </a>
+        )}
+      </div>
+    )}
+  </div>
+</section>

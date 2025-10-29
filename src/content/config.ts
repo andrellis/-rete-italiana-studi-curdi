@@ -21,6 +21,8 @@ const pagineCollection = defineCollection({
     description: z.string().optional(),
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
+    backgroundImage: z.string().optional(),
+    backgroundOverlay: z.number().optional(),
     order: z.number().optional(),
   }),
 });
@@ -59,15 +61,25 @@ const settingsCollection = defineCollection({
   schema: z.object({
     siteName: z.string(),
     logoText: z.string(),
+    logoImage: z.string().optional(),
+    logoVariant: z.enum(['full', 'icon', 'horizontal']).optional(),
+    showLogoImage: z.boolean().optional(),
+    showLogoText: z.boolean().optional(),
+    logoAlt: z.string().optional(),
     contactEmail: z.string(),
     website: z.string(),
     twitterUsernames: z.string().optional(),
     showTwitter: z.boolean().optional(),
     twitterHeight: z.number().optional(),
     twitterTheme: z.enum(['light', 'dark']).optional(),
+    twitterMode: z.enum(['embed', 'link']).optional(),
+    twitterSource: z.enum(['users', 'list']).optional(),
+    twitterListUrl: z.string().optional(),
     linkedinUsernames: z.string().optional(),
     showLinkedin: z.boolean().optional(),
     linkedinHeight: z.number().optional(),
+    linkedinMode: z.enum(['embed', 'link']).optional(),
+    linkedinEmbedHtml: z.string().optional(),
     facebookUsernames: z.string().optional(),
     showFacebook: z.boolean().optional(),
     facebookHeight: z.number().optional(),
@@ -95,6 +107,8 @@ const homepageCollection = defineCollection({
     heroSubtitle: z.string(),
     heroBgFrom: z.string().optional(),
     heroBgTo: z.string().optional(),
+    heroBackgroundImage: z.string().optional(),
+    heroOverlayOpacity: z.number().optional(),
     ctaButton1Label: z.string().optional(),
     ctaButton1Url: z.string().optional(),
     ctaButton2Label: z.string().optional(),
@@ -110,6 +124,33 @@ const homepageCollection = defineCollection({
     eventsSectionTitle: z.string().optional(),
     showSocialMedia: z.boolean().optional(),
     socialMediaTitle: z.string().optional(),
+
+    // Drag-and-drop ordered sections (optional; fallback to defaults when absent)
+    sections: z
+      .array(
+        z.object({
+          type: z.enum(['hero', 'brand', 'articles', 'publications', 'events', 'social', 'about']),
+          enabled: z.boolean().optional(),
+
+          // Hero overrides (used when type === 'hero')
+          heroBackgroundImage: z.string().optional(),
+          heroOverlayOpacity: z.number().optional(),
+          title: z.string().optional(),
+          subtitle: z.string().optional(),
+          ctaButton1Label: z.string().optional(),
+          ctaButton1Url: z.string().optional(),
+          ctaButton2Label: z.string().optional(),
+          ctaButton2Url: z.string().optional(),
+
+          // Brand (logo) section options (used when type === 'brand')
+          logoVariant: z.enum(['full', 'horizontal', 'icon']).optional(),
+          showLogoImage: z.boolean().optional(),
+          showLogoText: z.boolean().optional(),
+          align: z.enum(['left', 'center', 'right']).optional(),
+          maxWidth: z.enum(['sm', 'md', 'lg']).optional(),
+        })
+      )
+      .optional(),
   }),
 });
 

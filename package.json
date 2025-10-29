@@ -8,6 +8,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "cms": "decap-server",
+    "dev:cms": "concurrently \"npm:cms\" \"npm:dev\"",
     "verify": "node scripts/verify-deployment.cjs",
     "deploy:prep": "node scripts/deploy-prep.cjs",
     "deploy:checklist": "node scripts/deployment-checklist.cjs"
@@ -20,6 +22,8 @@
     "typescript": "^5.6.3"
   },
   "devDependencies": {
-    "@types/node": "^22.10.2"
+    "@types/node": "^22.10.2",
+    "concurrently": "^9.0.1",
+    "decap-server": "^3.0.0"
   }
 }

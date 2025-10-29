@@ -25,48 +25,89 @@ const twitterUsernames = parseUsernames(settings?.twitterUsernames, isValidTwitt
 const linkedinUsernames = parseUsernames(settings?.linkedinUsernames, isValidLinkedInUsername);
 const facebookUsernames = parseUsernames(settings?.facebookUsernames, isValidFacebookUsername);
 
-// Check if we have valid usernames for each platform
-const validTwitter = twitterUsernames.length > 0;
-const validLinkedin = linkedinUsernames.length > 0;
-const validFacebook = facebookUsernames.length > 0;
-
 const twitterHeight = settings?.twitterHeight || 400;
 const twitterTheme = settings?.twitterTheme || 'light';
+const twitterMode = settings?.twitterMode || 'embed';
+const twitterSource = settings?.twitterSource || 'users';
+const twitterListUrl = settings?.twitterListUrl || '';
 const linkedinHeight = settings?.linkedinHeight || 400;
+const linkedinMode = settings?.linkedinMode || 'embed';
+const linkedinEmbedHtml = settings?.linkedinEmbedHtml || '';
 const facebookHeight = settings?.facebookHeight || 400;
+// Check if we have valid configuration for each platform
+const validTwitter = twitterSource === 'list'
+  ? (twitterListUrl && twitterListUrl.length > 0)
+  : twitterUsernames.length > 0;
+const validLinkedin = linkedinMode === 'embed'
+  ? (linkedinEmbedHtml && linkedinEmbedHtml.trim().length > 0)
+  : linkedinUsernames.length > 0;
+const validFacebook = facebookUsernames.length > 0;
 
-// Only show if at least one social media is enabled and has valid username
+// Only show if at least one social media is enabled and has valid configuration
 const hasSocialMedia = (showTwitter && validTwitter) || (showLinkedin && validLinkedin) || (showFacebook && validFacebook);
 ---
 
 {hasSocialMedia && (
   <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-    {showTwitter && validTwitter && (
-      <div class="lg:col-span-2 xl:col-span-1">
-        {twitterUsernames.map((username) => (
-          <div class={twitterUsernames.length > 1 ? "mb-6 last:mb-0" : ""}>
-            <TwitterFeed 
-              username={username}
-              height={twitterHeight}
-              theme={twitterTheme}
-              title={twitterUsernames.length > 1 ? `@${username}` : "Seguici su Twitter"}
-            />
-          </div>
-        ))}
-      </div>
+{showTwitter && (
+  <div class="lg:col-span-2 xl:col-span-1">
+    {twitterSource === 'list' && twitterListUrl ? (
+      <TwitterFeed
+        username={twitterUsernames[0] || 'x'}
+        href={twitterListUrl}
+        height={twitterHeight}
+        theme={twitterTheme}
+        title="Aggiornamenti su X"
+        mode={twitterMode}
+      />
+    ) : (
+      validTwitter && (
+        <>
+          <TwitterFeed
+            username={twitterUsernames[0]}
+            height={twitterHeight}
+            theme={twitterTheme}
+            title={"Aggiornamenti su X"}
+            mode={twitterMode}
+          />
+          {twitterUsernames.length > 1 && (
+            <div class="mt-3 text-sm text-gray-600">
+              Altri profili:
+              {twitterUsernames.slice(1).map((u, i) => (
+                <>
+                  {" "}
+                  <a href={`https://twitter.com/${u}`} target="_blank" rel="noopener noreferrer" class="underline hover:no-underline">@{u}</a>
+                  {i < twitterUsernames.slice(1).length - 1 ? "," : ""}
+                </>
+              ))}
+            </div>
+          )}
+        </>
+      )
     )}
+  </div>
+)}
     
     {showLinkedin && validLinkedin && (
       <div>
-        {linkedinUsernames.map((username) => (
-          <div class={linkedinUsernames.length > 1 ? "mb-6 last:mb-0" : ""}>
-            <LinkedInFeed 
-              username={username}
-              height={linkedinHeight}
-              title={linkedinUsernames.length > 1 ? `${username}` : "Seguici su LinkedIn"}
-            />
+        <LinkedInFeed
+          username={linkedinUsernames[0]}
+          height={linkedinHeight}
+          title={"Aggiornamenti su LinkedIn"}
+          mode={linkedinMode}
+          embedHtml={linkedinEmbedHtml}
+        />
+        {linkedinUsernames.length > 1 && (
+          <div class="mt-3 text-sm text-gray-600">
+            Altri profili:
+            {linkedinUsernames.slice(1).map((u, i) => (
+              <>
+                {' '}<a href={`https://www.linkedin.com/company/${u}`} target="_blank" rel="noopener noreferrer" class="underline hover:no-underline">{u}</a>
+                {i < linkedinUsernames.slice(1).length - 1 ? ',' : ''}
+              </>
+            ))}
           </div>
-        ))}
+        )}
       </div>
     )}
     

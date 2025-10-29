@@ -1,0 +1,67 @@
+---
+export interface Props {
+  variant?: 'full' | 'icon' | 'horizontal';
+  size?: 'sm' | 'md' | 'lg';
+  logoImage?: string;
+  logoAlt?: string;
+  showLogoImage?: boolean;
+  showLogoText?: boolean;
+  siteName?: string;
+  className?: string;
+}
+
+const {
+  variant = 'full',
+  size = 'md',
+  logoImage = '/images/logo/risc-logo-full.png',
+  logoAlt = 'Rete Italiana Studi Curdi Logo',
+  showLogoImage = true,
+  showLogoText = true,
+  siteName = 'Rete Italiana Studi Curdi',
+  className = ''
+} = Astro.props;
+
+// Size configurations
+const sizeConfig = {
+  sm: {
+    image: 'h-6 w-6',
+    text: 'text-sm',
+    container: 'gap-2'
+  },
+  md: {
+    image: 'h-8 w-8',
+    text: 'text-lg',
+    container: 'gap-3'
+  },
+  lg: {
+    image: 'h-12 w-12',
+    text: 'text-xl',
+    container: 'gap-4'
+  }
+};
+
+// Variant-specific image paths
+const variantImages = {
+  full: '/images/logo/risc-logo-full.png',
+  horizontal: '/images/logo/risc-logo-horizontal.png',
+  icon: '/images/logo/risc-logo-icon.png'
+};
+
+const currentSize = sizeConfig[size];
+const currentImage = variantImages[variant] || logoImage;
+---
+
+<div class={`flex items-center ${currentSize.container} ${className}`}>
+  {showLogoImage && (
+    <img 
+      src={currentImage}
+      alt={logoAlt}
+      class={`${currentSize.image} object-contain flex-shrink-0`}
+    />
+  )}
+  {showLogoText && (
+    <span class={`font-bold text-red-600 ${currentSize.text}`}>
+      {siteName}
+    </span>
+  )}
+</div>

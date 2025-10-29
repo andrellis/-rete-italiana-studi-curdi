@@ -1,3 +1,4 @@
+local_backend: true
 backend:
   name: git-gateway
   branch: master
@@ -41,6 +42,8 @@ collections:
       - {label: "Descrizione", name: "description", widget: "text", required: false, hint: "Descrizione SEO della pagina"}
       - {label: "Data Aggiornamento", name: "updatedDate", widget: "datetime", required: false, hint: "Data dell'ultimo aggiornamento (opzionale)"}
       - {label: "Immagine Hero", name: "heroImage", widget: "image", required: false, hint: "Immagine principale della pagina (raccomandato 1200x630px)"}
+      - {label: "Background Image", name: "backgroundImage", widget: "image", required: false, hint: "Custom hero background (1920x600px recommended)"}
+      - {label: "Background Overlay (%)", name: "backgroundOverlay", widget: "number", min: 0, max: 100, default: 60, required: false}
       - {label: "Ordine", name: "order", widget: "number", required: false, hint: "Ordine di visualizzazione nel menu (opzionale)"}
       - {label: "Contenuto", name: "body", widget: "markdown", hint: "Contenuto della pagina in formato Markdown"}
 
@@ -88,14 +91,24 @@ collections:
         fields:
           - {label: "Nome Sito", name: "siteName", widget: "string", hint: "Nome principale del sito"}
           - {label: "Testo Logo", name: "logoText", widget: "string", hint: "Testo visualizzato nel logo"}
+          - {label: "Logo Image", name: "logoImage", widget: "image", required: false, hint: "Logo image (recommended: PNG with transparency)"}
+          - {label: "Logo Variant", name: "logoVariant", widget: "select", options: ["full", "horizontal", "icon"], required: false, default: "full", hint: "Choose logo layout variant"}
+          - {label: "Show Logo Image", name: "showLogoImage", widget: "boolean", default: true, hint: "Display logo image in header"}
+          - {label: "Show Logo Text", name: "showLogoText", widget: "boolean", default: true, hint: "Display site name text in header"}
+          - {label: "Logo Alt Text", name: "logoAlt", widget: "string", required: false, default: "Rete Italiana Studi Curdi Logo", hint: "Alternative text for logo (accessibility)"}
           - {label: "Email Contatto", name: "contactEmail", widget: "string", hint: "Email principale per i contatti"}
           - {label: "Sito Web", name: "website", widget: "string", hint: "URL del sito web"}
-          - {label: "Account Twitter", name: "twitterUsernames", widget: "string", required: false, hint: "Account Twitter separati da virgola (es: account1,account2,account3)"}
-          - {label: "Mostra Feed Twitter", name: "showTwitter", widget: "boolean", required: false, hint: "Mostra il feed Twitter nella homepage"}
-          - {label: "Altezza Feed Twitter", name: "twitterHeight", widget: "number", required: false, hint: "Altezza del feed Twitter in pixel (raccomandato: 300-600)"}
-          - {label: "Tema Twitter", name: "twitterTheme", widget: "select", options: ["light", "dark"], required: false, hint: "Tema del feed Twitter"}
+          - {label: "Account X (ex Twitter)", name: "twitterUsernames", widget: "string", required: false, hint: "Handle X separati da virgola (max 15 caratteri)"}
+          - {label: "Mostra Feed X", name: "showTwitter", widget: "boolean", required: false, default: true, hint: "Mostra la sezione X nella homepage"}
+          - {label: "Modalità X", name: "twitterMode", widget: "select", options: ["embed", "link"], default: "embed", hint: "'embed' tenta l'iframe ufficiale; 'link' mostra solo un pulsante"}
+          - {label: "Sorgente X", name: "twitterSource", widget: "select", options: ["users", "list"], default: "users", hint: "'list' per un box unico che aggrega più account tramite una Lista pubblica"}
+          - {label: "URL Lista X", name: "twitterListUrl", widget: "string", required: false, hint: "Incolla l'URL completo della lista pubblica (es: https://twitter.com/i/lists/1234567890)"}
+          - {label: "Altezza Feed X", name: "twitterHeight", widget: "number", required: false, hint: "Altezza del feed in pixel (raccomandato: 300-600)"}
+          - {label: "Tema X", name: "twitterTheme", widget: "select", options: ["light", "dark"], required: false, hint: "Tema del feed X"}
           - {label: "Account LinkedIn", name: "linkedinUsernames", widget: "string", required: false, hint: "Account LinkedIn separati da virgola (es: company1,company2)"}
-          - {label: "Mostra Feed LinkedIn", name: "showLinkedin", widget: "boolean", required: false, hint: "Mostra il feed LinkedIn nella homepage"}
+          - {label: "Mostra Sezione LinkedIn", name: "showLinkedin", widget: "boolean", required: false, default: true, hint: "Mostra la sezione LinkedIn nella homepage"}
+          - {label: "Modalità LinkedIn", name: "linkedinMode", widget: "select", options: ["embed","link"], default: "embed", hint: "'embed' usa un widget di terze parti; 'link' mostra solo un pulsante"}
+          - {label: "Embed LinkedIn (HTML)", name: "linkedinEmbedHtml", widget: "text", required: false, hint: "Incolla qui il codice incorporabile del provider (Elfsight/Tagembed/SociableKIT)"}
           - {label: "Altezza Feed LinkedIn", name: "linkedinHeight", widget: "number", required: false, hint: "Altezza del componente LinkedIn in pixel (raccomandato: 200-400)"}
           - {label: "Account Facebook", name: "facebookUsernames", widget: "string", required: false, hint: "Account Facebook separati da virgola (es: page1,page2)"}
           - {label: "Mostra Feed Facebook", name: "showFacebook", widget: "boolean", required: false, hint: "Mostra il feed Facebook nella homepage"}
@@ -128,6 +141,8 @@ collections:
           - {label: "Sottotitolo Hero", name: "heroSubtitle", widget: "text", hint: "Sottotitolo della sezione hero"}
           - {label: "Colore Sfondo Hero (da)", name: "heroBgFrom", widget: "string", required: false, hint: "Classe Tailwind per colore sfondo (es: from-red-600)"}
           - {label: "Colore Sfondo Hero (a)", name: "heroBgTo", widget: "string", required: false, hint: "Classe Tailwind per colore sfondo (es: to-red-700)"}
+          - {label: "Hero Background Image", name: "heroBackgroundImage", widget: "image", required: false, hint: "Hero section background"}
+          - {label: "Hero Overlay Opacity (%)", name: "heroOverlayOpacity", widget: "number", min: 0, max: 100, default: 60, required: false}
           - {label: "Pulsante 1 - Etichetta", name: "ctaButton1Label", widget: "string", required: false, hint: "Testo del primo pulsante CTA"}
           - {label: "Pulsante 1 - URL", name: "ctaButton1Url", widget: "string", required: false, hint: "Link del primo pulsante CTA"}
           - {label: "Pulsante 2 - Etichetta", name: "ctaButton2Label", widget: "string", required: false, hint: "Testo del secondo pulsante CTA"}
@@ -143,3 +158,72 @@ collections:
           - {label: "Titolo Sezione Eventi", name: "eventsSectionTitle", widget: "string", required: false, hint: "Titolo della sezione eventi"}
           - {label: "Mostra Social Media", name: "showSocialMedia", widget: "boolean", required: false, hint: "Mostra la sezione social media"}
           - {label: "Titolo Social Media", name: "socialMediaTitle", widget: "string", required: false, hint: "Titolo della sezione social media"}
+
+          # NEW: Drag-and-drop ordered sections
+          - label: "Sezioni (ordine)"
+            name: "sections"
+            widget: "list"
+            allow_add: true
+            collapsed: false
+            types:
+              - label: "Hero"
+                name: "hero"
+                widget: "object"
+                summary: "Hero ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Titolo", name: "title", widget: "string", required: false }
+                  - { label: "Sottotitolo", name: "subtitle", widget: "text", required: false }
+                  - { label: "Background", name: "heroBackgroundImage", widget: "image", required: false }
+                  - { label: "Overlay (%)", name: "heroOverlayOpacity", widget: "number", min: 0, max: 100, default: 60, required: false }
+                  - { label: "CTA 1 - Etichetta", name: "ctaButton1Label", widget: "string", required: false }
+                  - { label: "CTA 1 - URL", name: "ctaButton1Url", widget: "string", required: false }
+                  - { label: "CTA 2 - Etichetta", name: "ctaButton2Label", widget: "string", required: false }
+                  - { label: "CTA 2 - URL", name: "ctaButton2Url", widget: "string", required: false }
+
+              - label: "Brand/Logo"
+                name: "brand"
+                widget: "object"
+                summary: "Brand ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Logo Variant", name: "logoVariant", widget: "select", options: ["full","horizontal","icon"], required: false }
+                  - { label: "Mostra Immagine", name: "showLogoImage", widget: "boolean", default: true }
+                  - { label: "Mostra Testo", name: "showLogoText", widget: "boolean", default: true }
+                  - { label: "Allineamento", name: "align", widget: "select", options: ["left","center","right"], default: "center" }
+                  - { label: "Max Width", name: "maxWidth", widget: "select", options: ["sm","md","lg"], default: "md" }
+
+              - label: "Articoli"
+                name: "articles"
+                widget: "object"
+                summary: "Articoli ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+
+              - label: "Pubblicazioni"
+                name: "publications"
+                widget: "object"
+                summary: "Pubblicazioni ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+
+              - label: "Eventi"
+                name: "events"
+                widget: "object"
+                summary: "Eventi ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+
+              - label: "Social"
+                name: "social"
+                widget: "object"
+                summary: "Social ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+
+              - label: "About"
+                name: "about"
+                widget: "object"
+                summary: "About ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }

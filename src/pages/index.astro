@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import SocialMediaFeeds from '../components/SocialMediaFeeds.astro';
+import PageHero from '../components/PageHero.astro';
+import Logo from '../components/Logo.astro';
 
 // Get homepage settings with error handling
 let homepageSettings: any[] = [];
@@ -42,186 +44,205 @@ const articlesTitle = settings?.articlesSectionTitle || 'Articoli Recenti';
 const publicationsTitle = settings?.publicationsSectionTitle || 'Pubblicazioni Recenti';
 const eventsTitle = settings?.eventsSectionTitle || 'Prossimi Eventi';
 const socialMediaTitle = settings?.socialMediaTitle || 'Seguici sui Social';
+
+// Compute ordered sections from settings.sections (fallback to default order if not set)
+const defaultOrder = [
+  { type: 'hero', enabled: true },
+  { type: 'brand', enabled: true },
+  { type: 'articles', enabled: true },
+  { type: 'publications', enabled: true },
+  { type: 'events', enabled: true },
+  { type: 'social', enabled: settings?.showSocialMedia !== false },
+  { type: 'about', enabled: settings?.showAboutSection !== false },
+];
+
+const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sections) && settings.sections.length > 0
+  ? settings.sections
+  : defaultOrder;
 ---
-
 <Layout title="Rete Italiana Studi Curdi - Home">
-  <!-- Hero Section -->
-  <section class={`bg-gradient-to-r ${settings?.heroBgFrom || 'from-red-600'} ${settings?.heroBgTo || 'to-red-700'} text-white py-20`}>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6">
-        {settings?.heroTitle || 'Rete Italiana Studi Curdi'}
-      </h1>
-      <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-        {settings?.heroSubtitle || 'Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Promuoviamo un confronto e una discussione accademica rigorosi.'}
-      </p>
-      {(settings?.ctaButton1Label || settings?.ctaButton2Label) && (
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          {settings?.ctaButton1Label && settings?.ctaButton1Url && (
-            <a href={settings.ctaButton1Url} class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-              {settings.ctaButton1Label}
-            </a>
-          )}
-          {settings?.ctaButton2Label && settings?.ctaButton2Url && (
-            <a href={settings.ctaButton2Url} class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-red-600 transition-colors">
-              {settings.ctaButton2Label}
-            </a>
-          )}
-        </div>
-      )}
-    </div>
-  </section>
-
-  <!-- Featured Articles -->
-  {featuredArticles.length > 0 && (
-    <section class="py-16 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">{articlesTitle}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredArticles.map((article) => (
-            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-              {article.data.heroImage && (
-                <img 
-                  src={article.data.heroImage} 
-                  alt={article.data.title}
-                  class="w-full h-48 object-cover"
+  {sectionsOrder.map((s: any) => {
+    if (s?.enabled === false) return null;
+    switch (s?.type) {
+      case 'hero':
+        return (
+          <PageHero 
+            title={s?.title || settings?.heroTitle || 'Rete Italiana Studi Curdi'}
+            subtitle={s?.subtitle || settings?.heroSubtitle || 'Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Promuoviamo un confronto e una discussione accademica rigorosi.'}
+            backgroundImage={s?.heroBackgroundImage || settings?.heroBackgroundImage}
+            overlayOpacity={s?.heroOverlayOpacity ?? settings?.heroOverlayOpacity ?? 60}
+            showButtons={true}
+            ctaButton1Label={s?.ctaButton1Label ?? settings?.ctaButton1Label}
+            ctaButton1Url={s?.ctaButton1Url ?? settings?.ctaButton1Url}
+            ctaButton2Label={s?.ctaButton2Label ?? settings?.ctaButton2Label}
+            ctaButton2Url={s?.ctaButton2Url ?? settings?.ctaButton2Url}
+          />
+        );
+      case 'brand':
+        return (
+          <section class="py-10 bg-white">
+            <div class={`max-w-${s?.maxWidth === 'sm' ? '3xl' : s?.maxWidth === 'lg' ? '7xl' : '5xl'} mx-auto px-4 sm:px-6 lg:px-8`}>
+              <div class={`flex ${s?.align === 'left' ? 'justify-start' : s?.align === 'right' ? 'justify-end' : 'justify-center'}`}>
+                <Logo 
+                  variant={s?.logoVariant || 'full'}
+                  size="lg"
+                  showLogoImage={s?.showLogoImage !== false}
+                  showLogoText={s?.showLogoText !== false}
+                  siteName={settings?.heroTitle || 'Rete Italiana Studi Curdi'}
                 />
-              )}
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                  <a href={`/articoli/${article.slug}`} class="hover:text-red-600 transition-colors">
-                    {article.data.title}
-                  </a>
-                </h3>
-                <p class="text-gray-600 text-sm mb-4">
-                  {article.data.description || article.body.slice(0, 150) + '...'}
-                </p>
-                <div class="flex items-center justify-between text-sm text-gray-500">
-                  <span>{article.data.pubDate.toLocaleDateString('it-IT')}</span>
-                  {article.data.author && <span>di {article.data.author}</span>}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div class="text-center mt-8">
-          <a href="/articoli" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-            Vedi Tutti gli Articoli
-          </a>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Featured Publications -->
-  {featuredPublications.length > 0 && (
-    <section class="py-16 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">{publicationsTitle}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredPublications.map((publication) => (
-            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
-              <div class="p-6">
-                <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                  <a href={`/pubblicazioni/${publication.slug}`} class="hover:text-red-600 transition-colors">
-                    {publication.data.title}
-                  </a>
-                </h3>
-                <p class="text-gray-600 text-sm mb-3 font-medium">
-                  {publication.data.authors.join(', ')}
-                </p>
-                <p class="text-gray-600 text-sm mb-4">
-                  {publication.data.publisher} • {publication.data.pubDate.toLocaleDateString('it-IT')}
-                </p>
-                <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                  {publication.data.abstract}
-                </p>
-                <div class="flex flex-wrap gap-2">
-                  {publication.data.doi && (
-                    <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">
-                      DOI
-                    </span>
-                  )}
-                  {publication.data.tags && publication.data.tags.slice(0, 2).map((tag) => (
-                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div class="text-center mt-8">
-          <a href="/pubblicazioni" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-            Vedi Tutte le Pubblicazioni
-          </a>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Upcoming Events -->
-  {upcomingEvents.length > 0 && (
-    <section class="py-16 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">{eventsTitle}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {upcomingEvents.map((event) => (
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-              <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                <a href={`/eventi/${event.slug}`} class="hover:text-red-600 transition-colors">
-                  {event.data.title}
-                </a>
-              </h3>
-              <p class="text-gray-600 text-sm mb-4">
-                {event.data.description || event.body.slice(0, 150) + '...'}
-              </p>
-              <div class="text-sm text-gray-500 space-y-1">
-                <p>📅 {event.data.eventDate.toLocaleDateString('it-IT')}</p>
-                {event.data.location && <p>📍 {event.data.location}</p>}
               </div>
             </div>
-          ))}
-        </div>
-        <div class="text-center mt-8">
-          <a href="/eventi" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-            Vedi Tutti gli Eventi
-          </a>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Social Media Section -->
-  {settings?.showSocialMedia !== false && (
-    <section class="py-16 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-gray-900 mb-4">{socialMediaTitle}</h2>
-          <p class="text-lg text-gray-600">
-            Resta aggiornato sui nostri eventi, pubblicazioni e attività
-          </p>
-        </div>
-        
-        <div class="max-w-6xl mx-auto">
-          <SocialMediaFeeds />
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- About Section -->
-  {settings?.showAboutSection !== false && (
-    <section class="py-16 bg-white">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-gray-900 mb-8">{settings?.aboutTitle || 'Chi Siamo'}</h2>
-        <p class="text-lg text-gray-600 leading-relaxed mb-8">
-          {settings?.aboutContent || 'La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Il network nasce per promuovere un confronto e una discussione accademica rigorosi, favorendo l\'incontro tra ricercatori, lo scambio di conoscenze e possibili collaborazioni tra i propri membri.'}
-        </p>
-        <a href="/chi-siamo" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-          Scopri di Più
-        </a>
-      </div>
-    </section>
-  )}
+          </section>
+        );
+      case 'articles':
+        return (featuredArticles.length > 0) && (
+          <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">{articlesTitle}</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {featuredArticles.map((article) => (
+                  <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    {article.data.heroImage && (
+                      <img 
+                        src={article.data.heroImage} 
+                        alt={article.data.title}
+                        class="w-full h-48 object-cover"
+                      />
+                    )}
+                    <div class="p-6">
+                      <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        <a href={`/articoli/${article.slug}`} class="hover:text-red-600 transition-colors">
+                          {article.data.title}
+                        </a>
+                      </h3>
+                      <p class="text-gray-600 text-sm mb-4">
+                        {article.data.description || article.body.slice(0, 150) + '...'}
+                      </p>
+                      <div class="flex items-center justify-between text-sm text-gray-500">
+                        <span>{article.data.pubDate.toLocaleDateString('it-IT')}</span>
+                        {article.data.author && <span>di {article.data.author}</span>}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <div class="text-center mt-8">
+                <a href="/articoli" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                  Vedi Tutti gli Articoli
+                </a>
+              </div>
+            </div>
+          </section>
+        );
+      case 'publications':
+        return (featuredPublications.length > 0) && (
+          <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">{publicationsTitle}</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {featuredPublications.map((publication) => (
+                  <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
+                    <div class="p-6">
+                      <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        <a href={`/pubblicazioni/${publication.slug}`} class="hover:text-red-600 transition-colors">
+                          {publication.data.title}
+                        </a>
+                      </h3>
+                      <p class="text-gray-600 text-sm mb-3 font-medium">
+                        {publication.data.authors.join(', ')}
+                      </p>
+                      <p class="text-gray-600 text-sm mb-4">
+                        {publication.data.publisher} • {publication.data.pubDate.toLocaleDateString('it-IT')}
+                      </p>
+                      <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                        {publication.data.abstract}
+                      </p>
+                      <div class="flex flex-wrap gap-2">
+                        {publication.data.doi && (
+                          <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">
+                            DOI
+                          </span>
+                        )}
+                        {publication.data.tags && publication.data.tags.slice(0, 2).map((tag) => (
+                          <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+              <div class="text-center mt-8">
+                <a href="/pubblicazioni" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                  Vedi Tutte le Pubblicazioni
+                </a>
+              </div>
+            </div>
+          </section>
+        );
+      case 'events':
+        return (upcomingEvents.length > 0) && (
+          <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">{eventsTitle}</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {upcomingEvents.map((event) => (
+                  <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                      <a href={`/eventi/${event.slug}`} class="hover:text-red-600 transition-colors">
+                        {event.data.title}
+                      </a>
+                    </h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                      {event.data.description || event.body.slice(0, 150) + '...'}
+                    </p>
+                    <div class="text-sm text-gray-500 space-y-1">
+                      <p>📅 {event.data.eventDate.toLocaleDateString('it-IT')}</p>
+                      {event.data.location && <p>📍 {event.data.location}</p>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div class="text-center mt-8">
+                <a href="/eventi" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                  Vedi Tutti gli Eventi
+                </a>
+              </div>
+            </div>
+          </section>
+        );
+      case 'social':
+        return (settings?.showSocialMedia !== false) && (
+          <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">{socialMediaTitle}</h2>
+                <p class="text-lg text-gray-600">
+                  Resta aggiornato sui nostri eventi, pubblicazioni e attività
+                </p>
+              </div>
+              <div class="max-w-6xl mx-auto">
+                <SocialMediaFeeds />
+              </div>
+            </div>
+          </section>
+        );
+      case 'about':
+        return (settings?.showAboutSection !== false) && (
+          <section class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h2 class="text-3xl font-bold text-gray-900 mb-8">{settings?.aboutTitle || 'Chi Siamo'}</h2>
+              <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                {settings?.aboutContent || 'La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Il network nasce per promuovere un confronto e una discussione accademica rigorosi, favorendo l\'incontro tra ricercatori, lo scambio di conoscenze e possibili collaborazioni tra i propri membri.'}
+              </p>
+              <a href="/chi-siamo" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                Scopri di Più
+              </a>
+            </div>
+          </section>
+        );
+    }
+    return null;
+  })}
 </Layout>

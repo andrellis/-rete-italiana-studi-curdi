@@ -5,98 +5,96 @@ export interface Props {
   theme?: 'light' | 'dark';
   title?: string;
   fallbackText?: string;
+  mode?: 'embed' | 'link';
+  href?: string; // optional direct URL (e.g., X List url)
 }
 
-const { 
-  username, 
-  height = 400, 
-  theme = 'light', 
-  title = "Seguici su Twitter",
-  fallbackText = "Seguici su Twitter per rimanere informato sui nostri eventi e pubblicazioni."
+const {
+  username,
+  height = 400,
+  theme = 'light',
+  title = "Seguici su X",
+  fallbackText = "Seguici su X per rimanere informato su eventi e pubblicazioni.",
+  mode = 'embed',
+  href,
 } = Astro.props;
 ---
 
 <div class="bg-white rounded-lg shadow-md p-6">
   <h3 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-    <svg class="w-6 h-6 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-    </svg>
+    <svg class="w-6 h-6 mr-2 text-black" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2H21l-6.57 7.507L22.5 22H15.93l-5.06-6.59L4.6 22H2l7.02-8.016L1.5 2h6.75l4.57 6.016L18.244 2Zm-1.19 18h1.8L7.08 4h-1.8l11.774 16Z"/></svg>
     {title}
   </h3>
-  
-  <!-- Twitter Timeline Embed -->
-  <div class="twitter-timeline-container">
-    <a 
-      class="twitter-timeline" 
-      data-height={height} 
-      data-theme={theme}
-      data-chrome="nofooter"
-      href={`https://twitter.com/${username}?ref_src=twsrc%5Etfw`}
-    >
-      Tweets by {username}
-    </a>
-  </div>
-  
-  <!-- Fallback content if Twitter embed fails -->
-  <div class="twitter-fallback hidden">
-    <p class="text-gray-600 text-sm mb-4">
-      {fallbackText}
-    </p>
-    <a 
-      href={`https://twitter.com/${username}`} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      class="inline-flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-    >
-      <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-      </svg>
-      Seguici su Twitter
-    </a>
-  </div>
+
+  {mode === 'embed' ? (
+    <div>
+      <div class="x-timeline-container">
+        <a
+          class="twitter-timeline"
+          data-height={height}
+          data-theme={theme}
+          data-chrome="nofooter"
+          href={href || `https://twitter.com/${username}`}
+        >
+          {href ? 'Timeline X' : `Post di @${username}`}
+        </a>
+      </div>
+      <div class="x-fallback hidden">
+        <p class="text-gray-600 text-sm mb-4">
+          {fallbackText}
+        </p>
+        <a
+          href={href || `https://twitter.com/${username}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:opacity-90 transition-colors"
+        >
+          Vai al profilo @{username}
+        </a>
+      </div>
+      <script is:inline async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <script is:inline>
+        document.addEventListener('DOMContentLoaded', function () {
+          const ensureLoaded = () => {
+            const twttr = window.twttr;
+            if (twttr && twttr.widgets) {
+              twttr.widgets.load();
+            }
+          };
+          setTimeout(ensureLoaded, 300);
+
+          setTimeout(function () {
+            const box = document.querySelector('.x-timeline-container');
+            const iframe = box && box.querySelector('iframe');
+            const fallback = document.querySelector('.x-fallback');
+            if (!iframe || iframe.offsetHeight === 0) {
+              if (box) box.style.display = 'none';
+              if (fallback) fallback.classList.remove('hidden');
+            }
+          }, 5000);
+        });
+      </script>
+    </div>
+  ) : (
+    <div class="flex items-center justify-between">
+      <p class="text-gray-600 text-sm">Seguici su X: @{username}</p>
+      <a
+        href={`https://twitter.com/${username}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:opacity-90 transition-colors"
+      >
+        Apri profilo
+      </a>
+    </div>
+  )}
 </div>
 
-<!-- Twitter Widgets Script -->
-<script is:inline async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<script>
-  // Fallback handling
-  document.addEventListener('DOMContentLoaded', function() {
-    // Check if Twitter widgets loaded successfully
-    setTimeout(function() {
-      const twitterContainer = document.querySelector('.twitter-timeline-container') as HTMLElement;
-      const fallback = document.querySelector('.twitter-fallback') as HTMLElement;
-      
-      if (twitterContainer && fallback) {
-        // If no tweets are loaded after 5 seconds, show fallback
-        setTimeout(function() {
-          const tweets = twitterContainer.querySelector('.twitter-timeline') as HTMLElement;
-          if (!tweets || tweets.offsetHeight === 0) {
-            twitterContainer.style.display = 'none';
-            fallback.classList.remove('hidden');
-          }
-        }, 5000);
-      }
-    }, 1000);
-  });
-</script>
-
 <style>
-  .twitter-timeline-container {
-    min-height: 400px;
+  .x-timeline-container { min-height: 400px; }
+  .x-fallback {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 200px; text-align: center;
   }
-  
-  .twitter-fallback {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    text-align: center;
-  }
-  
-  /* Custom styling for Twitter embed */
-  .twitter-timeline {
-    border-radius: 0.5rem;
-  }
+  .twitter-timeline { border-radius: 0.5rem; }
 </style>
