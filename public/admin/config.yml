@@ -2,7 +2,7 @@ backend:
   name: github
   repo: andrellis/-rete-italiana-studi-curdi
   branch: master
-  base_url: https://YOUR-WORKER.SUBDOMAIN.workers.dev
+  base_url: https://sveltia-cms-auth.novellis-andrea.workers.dev
   auth_endpoint: auth
 
 # Enable immediate publishing (no editorial workflow)
