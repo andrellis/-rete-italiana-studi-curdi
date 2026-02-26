@@ -6,13 +6,19 @@ export interface Props {
   title: string;
   description?: string;
   image?: string;
+  lang?: 'it' | 'en';
 }
 
-const { title, description = "Rete Italiana Studi Curdi - Promuoviamo la ricerca e la conoscenza della cultura curda", image } = Astro.props;
+const {
+  title,
+  description = "Rete Italiana Studi Curdi - Promuoviamo la ricerca e la conoscenza della cultura curda",
+  image,
+  lang = 'it',
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -41,29 +47,15 @@ const { title, description = "Rete Italiana Studi Curdi - Promuoviamo la ricerca
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body class="min-h-screen bg-gray-50 text-gray-900">
-    <Header />
+    <Header lang={lang} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>
-
-<script>
-  if ((window as any).netlifyIdentity) {
-    (window as any).netlifyIdentity.on("init", (user: any) => {
-      if (!user) {
-        (window as any).netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
 
 <style is:global>
   html {

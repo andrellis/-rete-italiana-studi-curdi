@@ -2,18 +2,23 @@
 import { getCollection } from 'astro:content';
 import Logo from './Logo.astro';
 
+const { lang = 'it' } = Astro.props;
+const isEnglish = lang === 'en';
+const settingsCollection = isEnglish ? 'settings-en' : 'settings';
+const navigationCollection = isEnglish ? 'navigation-en' : 'navigation';
+
 // Get site settings and navigation with error handling
 let siteSettings: any[] = [];
 let navigationItems: any[] = [];
 
 try {
-  siteSettings = await getCollection('settings');
+  siteSettings = await getCollection(settingsCollection as any);
 } catch (error) {
   console.warn('Settings collection not found or empty:', error);
 }
 
 try {
-  navigationItems = await getCollection('navigation');
+  navigationItems = await getCollection(navigationCollection as any);
 } catch (error) {
   console.warn('Navigation collection not found or empty:', error);
 }
@@ -25,14 +30,19 @@ const sortedNavigation = navigationItems.length > 0
 
 // Get settings data with fallbacks
 const settings = siteSettings.length > 0 ? siteSettings[0]?.data : null;
-const siteName = settings?.logoText || 'Rete Italiana Studi Curdi';
+const siteName = settings?.logoText || (isEnglish ? 'Italian Network of Kurdish Studies' : 'Rete Italiana Studi Curdi');
 const logoImage = settings?.logoImage;
 const showLogoImage = settings?.showLogoImage !== false;
-const logoAlt = settings?.logoAlt || 'Rete Italiana Studi Curdi Logo';
+const logoAlt = settings?.logoAlt || (isEnglish ? 'Italian Network of Kurdish Studies logo' : 'Rete Italiana Studi Curdi Logo');
 const contactEmail = settings?.contactEmail || 'rete.italiana.studi.curdi@gmail.com';
 const website = settings?.website || 'www.reteitalianastudicurdi.it';
-const footerText = settings?.footerText || 'Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi.';
+const footerText = settings?.footerText || (isEnglish
+  ? 'A network of scholars, researchers, and students focused on Kurdish studies across disciplines.'
+  : 'Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi.');
 const copyrightYear = settings?.copyrightYear || new Date().getFullYear();
+const quickLinksLabel = isEnglish ? 'Quick Links' : 'Link Utili';
+const contactsLabel = isEnglish ? 'Contact' : 'Contatti';
+const rightsText = isEnglish ? 'All rights reserved.' : 'Tutti i diritti riservati.';
 ---
 
 <footer class="bg-gray-900 text-white">
@@ -62,7 +72,7 @@ const copyrightYear = settings?.copyrightYear || new Date().getFullYear();
       
       <!-- Quick Links -->
       <div>
-        <h3 class="text-lg font-semibold mb-4">Link Utili</h3>
+        <h3 class="text-lg font-semibold mb-4">{quickLinksLabel}</h3>
         <ul class="space-y-2">
           {sortedNavigation.map((item) => (
             <li>
@@ -80,7 +90,7 @@ const copyrightYear = settings?.copyrightYear || new Date().getFullYear();
       
       <!-- Contact Info -->
       <div>
-        <h3 class="text-lg font-semibold mb-4">Contatti</h3>
+        <h3 class="text-lg font-semibold mb-4">{contactsLabel}</h3>
         <div class="text-gray-300 text-sm space-y-2">
           <p>Email: {contactEmail}</p>
           <p>Website: {website}</p>
@@ -90,7 +100,7 @@ const copyrightYear = settings?.copyrightYear || new Date().getFullYear();
     
     <div class="border-t border-gray-800 mt-8 pt-8 text-center">
       <p class="text-gray-400 text-sm">
-        © {copyrightYear} {siteName}. Tutti i diritti riservati.
+        © {copyrightYear} {siteName}. {rightsText}
       </p>
     </div>
   </div>

@@ -2,18 +2,58 @@
 import { getCollection } from 'astro:content';
 import Logo from './Logo.astro';
 
+const { lang = 'it' } = Astro.props;
+const currentPath = Astro.url?.pathname || '/';
+const isEnglish = lang === 'en';
+const navCollection = isEnglish ? 'navigation-en' : 'navigation';
+const settingsCollection = isEnglish ? 'settings-en' : 'settings';
+
+const routeMapItToEn: Record<string, string> = {
+  '/chi-siamo': '/en/about',
+  '/contatti': '/en/contact',
+  '/articoli': '/en/articles',
+  '/eventi': '/en/events',
+  '/pubblicazioni': '/en/publications',
+  '/': '/en',
+};
+
+const routeMapEnToIt: Record<string, string> = {
+  '/en/about': '/chi-siamo',
+  '/en/contact': '/contatti',
+  '/en/articles': '/articoli',
+  '/en/events': '/eventi',
+  '/en/publications': '/pubblicazioni',
+  '/en': '/',
+};
+
+const getSwitchHref = () => {
+  if (isEnglish) {
+    if (routeMapEnToIt[currentPath]) return routeMapEnToIt[currentPath];
+    if (currentPath.startsWith('/en/articles/')) return currentPath.replace('/en/articles/', '/articoli/');
+    if (currentPath.startsWith('/en/events/')) return currentPath.replace('/en/events/', '/eventi/');
+    if (currentPath.startsWith('/en/publications/')) return currentPath.replace('/en/publications/', '/pubblicazioni/');
+    return currentPath.replace(/^\/en/, '') || '/';
+  }
+
+  if (routeMapItToEn[currentPath]) return routeMapItToEn[currentPath];
+  if (currentPath.startsWith('/articoli/')) return currentPath.replace('/articoli/', '/en/articles/');
+  if (currentPath.startsWith('/eventi/')) return currentPath.replace('/eventi/', '/en/events/');
+  if (currentPath.startsWith('/pubblicazioni/')) return currentPath.replace('/pubblicazioni/', '/en/publications/');
+  return `/en${currentPath === '/' ? '' : currentPath}`;
+};
+
 // Get navigation items and site settings with error handling
 let navigationItems: any[] = [];
 let siteSettings: any[] = [];
 
 try {
-  navigationItems = await getCollection('navigation');
+  navigationItems = await getCollection(navCollection as any);
 } catch (error) {
   console.warn('Navigation collection not found or empty:', error);
 }
 
 try {
-  siteSettings = await getCollection('settings');
+  siteSettings = await getCollection(settingsCollection as any);
 } catch (error) {
   console.warn('Settings collection not found or empty:', error);
 }
@@ -25,12 +65,14 @@ const sortedNavigation = navigationItems.length > 0
 
 // Get site settings with fallbacks
 const settings = siteSettings.length > 0 ? siteSettings[0]?.data : null;
-const siteName = settings?.logoText || 'Rete Italiana Studi Curdi';
+const siteName = settings?.logoText || (isEnglish ? 'Italian Network of Kurdish Studies' : 'Rete Italiana Studi Curdi');
 const logoImage = settings?.logoImage;
 const logoVariant = settings?.logoVariant || 'full';
 const showLogoImage = settings?.showLogoImage !== false;
 const showLogoText = settings?.showLogoText !== false;
-const logoAlt = settings?.logoAlt || 'Rete Italiana Studi Curdi Logo';
+const logoAlt = settings?.logoAlt || (isEnglish ? 'Italian Network of Kurdish Studies logo' : 'Rete Italiana Studi Curdi Logo');
+const switchHref = getSwitchHref();
+const homeHref = isEnglish ? '/en' : '/';
 ---
 
 <header class="bg-white shadow-sm border-b border-gray-200">
@@ -38,7 +80,7 @@ const logoAlt = settings?.logoAlt || 'Rete Italiana Studi Curdi Logo';
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
       <div class="flex-shrink-0">
-        <a href="/" class="hover:opacity-80 transition-opacity">
+        <a href={homeHref} class="hover:opacity-80 transition-opacity">
           <Logo 
             variant={logoVariant}
             size="md"
@@ -52,7 +94,7 @@ const logoAlt = settings?.logoAlt || 'Rete Italiana Studi Curdi Logo';
       </div>
       
       <!-- Desktop Navigation -->
-      <div class="hidden md:block">
+      <div class="hidden md:flex items-center gap-4">
         <div class="ml-10 flex items-baseline space-x-4">
           {sortedNavigation
             .filter(item => item.data.showDesktop !== false)
@@ -65,6 +107,22 @@ const logoAlt = settings?.logoAlt || 'Rete Italiana Studi Curdi Logo';
                 {item.data.label}
               </a>
             ))}
+        </div>
+        <div class="flex items-center gap-2 border-l border-gray-200 pl-4">
+          <a
+            href={isEnglish ? switchHref : currentPath}
+            class={`text-xs font-semibold px-2 py-1 rounded ${isEnglish ? 'text-gray-500' : 'text-red-600 bg-red-50'}`}
+            aria-current={!isEnglish ? 'page' : undefined}
+          >
+            ITA
+          </a>
+          <a
+            href={isEnglish ? currentPath : switchHref}
+            class={`text-xs font-semibold px-2 py-1 rounded ${isEnglish ? 'text-red-600 bg-red-50' : 'text-gray-500'}`}
+            aria-current={isEnglish ? 'page' : undefined}
+          >
+            ENG
+          </a>
         </div>
       </div>
       
@@ -83,6 +141,22 @@ const logoAlt = settings?.logoAlt || 'Rete Italiana Studi Curdi Logo';
     <!-- Mobile menu -->
     <div class="md:hidden" id="mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div class="flex items-center gap-2 px-3 py-2">
+          <a
+            href={isEnglish ? switchHref : currentPath}
+            class={`text-xs font-semibold px-2 py-1 rounded ${isEnglish ? 'text-gray-500' : 'text-red-600 bg-red-50'}`}
+            aria-current={!isEnglish ? 'page' : undefined}
+          >
+            ITA
+          </a>
+          <a
+            href={isEnglish ? currentPath : switchHref}
+            class={`text-xs font-semibold px-2 py-1 rounded ${isEnglish ? 'text-red-600 bg-red-50' : 'text-gray-500'}`}
+            aria-current={isEnglish ? 'page' : undefined}
+          >
+            ENG
+          </a>
+        </div>
         {sortedNavigation
           .filter(item => item.data.showMobile !== false)
           .map((item) => (

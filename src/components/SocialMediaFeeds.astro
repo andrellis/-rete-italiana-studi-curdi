@@ -5,10 +5,14 @@ import LinkedInFeed from './LinkedInFeed.astro';
 import FacebookFeed from './FacebookFeed.astro';
 import { parseUsernames, isValidTwitterUsername, isValidLinkedInUsername, isValidFacebookUsername } from '../utils/validation';
 
+const { lang = 'it' } = Astro.props;
+const isEnglish = lang === 'en';
+const settingsCollection = isEnglish ? 'settings-en' : 'settings';
+
 // Get site settings with error handling
 let siteSettings: any[] = [];
 try {
-  siteSettings = await getCollection('settings');
+  siteSettings = await getCollection(settingsCollection as any);
 } catch (error) {
   console.warn('Settings collection not found or empty:', error);
 }
@@ -57,8 +61,9 @@ const hasSocialMedia = (showTwitter && validTwitter) || (showLinkedin && validLi
         href={twitterListUrl}
         height={twitterHeight}
         theme={twitterTheme}
-        title="Aggiornamenti su X"
+        title={isEnglish ? 'Updates on X' : 'Aggiornamenti su X'}
         mode={twitterMode}
+        lang={lang}
       />
     ) : (
       validTwitter && (
@@ -67,12 +72,13 @@ const hasSocialMedia = (showTwitter && validTwitter) || (showLinkedin && validLi
             username={twitterUsernames[0]}
             height={twitterHeight}
             theme={twitterTheme}
-            title={"Aggiornamenti su X"}
+            title={isEnglish ? 'Updates on X' : 'Aggiornamenti su X'}
             mode={twitterMode}
+            lang={lang}
           />
           {twitterUsernames.length > 1 && (
             <div class="mt-3 text-sm text-gray-600">
-              Altri profili:
+              {isEnglish ? 'Other profiles:' : 'Altri profili:'}
               {twitterUsernames.slice(1).map((u, i) => (
                 <>
                   {" "}
@@ -93,13 +99,14 @@ const hasSocialMedia = (showTwitter && validTwitter) || (showLinkedin && validLi
         <LinkedInFeed
           username={linkedinUsernames[0]}
           height={linkedinHeight}
-          title={"Aggiornamenti su LinkedIn"}
+          title={isEnglish ? 'Updates on LinkedIn' : 'Aggiornamenti su LinkedIn'}
           mode={linkedinMode}
           embedHtml={linkedinEmbedHtml}
+          lang={lang}
         />
         {linkedinUsernames.length > 1 && (
           <div class="mt-3 text-sm text-gray-600">
-            Altri profili:
+            {isEnglish ? 'Other profiles:' : 'Altri profili:'}
             {linkedinUsernames.slice(1).map((u, i) => (
               <>
                 {' '}<a href={`https://www.linkedin.com/company/${u}`} target="_blank" rel="noopener noreferrer" class="underline hover:no-underline">{u}</a>
@@ -118,7 +125,8 @@ const hasSocialMedia = (showTwitter && validTwitter) || (showLinkedin && validLi
             <FacebookFeed 
               username={username}
               height={facebookHeight}
-              title={facebookUsernames.length > 1 ? `${username}` : "Seguici su Facebook"}
+              title={facebookUsernames.length > 1 ? `${username}` : (isEnglish ? 'Follow us on Facebook' : 'Seguici su Facebook')}
+              lang={lang}
             />
           </div>
         ))}

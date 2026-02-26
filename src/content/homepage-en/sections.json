@@ -1,0 +1,58 @@
+{
+  "ctaButton1Url": "/en/about",
+  "socialMediaTitle": "Follow Us",
+  "ctaButton2Label": "",
+  "featuredArticlesCount": 3,
+  "ctaButton1Label": "About Us",
+  "featuredEventsCount": 3,
+  "heroBgFrom": "from-red-600",
+  "aboutTitle": "About Us",
+  "aboutContent": "The Italian Network of Kurdish Studies is a network of scholars, researchers, and students interested in all fields related to Kurdish studies. The network was created to foster rigorous academic exchange and discussion, encouraging collaboration, knowledge sharing, and new research partnerships.",
+  "eventsSectionTitle": "Upcoming Events",
+  "sections": [
+    {
+      "type": "hero",
+      "enabled": true
+    },
+    {
+      "type": "brand",
+      "enabled": true,
+      "logoVariant": "full",
+      "align": "center",
+      "maxWidth": "md",
+      "showLogoImage": true,
+      "showLogoText": true
+    },
+    {
+      "type": "articles",
+      "enabled": true
+    },
+    {
+      "type": "publications",
+      "enabled": true
+    },
+    {
+      "type": "events",
+      "enabled": true
+    },
+    {
+      "type": "social",
+      "enabled": true
+    },
+    {
+      "type": "about",
+      "enabled": true
+    }
+  ],
+  "articlesSectionTitle": "Recent Articles",
+  "heroSubtitle": "A network of scholars, researchers, and students devoted to Kurdish studies. We promote rigorous academic exchange and collaboration.",
+  "heroBackgroundImage": "/images/backgrounds/landscape-hero.jpg",
+  "heroOverlayOpacity": 60,
+  "showAboutSection": true,
+  "heroBgTo": "to-red-700",
+  "showSocialMedia": true,
+  "featuredPublicationsCount": 3,
+  "publicationsSectionTitle": "Recent Publications",
+  "heroTitle": "Italian Network of Kurdish Studies",
+  "ctaButton2Url": ""
+}

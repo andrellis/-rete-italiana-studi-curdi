@@ -1,31 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import SocialMediaFeeds from '../components/SocialMediaFeeds.astro';
-import PageHero from '../components/PageHero.astro';
-import Logo from '../components/Logo.astro';
+import SocialMediaFeeds from '../../components/SocialMediaFeeds.astro';
+import PageHero from '../../components/PageHero.astro';
+import Logo from '../../components/Logo.astro';
 
-// Get homepage settings with error handling
 let homepageSettings: any[] = [];
 try {
-  homepageSettings = await getCollection('homepage');
+  homepageSettings = await getCollection('homepage-en');
 } catch (error) {
-  console.warn('Homepage collection not found or empty:', error);
+  console.warn('Homepage EN collection not found or empty:', error);
 }
 
 const settings = homepageSettings.length > 0 ? homepageSettings[0]?.data : null;
 
-// Get featured articles, publications and events
-const allArticles = await getCollection('articoli');
-const allPublications = await getCollection('pubblicazioni');
-const allEvents = await getCollection('eventi');
+const allArticles = await getCollection('articoli-en');
+const allPublications = await getCollection('pubblicazioni-en');
+const allEvents = await getCollection('eventi-en');
 
-// Get counts from settings or use defaults
 const articlesCount = settings?.featuredArticlesCount || 3;
 const publicationsCount = settings?.featuredPublicationsCount || 3;
 const eventsCount = settings?.featuredEventsCount || 3;
 
-// Sort by date and get latest
 const featuredArticles = allArticles
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
   .slice(0, articlesCount);
@@ -39,13 +35,11 @@ const upcomingEvents = allEvents
   .sort((a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime())
   .slice(0, eventsCount);
 
-// Get section titles from settings or use defaults
-const articlesTitle = settings?.articlesSectionTitle || 'Articoli Recenti';
-const publicationsTitle = settings?.publicationsSectionTitle || 'Pubblicazioni Recenti';
-const eventsTitle = settings?.eventsSectionTitle || 'Prossimi Eventi';
-const socialMediaTitle = settings?.socialMediaTitle || 'Seguici sui Social';
+const articlesTitle = settings?.articlesSectionTitle || 'Recent Articles';
+const publicationsTitle = settings?.publicationsSectionTitle || 'Recent Publications';
+const eventsTitle = settings?.eventsSectionTitle || 'Upcoming Events';
+const socialMediaTitle = settings?.socialMediaTitle || 'Follow Us';
 
-// Compute ordered sections from settings.sections (fallback to default order if not set)
 const defaultOrder = [
   { type: 'hero', enabled: true },
   { type: 'brand', enabled: true },
@@ -60,15 +54,15 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
   ? settings.sections
   : defaultOrder;
 ---
-<Layout title="Rete Italiana Studi Curdi - Home">
+<Layout lang="en" title="Italian Network of Kurdish Studies - Home" description="The Italian Network of Kurdish Studies promotes research and knowledge about Kurdish society and culture.">
   {sectionsOrder.map((s: any) => {
     if (s?.enabled === false) return null;
     switch (s?.type) {
       case 'hero':
         return (
           <PageHero 
-            title={s?.title || settings?.heroTitle || 'Rete Italiana Studi Curdi'}
-            subtitle={s?.subtitle || settings?.heroSubtitle || 'Un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Promuoviamo un confronto e una discussione accademica rigorosi.'}
+            title={s?.title || settings?.heroTitle || 'Italian Network of Kurdish Studies'}
+            subtitle={s?.subtitle || settings?.heroSubtitle || 'A network of scholars, researchers, and students devoted to Kurdish studies. We promote rigorous academic exchange and collaboration.'}
             backgroundImage={s?.heroBackgroundImage || settings?.heroBackgroundImage}
             overlayOpacity={s?.heroOverlayOpacity ?? settings?.heroOverlayOpacity ?? 60}
             showButtons={true}
@@ -88,7 +82,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                   size="lg"
                   showLogoImage={s?.showLogoImage !== false}
                   showLogoText={s?.showLogoText !== false}
-                  siteName={settings?.heroTitle || 'Rete Italiana Studi Curdi'}
+                  siteName={settings?.heroTitle || 'Italian Network of Kurdish Studies'}
                 />
               </div>
             </div>
@@ -111,7 +105,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                     )}
                     <div class="p-6">
                       <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                        <a href={`/articoli/${article.slug}`} class="hover:text-red-600 transition-colors">
+                        <a href={`/en/articles/${article.slug}`} class="hover:text-red-600 transition-colors">
                           {article.data.title}
                         </a>
                       </h3>
@@ -119,16 +113,16 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                         {article.data.description || article.body.slice(0, 150) + '...'}
                       </p>
                       <div class="flex items-center justify-between text-sm text-gray-500">
-                        <span>{article.data.pubDate.toLocaleDateString('it-IT')}</span>
-                        {article.data.author && <span>di {article.data.author}</span>}
+                        <span>{article.data.pubDate.toLocaleDateString('en-GB')}</span>
+                        {article.data.author && <span>by {article.data.author}</span>}
                       </div>
                     </div>
                   </article>
                 ))}
               </div>
               <div class="text-center mt-8">
-                <a href="/articoli" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-                  Vedi Tutti gli Articoli
+                <a href="/en/articles" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                  View All Articles
                 </a>
               </div>
             </div>
@@ -144,7 +138,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                   <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
                     <div class="p-6">
                       <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                        <a href={`/pubblicazioni/${publication.slug}`} class="hover:text-red-600 transition-colors">
+                        <a href={`/en/publications/${publication.slug}`} class="hover:text-red-600 transition-colors">
                           {publication.data.title}
                         </a>
                       </h3>
@@ -152,7 +146,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                         {publication.data.authors.join(', ')}
                       </p>
                       <p class="text-gray-600 text-sm mb-4">
-                        {publication.data.publisher} • {publication.data.pubDate.toLocaleDateString('it-IT')}
+                        {publication.data.publisher} • {publication.data.pubDate.toLocaleDateString('en-GB')}
                       </p>
                       <p class="text-gray-600 text-sm mb-4 line-clamp-3">
                         {publication.data.abstract}
@@ -174,8 +168,8 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                 ))}
               </div>
               <div class="text-center mt-8">
-                <a href="/pubblicazioni" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-                  Vedi Tutte le Pubblicazioni
+                <a href="/en/publications" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                  View All Publications
                 </a>
               </div>
             </div>
@@ -190,7 +184,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                 {upcomingEvents.map((event) => (
                   <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                     <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                      <a href={`/eventi/${event.slug}`} class="hover:text-red-600 transition-colors">
+                      <a href={`/en/events/${event.slug}`} class="hover:text-red-600 transition-colors">
                         {event.data.title}
                       </a>
                     </h3>
@@ -198,15 +192,15 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                       {event.data.description || event.body.slice(0, 150) + '...'}
                     </p>
                     <div class="text-sm text-gray-500 space-y-1">
-                      <p>📅 {event.data.eventDate.toLocaleDateString('it-IT')}</p>
+                      <p>📅 {event.data.eventDate.toLocaleDateString('en-GB')}</p>
                       {event.data.location && <p>📍 {event.data.location}</p>}
                     </div>
                   </div>
                 ))}
               </div>
               <div class="text-center mt-8">
-                <a href="/eventi" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-                  Vedi Tutti gli Eventi
+                <a href="/en/events" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                  View All Events
                 </a>
               </div>
             </div>
@@ -219,11 +213,11 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
               <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">{socialMediaTitle}</h2>
                 <p class="text-lg text-gray-600">
-                  Resta aggiornato sui nostri eventi, pubblicazioni e attività
+                  Stay up to date with our events, publications, and activities
                 </p>
               </div>
               <div class="max-w-6xl mx-auto">
-                <SocialMediaFeeds lang="it" />
+                <SocialMediaFeeds lang="en" />
               </div>
             </div>
           </section>
@@ -232,12 +226,12 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
         return (settings?.showAboutSection !== false) && (
           <section class="py-16 bg-white">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-              <h2 class="text-3xl font-bold text-gray-900 mb-8">{settings?.aboutTitle || 'Chi Siamo'}</h2>
+              <h2 class="text-3xl font-bold text-gray-900 mb-8">{settings?.aboutTitle || 'About Us'}</h2>
               <p class="text-lg text-gray-600 leading-relaxed mb-8">
-                {settings?.aboutContent || 'La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Il network nasce per promuovere un confronto e una discussione accademica rigorosi, favorendo l\'incontro tra ricercatori, lo scambio di conoscenze e possibili collaborazioni tra i propri membri.'}
+                {settings?.aboutContent || 'The Italian Network of Kurdish Studies is a network of scholars, researchers, and students devoted to Kurdish studies. It promotes rigorous academic exchange, knowledge sharing, and collaboration.'}
               </p>
-              <a href="/chi-siamo" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-                Scopri di Più
+              <a href="/en/about" class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                Learn More
               </a>
             </div>
           </section>

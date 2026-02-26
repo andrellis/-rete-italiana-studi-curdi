@@ -1,0 +1,85 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPublications = await getCollection('pubblicazioni-en');
+const featuredPublications = allPublications.filter(publication => publication.data.featured);
+const regularPublications = allPublications.filter(publication => !publication.data.featured);
+---
+
+<Layout lang="en" title="Publications - Italian Network of Kurdish Studies" description="Publications and research from the Italian Network of Kurdish Studies">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Publications</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Publications and research from the Italian Network of Kurdish Studies
+      </p>
+    </div>
+
+    {featuredPublications.length > 0 && (
+      <section class="mb-16">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8">Featured</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {featuredPublications.map((publication) => (
+            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  <a href={`/en/publications/${publication.slug}`} class="hover:text-red-600 transition-colors">
+                    {publication.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 text-sm mb-3 font-medium">
+                  {publication.data.authors.join(', ')}
+                </p>
+                <p class="text-gray-600 text-sm mb-4">
+                  {publication.data.publisher} • {publication.data.pubDate.toLocaleDateString('en-GB')}
+                </p>
+                <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                  {publication.data.abstract}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  {publication.data.doi && (
+                    <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">
+                      DOI
+                    </span>
+                  )}
+                  {publication.data.tags && publication.data.tags.slice(0, 3).map((tag) => (
+                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">All Publications</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {regularPublications.map((publication) => (
+          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-gray-200">
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                <a href={`/en/publications/${publication.slug}`} class="hover:text-red-600 transition-colors">
+                  {publication.data.title}
+                </a>
+              </h3>
+              <p class="text-gray-600 text-sm mb-3">
+                {publication.data.authors.join(', ')}
+              </p>
+              <p class="text-gray-600 text-sm mb-4">
+                {publication.data.publisher} • {publication.data.pubDate.toLocaleDateString('en-GB')}
+              </p>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                {publication.data.abstract}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -1,0 +1,104 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allEvents = await getCollection('eventi-en');
+const upcomingEvents = allEvents.filter(event => event.data.eventDate >= new Date());
+const pastEvents = allEvents.filter(event => event.data.eventDate < new Date());
+---
+
+<Layout lang="en" title="Events - Italian Network of Kurdish Studies" description="Events, conferences, and seminars on Kurdish studies">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Events</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Events, conferences, and seminars on Kurdish studies
+      </p>
+    </div>
+
+    {upcomingEvents.length > 0 && (
+      <section class="mb-16">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8">Upcoming Events</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {upcomingEvents.map((event) => (
+            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              {event.data.heroImage && (
+                <img 
+                  src={event.data.heroImage} 
+                  alt={event.data.title}
+                  class="w-full h-64 object-cover"
+                />
+              )}
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  <a href={`/en/events/${event.slug}`} class="hover:text-red-600 transition-colors">
+                    {event.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 mb-4">{event.data.description}</p>
+                <div class="text-sm text-gray-500 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <span>📅</span>
+                    <span>
+                      {event.data.eventDate.toLocaleDateString('en-GB', { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}
+                    </span>
+                  </div>
+                  {event.data.endDate && (
+                    <div class="flex items-center gap-2">
+                      <span>📅</span>
+                      <span>Until {event.data.endDate.toLocaleDateString('en-GB')}</span>
+                    </div>
+                  )}
+                  {event.data.location && (
+                    <div class="flex items-center gap-2">
+                      <span>📍</span>
+                      <span>{event.data.location}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {pastEvents.length > 0 && (
+      <section>
+        <h2 class="text-2xl font-bold text-gray-900 mb-8">Past Events</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {pastEvents.map((event) => (
+            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              {event.data.heroImage && (
+                <img 
+                  src={event.data.heroImage} 
+                  alt={event.data.title}
+                  class="w-full h-48 object-cover"
+                />
+              )}
+              <div class="p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                  <a href={`/en/events/${event.slug}`} class="hover:text-red-600 transition-colors">
+                    {event.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">
+                  {event.data.description || event.body.slice(0, 120) + '...'}
+                </p>
+                <div class="text-sm text-gray-500 space-y-1">
+                  <span>{event.data.eventDate.toLocaleDateString('en-GB')}</span>
+                  {event.data.location && <span> • {event.data.location}</span>}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</Layout>

@@ -7,6 +7,7 @@ export interface Props {
   fallbackText?: string;
   mode?: 'embed' | 'link';
   href?: string; // optional direct URL (e.g., X List url)
+  lang?: 'it' | 'en';
 }
 
 const {
@@ -17,7 +18,15 @@ const {
   fallbackText = "Seguici su X per rimanere informato su eventi e pubblicazioni.",
   mode = 'embed',
   href,
+  lang = 'it',
 } = Astro.props;
+
+const isEnglish = lang === 'en';
+const timelineLabel = isEnglish ? 'X timeline' : 'Timeline X';
+const postsLabel = isEnglish ? `Posts by @${username}` : `Post di @${username}`;
+const goProfile = isEnglish ? `Open profile @${username}` : `Vai al profilo @${username}`;
+const followInline = isEnglish ? `Follow on X: @${username}` : `Seguici su X: @${username}`;
+const openProfile = isEnglish ? 'Open profile' : 'Apri profilo';
 ---
 
 <div class="bg-white rounded-lg shadow-md p-6">
@@ -36,7 +45,7 @@ const {
           data-chrome="nofooter"
           href={href || `https://twitter.com/${username}`}
         >
-          {href ? 'Timeline X' : `Post di @${username}`}
+          {href ? timelineLabel : postsLabel}
         </a>
       </div>
       <div class="x-fallback hidden">
@@ -49,7 +58,7 @@ const {
           rel="noopener noreferrer"
           class="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:opacity-90 transition-colors"
         >
-          Vai al profilo @{username}
+          {goProfile}
         </a>
       </div>
       <script is:inline async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -77,14 +86,14 @@ const {
     </div>
   ) : (
     <div class="flex items-center justify-between">
-      <p class="text-gray-600 text-sm">Seguici su X: @{username}</p>
+      <p class="text-gray-600 text-sm">{followInline}</p>
       <a
         href={`https://twitter.com/${username}`}
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center px-4 py-2 bg-black text-white rounded-lg hover:opacity-90 transition-colors"
       >
-        Apri profilo
+        {openProfile}
       </a>
     </div>
   )}

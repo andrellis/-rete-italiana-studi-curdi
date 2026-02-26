@@ -5,9 +5,16 @@ export interface Props {
   title?: string;
   embedHtml?: string;
   mode?: 'embed' | 'link';
+  lang?: 'it' | 'en';
 }
 
-const { username, title = "Seguici su LinkedIn", embedHtml, mode = 'embed' } = Astro.props;
+const { username, title = "Seguici su LinkedIn", embedHtml, mode = 'embed', lang = 'it' } = Astro.props;
+const isEnglish = lang === 'en';
+const headingText = isEnglish ? 'Follow us on LinkedIn' : 'Seguici su LinkedIn';
+const bodyText = isEnglish
+  ? 'Stay updated with our posts, articles, and professional updates.'
+  : 'Resta aggiornato sui nostri post, articoli e aggiornamenti professionali';
+const buttonText = isEnglish ? 'Visit our LinkedIn page' : 'Visita la nostra pagina LinkedIn';
 ---
 
 <div class="bg-white rounded-lg shadow-md p-6">
@@ -23,15 +30,15 @@ const { username, title = "Seguici su LinkedIn", embedHtml, mode = 'embed' } = A
   ) : (
     <div class="linkedin-link-container">
       <div class="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-8 text-center">
-        <h4 class="text-lg font-semibold text-gray-900 mb-2">Seguici su LinkedIn</h4>
-        <p class="text-gray-600 text-sm mb-6">Resta aggiornato sui nostri post, articoli e aggiornamenti professionali</p>
+        <h4 class="text-lg font-semibold text-gray-900 mb-2">{headingText}</h4>
+        <p class="text-gray-600 text-sm mb-6">{bodyText}</p>
         <a
           href={`https://www.linkedin.com/company/${username}`}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
         >
-          Visita la nostra pagina LinkedIn
+          {buttonText}
         </a>
       </div>
     </div>
