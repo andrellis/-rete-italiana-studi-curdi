@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
+import PageSections from '../components/PageSections.astro';
 import { getEntryBySlug } from 'astro:content';
 
 const entry = await getEntryBySlug('pagine', 'chi-siamo');
@@ -15,6 +16,7 @@ const title = data?.title || 'Chi Siamo';
 const description = data?.description || 'Scopri la missione e i membri della Rete Italiana Studi Curdi';
 const bgImage = data?.backgroundImage || data?.heroImage;
 const overlay = typeof data?.backgroundOverlay === 'number' ? data?.backgroundOverlay : 60;
+const hasSections = Array.isArray(data?.sections) && data?.sections.length > 0;
 ---
 
 <Layout title={`${title} - Rete Italiana Studi Curdi`} description={description}>
@@ -26,15 +28,19 @@ const overlay = typeof data?.backgroundOverlay === 'number' ? data?.backgroundOv
     minHeight="py-16"
   />
   
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="prose prose-lg max-w-none">
-      {ContentComponent ? <ContentComponent /> : (
-        <>
-          <p class="text-xl text-gray-600 mb-8">
-            La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi.
-          </p>
-        </>
-      )}
+  {hasSections ? (
+    <PageSections sections={data?.sections} />
+  ) : (
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="prose prose-lg max-w-none">
+        {ContentComponent ? <ContentComponent /> : (
+          <>
+            <p class="text-xl text-gray-600 mb-8">
+              La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi.
+            </p>
+          </>
+        )}
+      </div>
     </div>
-  </div>
+  )}
 </Layout>

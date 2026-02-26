@@ -24,6 +24,62 @@ const pagineCollection = defineCollection({
     backgroundImage: z.string().optional(),
     backgroundOverlay: z.number().optional(),
     order: z.number().optional(),
+    sections: z
+      .array(
+        z.object({
+          type: z.enum(['hero', 'banner', 'text', 'image', 'gallery', 'icons', 'cta']),
+          enabled: z.boolean().optional(),
+          anchor: z.string().optional(),
+
+          // Hero
+          title: z.string().optional(),
+          subtitle: z.string().optional(),
+          backgroundImage: z.string().optional(),
+          overlayOpacity: z.number().optional(),
+          ctaButton1Label: z.string().optional(),
+          ctaButton1Url: z.string().optional(),
+          ctaButton2Label: z.string().optional(),
+          ctaButton2Url: z.string().optional(),
+
+          // Banner / CTA
+          text: z.string().optional(),
+          buttonLabel: z.string().optional(),
+          buttonUrl: z.string().optional(),
+          theme: z.enum(['light', 'accent', 'dark']).optional(),
+
+          // Text block
+          body: z.string().optional(),
+          align: z.enum(['left', 'center']).optional(),
+          maxWidth: z.enum(['sm', 'md', 'lg']).optional(),
+
+          // Image / Gallery
+          image: z.string().optional(),
+          caption: z.string().optional(),
+          fullWidth: z.boolean().optional(),
+          images: z
+            .array(
+              z.object({
+                image: z.string(),
+                caption: z.string().optional(),
+              })
+            )
+            .optional(),
+
+          // Icons grid
+          items: z
+            .array(
+              z.object({
+                iconImage: z.string().optional(),
+                title: z.string(),
+                text: z.string().optional(),
+                linkLabel: z.string().optional(),
+                linkUrl: z.string().optional(),
+              })
+            )
+            .optional(),
+        })
+      )
+      .optional(),
   }),
 });
 

@@ -47,6 +47,104 @@ collections:
       - {label: "Background Image", name: "backgroundImage", widget: "image", required: false, hint: "Custom hero background (1920x600px recommended)"}
       - {label: "Background Overlay (%)", name: "backgroundOverlay", widget: "number", min: 0, max: 100, default: 60, required: false}
       - {label: "Ordine", name: "order", widget: "number", required: false, hint: "Ordine di visualizzazione nel menu (opzionale)"}
+      - label: "Sezioni Pagina (Drag & Drop)"
+        name: "sections"
+        widget: "list"
+        allow_add: true
+        collapsed: false
+        types:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            summary: "Hero ({{fields.enabled}})"
+            fields:
+              - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+              - { label: "Anchor ID (opzionale)", name: "anchor", widget: "string", required: false, hint: "Per link diretti alle sezioni" }
+              - { label: "Titolo", name: "title", widget: "string", required: false }
+              - { label: "Sottotitolo", name: "subtitle", widget: "text", required: false }
+              - { label: "Background Image", name: "backgroundImage", widget: "image", required: false }
+              - { label: "Overlay (%)", name: "overlayOpacity", widget: "number", min: 0, max: 100, default: 60, required: false }
+              - { label: "CTA 1 - Etichetta", name: "ctaButton1Label", widget: "string", required: false }
+              - { label: "CTA 1 - URL", name: "ctaButton1Url", widget: "string", required: false }
+              - { label: "CTA 2 - Etichetta", name: "ctaButton2Label", widget: "string", required: false }
+              - { label: "CTA 2 - URL", name: "ctaButton2Url", widget: "string", required: false }
+          - label: "Banner"
+            name: "banner"
+            widget: "object"
+            summary: "Banner ({{fields.enabled}})"
+            fields:
+              - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+              - { label: "Anchor ID (opzionale)", name: "anchor", widget: "string", required: false }
+              - { label: "Titolo", name: "title", widget: "string", required: false }
+              - { label: "Testo", name: "text", widget: "text", required: false }
+              - { label: "Immagine", name: "image", widget: "image", required: false }
+              - { label: "Stile", name: "theme", widget: "select", options: ["light", "accent", "dark"], default: "light", required: false }
+              - { label: "Pulsante - Etichetta", name: "buttonLabel", widget: "string", required: false }
+              - { label: "Pulsante - URL", name: "buttonUrl", widget: "string", required: false }
+          - label: "Testo"
+            name: "text"
+            widget: "object"
+            summary: "Testo ({{fields.enabled}})"
+            fields:
+              - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+              - { label: "Anchor ID (opzionale)", name: "anchor", widget: "string", required: false }
+              - { label: "Titolo", name: "title", widget: "string", required: false }
+              - { label: "Contenuto", name: "body", widget: "markdown", required: false }
+              - { label: "Allineamento", name: "align", widget: "select", options: ["left", "center"], default: "left", required: false }
+              - { label: "Larghezza", name: "maxWidth", widget: "select", options: ["sm", "md", "lg"], default: "md", required: false }
+          - label: "Immagine"
+            name: "image"
+            widget: "object"
+            summary: "Immagine ({{fields.enabled}})"
+            fields:
+              - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+              - { label: "Anchor ID (opzionale)", name: "anchor", widget: "string", required: false }
+              - { label: "Immagine", name: "image", widget: "image", required: false }
+              - { label: "Didascalia", name: "caption", widget: "string", required: false }
+              - { label: "Full width", name: "fullWidth", widget: "boolean", default: false, required: false }
+          - label: "Galleria"
+            name: "gallery"
+            widget: "object"
+            summary: "Galleria ({{fields.enabled}})"
+            fields:
+              - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+              - { label: "Anchor ID (opzionale)", name: "anchor", widget: "string", required: false }
+              - { label: "Titolo", name: "title", widget: "string", required: false }
+              - label: "Immagini"
+                name: "images"
+                widget: "list"
+                fields:
+                  - { label: "Immagine", name: "image", widget: "image" }
+                  - { label: "Didascalia", name: "caption", widget: "string", required: false }
+          - label: "Icone"
+            name: "icons"
+            widget: "object"
+            summary: "Icone ({{fields.enabled}})"
+            fields:
+              - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+              - { label: "Anchor ID (opzionale)", name: "anchor", widget: "string", required: false }
+              - { label: "Titolo", name: "title", widget: "string", required: false }
+              - label: "Elementi"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Icona (immagine)", name: "iconImage", widget: "image", required: false }
+                  - { label: "Titolo", name: "title", widget: "string" }
+                  - { label: "Testo", name: "text", widget: "text", required: false }
+                  - { label: "Link - Etichetta", name: "linkLabel", widget: "string", required: false }
+                  - { label: "Link - URL", name: "linkUrl", widget: "string", required: false }
+          - label: "Call To Action"
+            name: "cta"
+            widget: "object"
+            summary: "CTA ({{fields.enabled}})"
+            fields:
+              - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+              - { label: "Anchor ID (opzionale)", name: "anchor", widget: "string", required: false }
+              - { label: "Titolo", name: "title", widget: "string", required: false }
+              - { label: "Testo", name: "text", widget: "text", required: false }
+              - { label: "Stile", name: "theme", widget: "select", options: ["accent", "light", "dark"], default: "accent", required: false }
+              - { label: "Pulsante - Etichetta", name: "buttonLabel", widget: "string", required: false }
+              - { label: "Pulsante - URL", name: "buttonUrl", widget: "string", required: false }
       - {label: "Contenuto", name: "body", widget: "markdown", hint: "Contenuto della pagina in formato Markdown"}
 
   - name: "eventi"
