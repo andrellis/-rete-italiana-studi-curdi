@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PageSections from '../../components/PageSections.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -12,6 +13,7 @@ export async function getStaticPaths() {
 
 const { publication } = Astro.props;
 const { Content } = await publication.render();
+const hasSections = Array.isArray(publication.data.sections) && publication.data.sections.length > 0;
 ---
 
 <Layout 
@@ -87,9 +89,13 @@ const { Content } = await publication.render();
     </header>
 
     <!-- Publication Content -->
-    <div class="prose prose-lg max-w-none">
-      <Content />
-    </div>
+    {hasSections ? (
+      <PageSections sections={publication.data.sections} />
+    ) : (
+      <div class="prose prose-lg max-w-none">
+        <Content />
+      </div>
+    )}
 
     <!-- Publication Footer -->
     <footer class="mt-12 pt-8 border-t border-gray-200">
