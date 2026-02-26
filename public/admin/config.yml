@@ -1,7 +1,9 @@
-local_backend: true
 backend:
-  name: git-gateway
+  name: github
+  repo: andrellis/-rete-italiana-studi-curdi
   branch: master
+  base_url: https://YOUR-WORKER.SUBDOMAIN.workers.dev
+  auth_endpoint: auth
 
 # Enable immediate publishing (no editorial workflow)
 publish_mode: simple
@@ -11,7 +13,7 @@ media_folder: "public/images"
 public_folder: "/images"
 
 # Site URL for previews
-site_url: https://reteitalianastudicurdi.netlify.app
+site_url: https://www.reteitalianastudicurdi.it
 
 collections:
   - name: "articoli"
