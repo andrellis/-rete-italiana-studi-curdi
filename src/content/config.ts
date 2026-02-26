@@ -304,6 +304,21 @@ const articoliEnCollection = defineCollection({
   }),
 });
 
+const newsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    author: z.string().optional(),
+    featured: z.boolean().optional(),
+    sections: pageSectionsSchema,
+  }),
+});
+
 const eventiEnCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -330,6 +345,21 @@ const pubblicazioniEnCollection = defineCollection({
     doi: z.string().optional(),
     pdfUrl: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    featured: z.boolean().optional(),
+    sections: pageSectionsSchema,
+  }),
+});
+
+const newsEnCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    author: z.string().optional(),
     featured: z.boolean().optional(),
     sections: pageSectionsSchema,
   }),
@@ -372,6 +402,7 @@ export const collections = {
   'pagine': pagineCollection,
   'eventi': eventiCollection,
   'pubblicazioni': pubblicazioniCollection,
+  'news': newsCollection,
   'settings': settingsCollection,
   'navigation': navigationCollection,
   'homepage': homepageCollection,
@@ -379,6 +410,7 @@ export const collections = {
   'pagine-en': pagineEnCollection,
   'eventi-en': eventiEnCollection,
   'pubblicazioni-en': pubblicazioniEnCollection,
+  'news-en': newsEnCollection,
   'settings-en': settingsEnCollection,
   'navigation-en': navigationEnCollection,
   'homepage-en': homepageEnCollection,

@@ -12,6 +12,7 @@ const routeMapItToEn: Record<string, string> = {
   '/chi-siamo': '/en/about',
   '/contatti': '/en/contact',
   '/articoli': '/en/articles',
+  '/news': '/en/news',
   '/eventi': '/en/events',
   '/pubblicazioni': '/en/publications',
   '/': '/en',
@@ -21,6 +22,7 @@ const routeMapEnToIt: Record<string, string> = {
   '/en/about': '/chi-siamo',
   '/en/contact': '/contatti',
   '/en/articles': '/articoli',
+  '/en/news': '/news',
   '/en/events': '/eventi',
   '/en/publications': '/pubblicazioni',
   '/en': '/',
@@ -30,6 +32,7 @@ const getSwitchHref = () => {
   if (isEnglish) {
     if (routeMapEnToIt[currentPath]) return routeMapEnToIt[currentPath];
     if (currentPath.startsWith('/en/articles/')) return currentPath.replace('/en/articles/', '/articoli/');
+    if (currentPath.startsWith('/en/news/')) return currentPath.replace('/en/news/', '/news/');
     if (currentPath.startsWith('/en/events/')) return currentPath.replace('/en/events/', '/eventi/');
     if (currentPath.startsWith('/en/publications/')) return currentPath.replace('/en/publications/', '/pubblicazioni/');
     return currentPath.replace(/^\/en/, '') || '/';
@@ -37,6 +40,7 @@ const getSwitchHref = () => {
 
   if (routeMapItToEn[currentPath]) return routeMapItToEn[currentPath];
   if (currentPath.startsWith('/articoli/')) return currentPath.replace('/articoli/', '/en/articles/');
+  if (currentPath.startsWith('/news/')) return currentPath.replace('/news/', '/en/news/');
   if (currentPath.startsWith('/eventi/')) return currentPath.replace('/eventi/', '/en/events/');
   if (currentPath.startsWith('/pubblicazioni/')) return currentPath.replace('/pubblicazioni/', '/en/publications/');
   return `/en${currentPath === '/' ? '' : currentPath}`;

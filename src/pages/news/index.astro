@@ -1,0 +1,81 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allNews = await getCollection('news');
+const featuredNews = allNews.filter(item => item.data.featured);
+const regularNews = allNews.filter(item => !item.data.featured);
+---
+
+<Layout title="News - Rete Italiana Studi Curdi" description="Aggiornamenti e notizie della Rete Italiana Studi Curdi">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">News</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Aggiornamenti, comunicazioni e novità della Rete Italiana Studi Curdi
+      </p>
+    </div>
+
+    {featuredNews.length > 0 && (
+      <section class="mb-16">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8">In Evidenza</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {featuredNews.map((item) => (
+            <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+              {item.data.heroImage && (
+                <img 
+                  src={item.data.heroImage} 
+                  alt={item.data.title}
+                  class="w-full h-64 object-cover"
+                />
+              )}
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  <a href={`/news/${item.slug}`} class="hover:text-red-600 transition-colors">
+                    {item.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 mb-4">{item.data.description}</p>
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                  <span>{item.data.pubDate.toLocaleDateString('it-IT')}</span>
+                  {item.data.author && <span>di {item.data.author}</span>}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Tutte le News</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {regularNews.map((item) => (
+          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            {item.data.heroImage && (
+              <img 
+                src={item.data.heroImage} 
+                alt={item.data.title}
+                class="w-full h-48 object-cover"
+              />
+            )}
+            <div class="p-6">
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                <a href={`/news/${item.slug}`} class="hover:text-red-600 transition-colors">
+                  {item.data.title}
+                </a>
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                {item.data.description || item.body.slice(0, 120) + '...'}
+              </p>
+              <div class="flex items-center justify-between text-sm text-gray-500">
+                <span>{item.data.pubDate.toLocaleDateString('it-IT')}</span>
+                {item.data.author && <span>di {item.data.author}</span>}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>
