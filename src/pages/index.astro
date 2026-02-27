@@ -452,6 +452,13 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
     rightBtn?.addEventListener('mouseenter', startRight);
     rightBtn?.addEventListener('mouseleave', stop);
 
+    leftBtn?.addEventListener('touchstart', startLeft, { passive: true });
+    leftBtn?.addEventListener('touchend', stop);
+    leftBtn?.addEventListener('touchcancel', stop);
+    rightBtn?.addEventListener('touchstart', startRight, { passive: true });
+    rightBtn?.addEventListener('touchend', stop);
+    rightBtn?.addEventListener('touchcancel', stop);
+
     leftBtn?.addEventListener('click', () => {
       const stepSize = getStep();
       container.scrollBy({ left: -stepSize, behavior: 'smooth' });
