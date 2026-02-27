@@ -155,11 +155,13 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
                 <h2 class="text-3xl font-bold text-gray-900">{updatesTitle}</h2>
               </div>
               <div class="relative">
-                <div class="flex items-center justify-end gap-2 mb-4">
-                  <button type="button" class="updates-scroll-left inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 hover:bg-gray-100" aria-label="Scroll left">←</button>
-                  <button type="button" class="updates-scroll-right inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 hover:bg-gray-100" aria-label="Scroll right">→</button>
-                </div>
-                <div class="overflow-hidden">
+                <button type="button" class="updates-scroll-left absolute left-0 top-0 h-full w-10 flex items-center justify-center bg-white/80 hover:bg-white border-r border-gray-200" aria-label="Scroll left">
+                  ←
+                </button>
+                <button type="button" class="updates-scroll-right absolute right-0 top-0 h-full w-10 flex items-center justify-center bg-white/80 hover:bg-white border-l border-gray-200" aria-label="Scroll right">
+                  →
+                </button>
+                <div class="overflow-hidden pl-12 pr-12">
                   <div class="updates-scroll-track flex gap-6">
                     {[...updates, ...updates].map((item, idx) => (
                       <article class="min-w-[280px] max-w-[320px] bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" data-idx={idx}>
@@ -395,14 +397,18 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
     const leftBtn = document.querySelector('.updates-scroll-left') as HTMLButtonElement | null;
     const rightBtn = document.querySelector('.updates-scroll-right') as HTMLButtonElement | null;
 
-    let autoScroll = true;
+    let autoScroll = false;
+    let direction = 1;
     let rafId: number | null = null;
 
     const step = () => {
       if (!autoScroll) return;
-      container.scrollLeft += 0.6;
+      container.scrollLeft += 0.8 * direction;
       if (container.scrollLeft >= (track.scrollWidth / 2)) {
         container.scrollLeft = 0;
+      }
+      if (container.scrollLeft <= 0) {
+        container.scrollLeft = track.scrollWidth / 2;
       }
       rafId = requestAnimationFrame(step);
     };
@@ -420,8 +426,13 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
       }
     };
 
-    container.addEventListener('mouseenter', stop);
-    container.addEventListener('mouseleave', start);
+    const startLeft = () => { direction = -1; start(); };
+    const startRight = () => { direction = 1; start(); };
+
+    leftBtn?.addEventListener('mouseenter', startLeft);
+    leftBtn?.addEventListener('mouseleave', stop);
+    rightBtn?.addEventListener('mouseenter', startRight);
+    rightBtn?.addEventListener('mouseleave', stop);
 
     leftBtn?.addEventListener('click', () => {
       container.scrollBy({ left: -320, behavior: 'smooth' });
@@ -429,7 +440,5 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
     rightBtn?.addEventListener('click', () => {
       container.scrollBy({ left: 320, behavior: 'smooth' });
     });
-
-    start();
   });
 </script>
