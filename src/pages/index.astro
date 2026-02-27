@@ -161,10 +161,10 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
                 <h2 class="text-3xl font-bold text-gray-900">{updatesTitle}</h2>
               </div>
               <div class="relative">
-                <button type="button" class="updates-scroll-left absolute left-0 top-0 h-full w-10 flex items-center justify-center bg-white/80 hover:bg-white border-r border-gray-200" aria-label="Scorri a sinistra">
+                <button type="button" class="updates-scroll-left absolute left-0 top-0 h-full w-10 flex items-center justify-center bg-white/80 hover:bg-white border-r border-gray-200 z-10 pointer-events-auto" aria-label="Scorri a sinistra">
                   ←
                 </button>
-                <button type="button" class="updates-scroll-right absolute right-0 top-0 h-full w-10 flex items-center justify-center bg-white/80 hover:bg-white border-l border-gray-200" aria-label="Scorri a destra">
+                <button type="button" class="updates-scroll-right absolute right-0 top-0 h-full w-10 flex items-center justify-center bg-white/80 hover:bg-white border-l border-gray-200 z-10 pointer-events-auto" aria-label="Scorri a destra">
                   →
                 </button>
                 <div class="overflow-hidden pl-12 pr-12">
@@ -396,12 +396,12 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const track = document.querySelector('.updates-scroll-track') as HTMLElement | null;
+    const track = document.querySelector('.updates-scroll-track');
     if (!track) return;
-    const container = track.parentElement as HTMLElement | null;
+    const container = track.parentElement;
     if (!container) return;
-    const leftBtn = document.querySelector('.updates-scroll-left') as HTMLButtonElement | null;
-    const rightBtn = document.querySelector('.updates-scroll-right') as HTMLButtonElement | null;
+    const leftBtn = document.querySelector('.updates-scroll-left');
+    const rightBtn = document.querySelector('.updates-scroll-right');
 
     let autoScroll = false;
     let direction = 1;
@@ -420,8 +420,8 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
     };
 
     const getStep = () => {
-      const first = track.children[0] as HTMLElement | undefined;
-      const second = track.children[1] as HTMLElement | undefined;
+      const first = track.children[0];
+      const second = track.children[1];
       if (first && second) {
         return Math.max(1, second.offsetLeft - first.offsetLeft);
       }
