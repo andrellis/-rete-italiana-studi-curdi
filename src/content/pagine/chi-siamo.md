@@ -19,21 +19,26 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
 
 **Comitato Fondatore**
 
-- Nicola Degli Esposti — Università di Padova
-- Sevgi Doğan — Scuola Normale Superiore
-- Davide Grasso — International University College
-- Camilla Insom — Università di Roma “La Sapienza”
-- Andrea Novellis — Università di Milano
-- Alessandro Tinti — Università di Torino
-- Federico Venturini — Università di Udine
+<ul class="list-disc pl-6">
+  <li>Nicola Degli Esposti — Università di Padova</li>
+  <li>Sevgi Doğan — Scuola Normale Superiore</li>
+  <li>Davide Grasso — International University College</li>
+  <li>Camilla Insom — Università di Roma “La Sapienza”</li>
+  <li>Andrea Novellis — Università di Milano</li>
+  <li>Alessandro Tinti — Università di Torino</li>
+  <li>Federico Venturini — Università di Udine</li>
+</ul>
 
- 
+<div class="mt-6"></div>
+
 **Membri Attuali**
 
-- **Andrea Novellis** — [Google Scholar](https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en) · [Sito personale](https://andreanovellis.com) · [LinkedIn](https://www.linkedin.com/in/andrea-novellis-39175b213/)
-- **Nome Cognome** — [Google Scholar](#) · [Sito personale](#) · [LinkedIn](#)
-- **Nome Cognome** — [Google Scholar](#) · [Sito personale](#) · [LinkedIn](#)
-- **Nome Cognome** — [Google Scholar](#) · [Sito personale](#) · [LinkedIn](#)
+<ul class="list-disc pl-6">
+  <li><strong>Andrea Novellis</strong> — <a href="https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en">Google Scholar</a> · <a href="https://andreanovellis.com">Sito personale</a> · <a href="https://www.linkedin.com/in/andrea-novellis-39175b213/">LinkedIn</a></li>
+  <li><strong>Nome Cognome</strong> — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
+  <li><strong>Nome Cognome</strong> — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
+  <li><strong>Nome Cognome</strong> — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
+</ul>
 
 ## Come Partecipare
 

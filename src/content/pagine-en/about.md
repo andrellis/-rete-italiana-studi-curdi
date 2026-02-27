@@ -19,21 +19,26 @@ The network was created to promote rigorous academic exchange and discussion. It
 
 **Founding Committee**
 
-- Nicola Degli Esposti — University of Padua
-- Sevgi Doğan — Scuola Normale Superiore
-- Davide Grasso — International University College
-- Camilla Insom — Sapienza University of Rome
-- Andrea Novellis — University of Milan
-- Alessandro Tinti — University of Turin
-- Federico Venturini — University of Udine
+<ul class="list-disc pl-6">
+  <li>Nicola Degli Esposti — University of Padua</li>
+  <li>Sevgi Doğan — Scuola Normale Superiore</li>
+  <li>Davide Grasso — International University College</li>
+  <li>Camilla Insom — Sapienza University of Rome</li>
+  <li>Andrea Novellis — University of Milan</li>
+  <li>Alessandro Tinti — University of Turin</li>
+  <li>Federico Venturini — University of Udine</li>
+</ul>
 
- 
+<div class="mt-6"></div>
+
 **Current Members**
 
-- **Andrea Novellis** — [Google Scholar](https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en) · [Personal website](https://andreanovellis.com) · [LinkedIn](https://www.linkedin.com/in/andrea-novellis-39175b213/)
-- **Full Name** — [Google Scholar](#) · [Personal website](#) · [LinkedIn](#)
-- **Full Name** — [Google Scholar](#) · [Personal website](#) · [LinkedIn](#)
-- **Full Name** — [Google Scholar](#) · [Personal website](#) · [LinkedIn](#)
+<ul class="list-disc pl-6">
+  <li><strong>Andrea Novellis</strong> — <a href="https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en">Google Scholar</a> · <a href="https://andreanovellis.com">Personal website</a> · <a href="https://www.linkedin.com/in/andrea-novellis-39175b213/">LinkedIn</a></li>
+  <li><strong>Full Name</strong> — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
+  <li><strong>Full Name</strong> — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
+  <li><strong>Full Name</strong> — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
+</ul>
 
 ## How to Join
 
