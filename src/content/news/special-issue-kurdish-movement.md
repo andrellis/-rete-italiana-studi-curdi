@@ -12,7 +12,8 @@ author: Andrea Novellis, Davide Grasso
 featured: true
 ---
 
-È disponibile il numero speciale di *Partecipazione e Conflitto* (PACO) 18(2) 2025, **“Exploring the Kurdish Movement: Power Relations, Historical Dynamics and Theoretical Perspectives”**.
+È disponibile il numero speciale di *Partecipazione e Conflitto* (PACO) 18(2) 2025, **“Exploring the Kurdish Movement: Power Relations, Historical Dynamics and Theoretical Perspectives”**.  
+Consulta l’indice completo del numero speciale nella pagina ufficiale PACO.
 
 Il volume (pubblicato il **15 luglio 2025**) propone un quadro di lettura in tre livelli e una serie di contributi che affrontano:
 
