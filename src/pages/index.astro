@@ -168,7 +168,7 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
                 <div class="overflow-hidden">
                   <div class="updates-scroll-track flex gap-6">
                     {[...updates, ...updates].map((item, idx) => (
-                      <article class="min-w-[280px] max-w-[320px] bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" key={`${item.url}-${idx}`}>
+                      <article class="min-w-[280px] max-w-[320px] bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" data-idx={idx}>
                         {item.heroImage && (
                           <div class="w-full aspect-[16/9] bg-gray-50 overflow-hidden">
                             <img
