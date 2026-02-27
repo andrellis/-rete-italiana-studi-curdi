@@ -419,6 +419,18 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
       rafId = requestAnimationFrame(step);
     };
 
+    const getStep = () => {
+      const first = track.children[0] as HTMLElement | undefined;
+      const second = track.children[1] as HTMLElement | undefined;
+      if (first && second) {
+        return Math.max(1, second.offsetLeft - first.offsetLeft);
+      }
+      if (first) {
+        return Math.max(1, Math.round(first.getBoundingClientRect().width));
+      }
+      return 320;
+    };
+
     const start = () => {
       if (rafId) return;
       autoScroll = true;
@@ -441,10 +453,12 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
     rightBtn?.addEventListener('mouseleave', stop);
 
     leftBtn?.addEventListener('click', () => {
-      container.scrollBy({ left: -320, behavior: 'smooth' });
+      const stepSize = getStep();
+      container.scrollBy({ left: -stepSize, behavior: 'smooth' });
     });
     rightBtn?.addEventListener('click', () => {
-      container.scrollBy({ left: 320, behavior: 'smooth' });
+      const stepSize = getStep();
+      container.scrollBy({ left: stepSize, behavior: 'smooth' });
     });
   });
 </script>
