@@ -34,10 +34,10 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
 **Membri Attuali**
 
 <ul class="list-disc pl-6">
-  <li><strong>Andrea Novellis</strong> — <a href="https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en">Google Scholar</a> · <a href="https://andreanovellis.com">Sito personale</a> · <a href="https://www.linkedin.com/in/andrea-novellis-39175b213/">LinkedIn</a></li>
-  <li><strong>Nome Cognome</strong> — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
-  <li><strong>Nome Cognome</strong> — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
-  <li><strong>Nome Cognome</strong> — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
+  <li>Andrea Novellis — <a href="https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en">Google Scholar</a> · <a href="https://andreanovellis.com">Sito personale</a> · <a href="https://www.linkedin.com/in/andrea-novellis-39175b213/">LinkedIn</a></li>
+  <li>Nome Cognome — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
+  <li>Nome Cognome — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
+  <li>Nome Cognome — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
 </ul>
 
 ## Come Partecipare

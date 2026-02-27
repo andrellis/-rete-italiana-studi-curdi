@@ -34,10 +34,10 @@ The network was created to promote rigorous academic exchange and discussion. It
 **Current Members**
 
 <ul class="list-disc pl-6">
-  <li><strong>Andrea Novellis</strong> — <a href="https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en">Google Scholar</a> · <a href="https://andreanovellis.com">Personal website</a> · <a href="https://www.linkedin.com/in/andrea-novellis-39175b213/">LinkedIn</a></li>
-  <li><strong>Full Name</strong> — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
-  <li><strong>Full Name</strong> — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
-  <li><strong>Full Name</strong> — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
+  <li>Andrea Novellis — <a href="https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en">Google Scholar</a> · <a href="https://andreanovellis.com">Personal website</a> · <a href="https://www.linkedin.com/in/andrea-novellis-39175b213/">LinkedIn</a></li>
+  <li>Full Name — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
+  <li>Full Name — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
+  <li>Full Name — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
 </ul>
 
 ## How to Join
