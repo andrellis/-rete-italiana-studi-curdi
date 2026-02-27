@@ -17,22 +17,22 @@ The Italian Network of Kurdish Studies is a network of scholars, researchers, an
 
 The network was created to promote rigorous academic exchange and discussion. It aims to foster connections among researchers, encourage knowledge sharing, and support collaboration among its members.
 
-**Founding Committee**
+## Founding Committee
 
-* Nicola Degli Esposti — University of Padua
-* Sevgi Doğan — Scuola Normale Superiore
-* Davide Grasso — International University College
-* Camilla Insom — Sapienza University of Rome
-* Andrea Novellis — University of Milan
-* Alessandro Tinti — University of Turin
-* Federico Venturini — University of Udine
+- Nicola Degli Esposti — University of Padua
+- Sevgi Doğan — Scuola Normale Superiore
+- Davide Grasso — International University College
+- Camilla Insom — Sapienza University of Rome
+- Andrea Novellis — University of Milan
+- Alessandro Tinti — University of Turin
+- Federico Venturini — University of Udine
 
 ## Current Members
 
-* Andrea Novellis — [Google Scholar](https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en) · [Personal website](https://andreanovellis.com) · [LinkedIn](https://www.linkedin.com/in/andrea-novellis-39175b213/)
-* [Full Name] — [Google Scholar](#) · [Personal website](#) · [LinkedIn](#)
-* [Full Name] — [Google Scholar](#) · [Personal website](#) · [LinkedIn](#)
-* [Full Name] — [Google Scholar](#) · [Personal website](#) · [LinkedIn](#)
+- **Andrea Novellis** — [Google Scholar](https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en) · [Personal website](https://andreanovellis.com) · [LinkedIn](https://www.linkedin.com/in/andrea-novellis-39175b213/)
+- **Full Name** — [Google Scholar](#) · [Personal website](#) · [LinkedIn](#)
+- **Full Name** — [Google Scholar](#) · [Personal website](#) · [LinkedIn](#)
+- **Full Name** — [Google Scholar](#) · [Personal website](#) · [LinkedIn](#)
 
 ## How to Join
 
