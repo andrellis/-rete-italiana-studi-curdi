@@ -2,7 +2,7 @@
 title: "Numero speciale PACO 18(2) 2025: Exploring the Kurdish Movement"
 description: "È uscito il numero speciale di PACO dedicato al movimento curdo, con contributi su potere, ideologie e pratiche di mobilitazione."
 pubDate: 2025-07-15
-heroImage: /images/paco-banner.png
+heroImage: /images/paco-banner-2026.png
 tags:
   - paco
   - movimento curdo
