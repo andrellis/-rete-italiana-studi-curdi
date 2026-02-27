@@ -15,10 +15,6 @@
       "enabled": true
     },
     {
-      "type": "links",
-      "enabled": true
-    },
-    {
       "type": "brand",
       "enabled": true,
       "logoVariant": "full",

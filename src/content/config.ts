@@ -219,7 +219,7 @@ const homepageCollection = defineCollection({
     sections: z
       .array(
         z.object({
-          type: z.enum(['hero', 'links', 'brand', 'news', 'articles', 'publications', 'events', 'social', 'about']),
+          type: z.enum(['hero', 'brand', 'news', 'articles', 'publications', 'events', 'social', 'about']),
           enabled: z.boolean().optional(),
 
           // Hero overrides (used when type === 'hero')
@@ -273,7 +273,7 @@ const homepageEnCollection = defineCollection({
     sections: z
       .array(
         z.object({
-          type: z.enum(['hero', 'links', 'brand', 'news', 'articles', 'publications', 'events', 'social', 'about']),
+          type: z.enum(['hero', 'brand', 'news', 'articles', 'publications', 'events', 'social', 'about']),
           enabled: z.boolean().optional(),
           heroBackgroundImage: z.string().optional(),
           heroOverlayOpacity: z.number().optional(),

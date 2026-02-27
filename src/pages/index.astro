@@ -55,7 +55,6 @@ const newsTitle = settings?.newsSectionTitle || 'News';
 // Compute ordered sections from settings.sections (fallback to default order if not set)
 const defaultOrder = [
   { type: 'hero', enabled: true },
-  { type: 'links', enabled: true },
   { type: 'brand', enabled: true },
   { type: 'news', enabled: true },
   { type: 'articles', enabled: true },
@@ -86,35 +85,6 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
             ctaButton2Label={s?.ctaButton2Label ?? settings?.ctaButton2Label}
             ctaButton2Url={s?.ctaButton2Url ?? settings?.ctaButton2Url}
           />
-        );
-      case 'links':
-        return (
-          <section class="py-12 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold text-gray-900">Esplora</h2>
-                <span class="text-sm text-gray-500">Accesso rapido</span>
-              </div>
-              <div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory">
-                {[
-                  { label: 'Chi Siamo', url: '/chi-siamo', tone: 'bg-red-600 text-white' },
-                  { label: 'News', url: '/news', tone: 'bg-gray-900 text-white' },
-                  { label: 'Articoli', url: '/articoli', tone: 'bg-white border border-gray-200 text-gray-900' },
-                  { label: 'Eventi', url: '/eventi', tone: 'bg-white border border-gray-200 text-gray-900' },
-                  { label: 'Pubblicazioni', url: '/pubblicazioni', tone: 'bg-white border border-gray-200 text-gray-900' },
-                  { label: 'Contatti', url: '/contatti', tone: 'bg-white border border-gray-200 text-gray-900' },
-                ].map((item) => (
-                  <a
-                    href={item.url}
-                    class={`min-w-[220px] snap-start rounded-2xl px-5 py-4 shadow-sm hover:shadow-md transition ${item.tone}`}
-                  >
-                    <div class="text-sm uppercase tracking-wide opacity-70">Link</div>
-                    <div class="text-lg font-semibold">{item.label}</div>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </section>
         );
       case 'brand':
         return (

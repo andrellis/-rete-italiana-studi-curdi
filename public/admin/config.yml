@@ -692,13 +692,6 @@ collections:
                   - { label: "CTA 2 - Etichetta", name: "ctaButton2Label", widget: "string", required: false }
                   - { label: "CTA 2 - URL", name: "ctaButton2Url", widget: "string", required: false }
 
-              - label: "Links"
-                name: "links"
-                widget: "object"
-                summary: "Links ({{fields.enabled}})"
-                fields:
-                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
-
               - label: "Brand/Logo"
                 name: "brand"
                 widget: "object"
@@ -1426,12 +1419,6 @@ collections:
                   - { label: "CTA 1 - URL", name: "ctaButton1Url", widget: "string", required: false }
                   - { label: "CTA 2 - Label", name: "ctaButton2Label", widget: "string", required: false }
                   - { label: "CTA 2 - URL", name: "ctaButton2Url", widget: "string", required: false }
-              - label: "Links"
-                name: "links"
-                widget: "object"
-                summary: "Links ({{fields.enabled}})"
-                fields:
-                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
               - label: "Brand/Logo"
                 name: "brand"
                 widget: "object"
