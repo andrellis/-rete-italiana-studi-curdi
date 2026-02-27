@@ -8,6 +8,9 @@
   "heroBgFrom": "from-red-600",
   "aboutTitle": "Chi Siamo",
   "aboutContent": "La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e studenti interessati allo studio di tutti i temi attinenti agli studi curdi. Il network nasce per promuovere un confronto e una discussione accademica rigorosi, favorendo l'incontro tra ricercatori, lo scambio di conoscenze e possibili collaborazioni tra i propri membri.",
+  "joinTitle": "Come Partecipare",
+  "joinContent": "Per unirti alla mailing list e partecipare agli eventi, inviaci il tuo curriculum e un breve messaggio di presentazione.",
+  "joinEmail": "rete.italiana.studi.curdi@gmail.com",
   "eventsSectionTitle": "Prossimi Eventi",
   "sections": [
     {
@@ -28,11 +31,11 @@
       "enabled": true
     },
     {
-      "type": "social",
+      "type": "about",
       "enabled": true
     },
     {
-      "type": "about",
+      "type": "join",
       "enabled": true
     }
   ],

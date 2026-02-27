@@ -8,6 +8,9 @@
   "heroBgFrom": "from-red-600",
   "aboutTitle": "About Us",
   "aboutContent": "The Italian Network of Kurdish Studies is a network of scholars, researchers, and students interested in all fields related to Kurdish studies. The network was created to foster rigorous academic exchange and discussion, encouraging collaboration, knowledge sharing, and new research partnerships.",
+  "joinTitle": "How to Join",
+  "joinContent": "To join the mailing list and participate in events, please send us your CV and a brief introductory message.",
+  "joinEmail": "rete.italiana.studi.curdi@gmail.com",
   "eventsSectionTitle": "Upcoming Events",
   "sections": [
     {
@@ -28,11 +31,11 @@
       "enabled": true
     },
     {
-      "type": "social",
+      "type": "about",
       "enabled": true
     },
     {
-      "type": "about",
+      "type": "join",
       "enabled": true
     }
   ],

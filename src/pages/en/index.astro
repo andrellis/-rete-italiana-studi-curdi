@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import SocialMediaFeeds from '../../components/SocialMediaFeeds.astro';
 import PageHero from '../../components/PageHero.astro';
 import Logo from '../../components/Logo.astro';
 
@@ -45,16 +44,18 @@ const latestNews = allNews
 const articlesTitle = settings?.articlesSectionTitle || 'Recent Articles';
 const publicationsTitle = settings?.publicationsSectionTitle || 'Recent Publications';
 const eventsTitle = settings?.eventsSectionTitle || 'Upcoming Events';
-const socialMediaTitle = settings?.socialMediaTitle || 'Follow Us';
 const newsTitle = settings?.newsSectionTitle || 'News';
 const updatesTitle = settings?.updatesSectionTitle || 'Recent Updates';
+const joinTitle = settings?.joinTitle || 'How to Join';
+const joinContent = settings?.joinContent || 'To join the mailing list and participate in events, please send us your CV and a brief introductory message.';
+const joinEmail = settings?.joinEmail || 'rete.italiana.studi.curdi@gmail.com';
 
 const defaultOrder = [
   { type: 'hero', enabled: true },
   { type: 'brand', enabled: true },
   { type: 'updates', enabled: true },
-  { type: 'social', enabled: settings?.showSocialMedia !== false },
   { type: 'about', enabled: settings?.showAboutSection !== false },
+  { type: 'join', enabled: true },
 ];
 
 const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sections) && settings.sections.length > 0
@@ -153,37 +154,41 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
               <div class="flex items-center justify-between mb-8">
                 <h2 class="text-3xl font-bold text-gray-900">{updatesTitle}</h2>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {updates.map((item) => (
-                  <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    {item.heroImage && (
-                      <div class="w-full aspect-[16/9] bg-gray-50 overflow-hidden">
-                        <img
-                          src={item.heroImage}
-                          alt={item.title}
-                          class="w-full h-full object-contain"
-                        />
-                      </div>
-                    )}
-                    <div class="p-6">
-                      <div class="inline-flex items-center mb-3">
-                        <span class="text-xs font-semibold uppercase tracking-wide bg-red-100 text-red-700 px-3 py-1 rounded-full">
-                          {item.type}
-                        </span>
-                      </div>
-                      <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                        <a href={item.url} class="hover:text-red-600 transition-colors">
-                          {item.title}
-                        </a>
-                      </h3>
-                      <p class="text-gray-600 text-sm mb-4">{item.description}</p>
-                      <a href={item.url} class="text-red-600 font-semibold text-sm hover:text-red-700">Read more →</a>
-                      <div class="text-sm text-gray-500">
-                        {item.date.toLocaleDateString('en-GB')}
-                      </div>
-                    </div>
-                  </article>
-                ))}
+              <div class="relative">
+                <div class="overflow-hidden">
+                  <div class="flex gap-6 animate-updates-scroll hover:[animation-play-state:paused]">
+                    {[...updates, ...updates].map((item, idx) => (
+                      <article class="min-w-[280px] max-w-[320px] bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" key={`${item.url}-${idx}`}>
+                        {item.heroImage && (
+                          <div class="w-full aspect-[16/9] bg-gray-50 overflow-hidden">
+                            <img
+                              src={item.heroImage}
+                              alt={item.title}
+                              class="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
+                        <div class="p-6">
+                          <div class="inline-flex items-center mb-3">
+                            <span class="text-xs font-semibold uppercase tracking-wide bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                              {item.type}
+                            </span>
+                          </div>
+                          <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                            <a href={item.url} class="hover:text-red-600 transition-colors">
+                              {item.title}
+                            </a>
+                          </h3>
+                          <p class="text-gray-600 text-sm mb-4">{item.description}</p>
+                          <a href={item.url} class="text-red-600 font-semibold text-sm hover:text-red-700">Read more →</a>
+                          <div class="text-sm text-gray-500 mt-2">
+                            {item.date.toLocaleDateString('en-GB')}
+                          </div>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </section>
@@ -346,22 +351,6 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
             </div>
           </section>
         );
-      case 'social':
-        return (settings?.showSocialMedia !== false) && (
-          <section class="py-16 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">{socialMediaTitle}</h2>
-                <p class="text-lg text-gray-600">
-                  Stay up to date with our events, publications, and activities
-                </p>
-              </div>
-              <div class="max-w-6xl mx-auto">
-                <SocialMediaFeeds lang="en" />
-              </div>
-            </div>
-          </section>
-        );
       case 'about':
         return (settings?.showAboutSection !== false) && (
           <section class="py-16 bg-white">
@@ -376,7 +365,34 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
             </div>
           </section>
         );
+      case 'join':
+        return (
+          <section class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <h2 class="text-3xl font-bold text-gray-900 mb-8">{joinTitle}</h2>
+              <p class="text-lg text-gray-600 leading-relaxed mb-6">{joinContent}</p>
+              <a href={`mailto:${joinEmail}`} class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                {joinEmail}
+              </a>
+            </div>
+          </section>
+        );
     }
     return null;
   })}
 </Layout>
+
+<style>
+  @keyframes updates-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-updates-scroll {
+    animation: updates-scroll 40s linear infinite;
+  }
+</style>
