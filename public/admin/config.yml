@@ -662,6 +662,8 @@ collections:
           - {label: "Numero Articoli in Evidenza", name: "featuredArticlesCount", widget: "number", required: false, hint: "Quanti articoli mostrare nella homepage"}
           - {label: "Numero Pubblicazioni in Evidenza", name: "featuredPublicationsCount", widget: "number", required: false, hint: "Quante pubblicazioni mostrare nella homepage"}
           - {label: "Numero Eventi in Evidenza", name: "featuredEventsCount", widget: "number", required: false, hint: "Quanti eventi mostrare nella homepage"}
+          - {label: "Numero News in Evidenza", name: "featuredNewsCount", widget: "number", required: false, hint: "Quante news mostrare nella homepage"}
+          - {label: "Titolo Sezione News", name: "newsSectionTitle", widget: "string", required: false, hint: "Titolo della sezione news"}
           - {label: "Titolo Sezione Articoli", name: "articlesSectionTitle", widget: "string", required: false, hint: "Titolo della sezione articoli"}
           - {label: "Titolo Sezione Pubblicazioni", name: "publicationsSectionTitle", widget: "string", required: false, hint: "Titolo della sezione pubblicazioni"}
           - {label: "Titolo Sezione Eventi", name: "eventsSectionTitle", widget: "string", required: false, hint: "Titolo della sezione eventi"}
@@ -690,6 +692,13 @@ collections:
                   - { label: "CTA 2 - Etichetta", name: "ctaButton2Label", widget: "string", required: false }
                   - { label: "CTA 2 - URL", name: "ctaButton2Url", widget: "string", required: false }
 
+              - label: "Links"
+                name: "links"
+                widget: "object"
+                summary: "Links ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
+
               - label: "Brand/Logo"
                 name: "brand"
                 widget: "object"
@@ -701,6 +710,13 @@ collections:
                   - { label: "Mostra Testo", name: "showLogoText", widget: "boolean", default: true }
                   - { label: "Allineamento", name: "align", widget: "select", options: ["left","center","right"], default: "center" }
                   - { label: "Max Width", name: "maxWidth", widget: "select", options: ["sm","md","lg"], default: "md" }
+
+              - label: "News"
+                name: "news"
+                widget: "object"
+                summary: "News ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
 
               - label: "Articoli"
                 name: "articles"
@@ -1383,6 +1399,8 @@ collections:
           - {label: "Featured Articles Count", name: "featuredArticlesCount", widget: "number", required: false}
           - {label: "Featured Publications Count", name: "featuredPublicationsCount", widget: "number", required: false}
           - {label: "Featured Events Count", name: "featuredEventsCount", widget: "number", required: false}
+          - {label: "Featured News Count", name: "featuredNewsCount", widget: "number", required: false}
+          - {label: "News Section Title", name: "newsSectionTitle", widget: "string", required: false}
           - {label: "Articles Section Title", name: "articlesSectionTitle", widget: "string", required: false}
           - {label: "Publications Section Title", name: "publicationsSectionTitle", widget: "string", required: false}
           - {label: "Events Section Title", name: "eventsSectionTitle", widget: "string", required: false}
@@ -1408,6 +1426,12 @@ collections:
                   - { label: "CTA 1 - URL", name: "ctaButton1Url", widget: "string", required: false }
                   - { label: "CTA 2 - Label", name: "ctaButton2Label", widget: "string", required: false }
                   - { label: "CTA 2 - URL", name: "ctaButton2Url", widget: "string", required: false }
+              - label: "Links"
+                name: "links"
+                widget: "object"
+                summary: "Links ({{fields.enabled}})"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
               - label: "Brand/Logo"
                 name: "brand"
                 widget: "object"
@@ -1419,6 +1443,12 @@ collections:
                   - { label: "Show Text", name: "showLogoText", widget: "boolean", default: true }
                   - { label: "Alignment", name: "align", widget: "select", options: ["left","center","right"], default: "center" }
                   - { label: "Max Width", name: "maxWidth", widget: "select", options: ["sm","md","lg"], default: "md" }
+              - label: "News"
+                name: "news"
+                widget: "object"
+                summary: "News ({{fields.enabled}})"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
               - label: "Articles"
                 name: "articles"
                 widget: "object"

@@ -15,6 +15,10 @@
       "enabled": true
     },
     {
+      "type": "links",
+      "enabled": true
+    },
+    {
       "type": "brand",
       "enabled": true,
       "logoVariant": "full",
@@ -22,6 +26,10 @@
       "maxWidth": "md",
       "showLogoImage": true,
       "showLogoText": true
+    },
+    {
+      "type": "news",
+      "enabled": true
     },
     {
       "type": "articles",

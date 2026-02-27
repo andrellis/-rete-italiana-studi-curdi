@@ -17,10 +17,12 @@ const settings = homepageSettings.length > 0 ? homepageSettings[0]?.data : null;
 const allArticles = await getCollection('articoli-en');
 const allPublications = await getCollection('pubblicazioni-en');
 const allEvents = await getCollection('eventi-en');
+const allNews = await getCollection('news-en');
 
 const articlesCount = settings?.featuredArticlesCount || 3;
 const publicationsCount = settings?.featuredPublicationsCount || 3;
 const eventsCount = settings?.featuredEventsCount || 3;
+const newsCount = settings?.featuredNewsCount || 3;
 
 const featuredArticles = allArticles
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
@@ -35,14 +37,21 @@ const upcomingEvents = allEvents
   .sort((a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime())
   .slice(0, eventsCount);
 
+const latestNews = allNews
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, newsCount);
+
 const articlesTitle = settings?.articlesSectionTitle || 'Recent Articles';
 const publicationsTitle = settings?.publicationsSectionTitle || 'Recent Publications';
 const eventsTitle = settings?.eventsSectionTitle || 'Upcoming Events';
 const socialMediaTitle = settings?.socialMediaTitle || 'Follow Us';
+const newsTitle = settings?.newsSectionTitle || 'News';
 
 const defaultOrder = [
   { type: 'hero', enabled: true },
+  { type: 'links', enabled: true },
   { type: 'brand', enabled: true },
+  { type: 'news', enabled: true },
   { type: 'articles', enabled: true },
   { type: 'publications', enabled: true },
   { type: 'events', enabled: true },
@@ -72,6 +81,35 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
             ctaButton2Url={s?.ctaButton2Url ?? settings?.ctaButton2Url}
           />
         );
+      case 'links':
+        return (
+          <section class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Explore</h2>
+                <span class="text-sm text-gray-500">Quick access</span>
+              </div>
+              <div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory">
+                {[
+                  { label: 'About', url: '/en/about', tone: 'bg-red-600 text-white' },
+                  { label: 'News', url: '/en/news', tone: 'bg-gray-900 text-white' },
+                  { label: 'Articles', url: '/en/articles', tone: 'bg-white border border-gray-200 text-gray-900' },
+                  { label: 'Events', url: '/en/events', tone: 'bg-white border border-gray-200 text-gray-900' },
+                  { label: 'Publications', url: '/en/publications', tone: 'bg-white border border-gray-200 text-gray-900' },
+                  { label: 'Contact', url: '/en/contact', tone: 'bg-white border border-gray-200 text-gray-900' },
+                ].map((item) => (
+                  <a
+                    href={item.url}
+                    class={`min-w-[220px] snap-start rounded-2xl px-5 py-4 shadow-sm hover:shadow-md transition ${item.tone}`}
+                  >
+                    <div class="text-sm uppercase tracking-wide opacity-70">Link</div>
+                    <div class="text-lg font-semibold">{item.label}</div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
       case 'brand':
         return (
           <section class="py-10 bg-white">
@@ -84,6 +122,44 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                   showLogoText={s?.showLogoText !== false}
                   siteName={settings?.heroTitle || 'Italian Network of Kurdish Studies'}
                 />
+              </div>
+            </div>
+          </section>
+        );
+      case 'news':
+        return (latestNews.length > 0) && (
+          <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">{newsTitle}</h2>
+                <a href="/en/news" class="text-red-600 font-semibold hover:text-red-700">View all →</a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {latestNews.map((item) => (
+                  <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    {item.data.heroImage && (
+                      <img 
+                        src={item.data.heroImage} 
+                        alt={item.data.title}
+                        class="w-full h-48 object-cover"
+                      />
+                    )}
+                    <div class="p-6">
+                      <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        <a href={`/en/news/${item.slug}`} class="hover:text-red-600 transition-colors">
+                          {item.data.title}
+                        </a>
+                      </h3>
+                      <p class="text-gray-600 text-sm mb-4">
+                        {item.data.description || item.body.slice(0, 140) + '...'}
+                      </p>
+                      <div class="flex items-center justify-between text-sm text-gray-500">
+                        <span>{item.data.pubDate.toLocaleDateString('en-GB')}</span>
+                        {item.data.author && <span>by {item.data.author}</span>}
+                      </div>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           </section>

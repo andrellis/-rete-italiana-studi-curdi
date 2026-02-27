@@ -19,11 +19,13 @@ const settings = homepageSettings.length > 0 ? homepageSettings[0]?.data : null;
 const allArticles = await getCollection('articoli');
 const allPublications = await getCollection('pubblicazioni');
 const allEvents = await getCollection('eventi');
+const allNews = await getCollection('news');
 
 // Get counts from settings or use defaults
 const articlesCount = settings?.featuredArticlesCount || 3;
 const publicationsCount = settings?.featuredPublicationsCount || 3;
 const eventsCount = settings?.featuredEventsCount || 3;
+const newsCount = settings?.featuredNewsCount || 3;
 
 // Sort by date and get latest
 const featuredArticles = allArticles
@@ -39,16 +41,23 @@ const upcomingEvents = allEvents
   .sort((a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime())
   .slice(0, eventsCount);
 
+const latestNews = allNews
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, newsCount);
+
 // Get section titles from settings or use defaults
 const articlesTitle = settings?.articlesSectionTitle || 'Articoli Recenti';
 const publicationsTitle = settings?.publicationsSectionTitle || 'Pubblicazioni Recenti';
 const eventsTitle = settings?.eventsSectionTitle || 'Prossimi Eventi';
 const socialMediaTitle = settings?.socialMediaTitle || 'Seguici sui Social';
+const newsTitle = settings?.newsSectionTitle || 'News';
 
 // Compute ordered sections from settings.sections (fallback to default order if not set)
 const defaultOrder = [
   { type: 'hero', enabled: true },
+  { type: 'links', enabled: true },
   { type: 'brand', enabled: true },
+  { type: 'news', enabled: true },
   { type: 'articles', enabled: true },
   { type: 'publications', enabled: true },
   { type: 'events', enabled: true },
@@ -78,6 +87,35 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
             ctaButton2Url={s?.ctaButton2Url ?? settings?.ctaButton2Url}
           />
         );
+      case 'links':
+        return (
+          <section class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Esplora</h2>
+                <span class="text-sm text-gray-500">Accesso rapido</span>
+              </div>
+              <div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory">
+                {[
+                  { label: 'Chi Siamo', url: '/chi-siamo', tone: 'bg-red-600 text-white' },
+                  { label: 'News', url: '/news', tone: 'bg-gray-900 text-white' },
+                  { label: 'Articoli', url: '/articoli', tone: 'bg-white border border-gray-200 text-gray-900' },
+                  { label: 'Eventi', url: '/eventi', tone: 'bg-white border border-gray-200 text-gray-900' },
+                  { label: 'Pubblicazioni', url: '/pubblicazioni', tone: 'bg-white border border-gray-200 text-gray-900' },
+                  { label: 'Contatti', url: '/contatti', tone: 'bg-white border border-gray-200 text-gray-900' },
+                ].map((item) => (
+                  <a
+                    href={item.url}
+                    class={`min-w-[220px] snap-start rounded-2xl px-5 py-4 shadow-sm hover:shadow-md transition ${item.tone}`}
+                  >
+                    <div class="text-sm uppercase tracking-wide opacity-70">Link</div>
+                    <div class="text-lg font-semibold">{item.label}</div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
       case 'brand':
         return (
           <section class="py-10 bg-white">
@@ -90,6 +128,44 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                   showLogoText={s?.showLogoText !== false}
                   siteName={settings?.heroTitle || 'Rete Italiana Studi Curdi'}
                 />
+              </div>
+            </div>
+          </section>
+        );
+      case 'news':
+        return (latestNews.length > 0) && (
+          <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">{newsTitle}</h2>
+                <a href="/news" class="text-red-600 font-semibold hover:text-red-700">Vedi tutte →</a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {latestNews.map((item) => (
+                  <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    {item.data.heroImage && (
+                      <img 
+                        src={item.data.heroImage} 
+                        alt={item.data.title}
+                        class="w-full h-48 object-cover"
+                      />
+                    )}
+                    <div class="p-6">
+                      <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        <a href={`/news/${item.slug}`} class="hover:text-red-600 transition-colors">
+                          {item.data.title}
+                        </a>
+                      </h3>
+                      <p class="text-gray-600 text-sm mb-4">
+                        {item.data.description || item.body.slice(0, 140) + '...'}
+                      </p>
+                      <div class="flex items-center justify-between text-sm text-gray-500">
+                        <span>{item.data.pubDate.toLocaleDateString('it-IT')}</span>
+                        {item.data.author && <span>di {item.data.author}</span>}
+                      </div>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           </section>

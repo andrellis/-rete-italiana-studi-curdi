@@ -117,6 +117,21 @@ const pubblicazioniCollection = defineCollection({
   }),
 });
 
+const newsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    heroImage: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    author: z.string().optional(),
+    featured: z.boolean().optional(),
+    sections: pageSectionsSchema,
+  }),
+});
+
 const settingsCollection = defineCollection({
   type: 'data',
   schema: z.object({
@@ -192,6 +207,8 @@ const homepageCollection = defineCollection({
     featuredArticlesCount: z.number().optional(),
     featuredPublicationsCount: z.number().optional(),
     featuredEventsCount: z.number().optional(),
+    featuredNewsCount: z.number().optional(),
+    newsSectionTitle: z.string().optional(),
     articlesSectionTitle: z.string().optional(),
     publicationsSectionTitle: z.string().optional(),
     eventsSectionTitle: z.string().optional(),
@@ -202,7 +219,7 @@ const homepageCollection = defineCollection({
     sections: z
       .array(
         z.object({
-          type: z.enum(['hero', 'brand', 'articles', 'publications', 'events', 'social', 'about']),
+          type: z.enum(['hero', 'links', 'brand', 'news', 'articles', 'publications', 'events', 'social', 'about']),
           enabled: z.boolean().optional(),
 
           // Hero overrides (used when type === 'hero')
@@ -246,6 +263,8 @@ const homepageEnCollection = defineCollection({
     featuredArticlesCount: z.number().optional(),
     featuredPublicationsCount: z.number().optional(),
     featuredEventsCount: z.number().optional(),
+    featuredNewsCount: z.number().optional(),
+    newsSectionTitle: z.string().optional(),
     articlesSectionTitle: z.string().optional(),
     publicationsSectionTitle: z.string().optional(),
     eventsSectionTitle: z.string().optional(),
@@ -254,7 +273,7 @@ const homepageEnCollection = defineCollection({
     sections: z
       .array(
         z.object({
-          type: z.enum(['hero', 'brand', 'articles', 'publications', 'events', 'social', 'about']),
+          type: z.enum(['hero', 'links', 'brand', 'news', 'articles', 'publications', 'events', 'social', 'about']),
           enabled: z.boolean().optional(),
           heroBackgroundImage: z.string().optional(),
           heroOverlayOpacity: z.number().optional(),
@@ -290,21 +309,6 @@ const pagineEnCollection = defineCollection({
 });
 
 const articoliEnCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    pubDate: z.coerce.date(),
-    updatedDate: z.coerce.date().optional(),
-    heroImage: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    author: z.string().optional(),
-    featured: z.boolean().optional(),
-    sections: pageSectionsSchema,
-  }),
-});
-
-const newsCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
