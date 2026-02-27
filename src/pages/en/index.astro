@@ -155,8 +155,12 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
                 <h2 class="text-3xl font-bold text-gray-900">{updatesTitle}</h2>
               </div>
               <div class="relative">
+                <div class="flex items-center justify-end gap-2 mb-4">
+                  <button type="button" class="updates-scroll-left inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 hover:bg-gray-100" aria-label="Scroll left">←</button>
+                  <button type="button" class="updates-scroll-right inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 hover:bg-gray-100" aria-label="Scroll right">→</button>
+                </div>
                 <div class="overflow-hidden">
-                  <div class="flex gap-6 animate-updates-scroll hover:[animation-play-state:paused]">
+                  <div class="updates-scroll-track flex gap-6">
                     {[...updates, ...updates].map((item, idx) => (
                       <article class="min-w-[280px] max-w-[320px] bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow" key={`${item.url}-${idx}`}>
                         {item.heroImage && (
@@ -382,17 +386,49 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
   })}
 </Layout>
 
-<style>
-  @keyframes updates-scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.querySelector('.updates-scroll-track');
+    if (!track) return;
+    const container = track.parentElement;
+    const leftBtn = document.querySelector('.updates-scroll-left');
+    const rightBtn = document.querySelector('.updates-scroll-right');
 
-  .animate-updates-scroll {
-    animation: updates-scroll 40s linear infinite;
-  }
-</style>
+    let autoScroll = true;
+    let rafId = null;
+
+    const step = () => {
+      if (!autoScroll || !container) return;
+      container.scrollLeft += 0.6;
+      if (container.scrollLeft >= (track.scrollWidth / 2)) {
+        container.scrollLeft = 0;
+      }
+      rafId = requestAnimationFrame(step);
+    };
+
+    const start = () => {
+      if (rafId) return;
+      autoScroll = true;
+      rafId = requestAnimationFrame(step);
+    };
+    const stop = () => {
+      autoScroll = false;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
+
+    container.addEventListener('mouseenter', stop);
+    container.addEventListener('mouseleave', start);
+
+    leftBtn?.addEventListener('click', () => {
+      container.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+    rightBtn?.addEventListener('click', () => {
+      container.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+
+    start();
+  });
+</script>
