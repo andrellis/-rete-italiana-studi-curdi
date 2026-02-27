@@ -394,17 +394,18 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const track = document.querySelector('.updates-scroll-track');
+    const track = document.querySelector('.updates-scroll-track') as HTMLElement | null;
     if (!track) return;
-    const container = track.parentElement;
-    const leftBtn = document.querySelector('.updates-scroll-left');
-    const rightBtn = document.querySelector('.updates-scroll-right');
+    const container = track.parentElement as HTMLElement | null;
+    if (!container) return;
+    const leftBtn = document.querySelector('.updates-scroll-left') as HTMLButtonElement | null;
+    const rightBtn = document.querySelector('.updates-scroll-right') as HTMLButtonElement | null;
 
     let autoScroll = true;
-    let rafId = null;
+    let rafId: number | null = null;
 
     const step = () => {
-      if (!autoScroll || !container) return;
+      if (!autoScroll) return;
       container.scrollLeft += 0.6;
       if (container.scrollLeft >= (track.scrollWidth / 2)) {
         container.scrollLeft = 0;
