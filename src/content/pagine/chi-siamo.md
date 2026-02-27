@@ -17,7 +17,7 @@ La Rete Italiana di Studi Curdi è un network di accademici, ricercatori e stude
 
 Il network nasce per promuovere un confronto e una discussione accademica rigorosi. La rete si pone l'obiettivo di favorire l'incontro tra ricercatori, lo scambio di conoscenze e possibili collaborazioni tra i propri membri.
 
-## Comitato Fondatore
+**Comitato Fondatore**
 
 - Nicola Degli Esposti — Università di Padova
 - Sevgi Doğan — Scuola Normale Superiore
@@ -27,7 +27,8 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
 - Alessandro Tinti — Università di Torino
 - Federico Venturini — Università di Udine
 
-## Membri Attuali
+ 
+**Membri Attuali**
 
 - **Andrea Novellis** — [Google Scholar](https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en) · [Sito personale](https://andreanovellis.com) · [LinkedIn](https://www.linkedin.com/in/andrea-novellis-39175b213/)
 - **Nome Cognome** — [Google Scholar](#) · [Sito personale](#) · [LinkedIn](#)
