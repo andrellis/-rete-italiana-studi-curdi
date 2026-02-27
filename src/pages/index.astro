@@ -66,6 +66,13 @@ const defaultOrder = [
 const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sections) && settings.sections.length > 0
   ? settings.sections
   : defaultOrder;
+
+const toWordExcerpt = (text: string, maxWords = 50) => {
+  if (!text) return '';
+  const words = text.replace(/\s+/g, ' ').trim().split(' ');
+  if (words.length <= maxWords) return words.join(' ');
+  return `${words.slice(0, maxWords).join(' ')}…`;
+};
 ---
 <Layout title="Rete Italiana Studi Curdi - Home">
   {sectionsOrder.map((s: any) => {
@@ -107,7 +114,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
             type: 'News',
             date: item.data.pubDate,
             title: item.data.title,
-            description: item.data.description || item.body.slice(0, 140) + '...',
+            description: toWordExcerpt(item.data.description || item.body, 50),
             heroImage: item.data.heroImage,
             url: `/news/${item.slug}`,
             featured: !!item.data.featured,
@@ -116,7 +123,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
             type: 'Evento',
             date: item.data.eventDate,
             title: item.data.title,
-            description: item.data.description || item.body.slice(0, 140) + '...',
+            description: toWordExcerpt(item.data.description || item.body, 50),
             heroImage: item.data.heroImage,
             url: `/eventi/${item.slug}`,
             featured: !!item.data.featured,
@@ -125,7 +132,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
             type: 'Articolo',
             date: item.data.pubDate,
             title: item.data.title,
-            description: item.data.description || item.body.slice(0, 140) + '...',
+            description: toWordExcerpt(item.data.description || item.body, 50),
             heroImage: item.data.heroImage,
             url: `/articoli/${item.slug}`,
             featured: !!item.data.featured,
@@ -134,7 +141,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
             type: 'Pubblicazione',
             date: item.data.pubDate,
             title: item.data.title,
-            description: item.data.abstract || item.body.slice(0, 140) + '...',
+            description: toWordExcerpt(item.data.abstract || item.body, 50),
             heroImage: item.data.heroImage,
             url: `/pubblicazioni/${item.slug}`,
             featured: !!item.data.featured,
@@ -176,6 +183,7 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                         </a>
                       </h3>
                       <p class="text-gray-600 text-sm mb-4">{item.description}</p>
+                      <a href={item.url} class="text-red-600 font-semibold text-sm hover:text-red-700">Leggi →</a>
                       <div class="text-sm text-gray-500">
                         {item.date.toLocaleDateString('it-IT')}
                       </div>
