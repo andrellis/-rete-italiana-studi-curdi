@@ -209,6 +209,8 @@ const homepageCollection = defineCollection({
     featuredPublicationsCount: z.number().optional(),
     featuredEventsCount: z.number().optional(),
     featuredNewsCount: z.number().optional(),
+    updatesCount: z.number().optional(),
+    updatesSectionTitle: z.string().optional(),
     newsSectionTitle: z.string().optional(),
     articlesSectionTitle: z.string().optional(),
     publicationsSectionTitle: z.string().optional(),
@@ -220,7 +222,7 @@ const homepageCollection = defineCollection({
     sections: z
       .array(
         z.object({
-          type: z.enum(['hero', 'brand', 'news', 'articles', 'publications', 'events', 'social', 'about']),
+          type: z.enum(['hero', 'brand', 'updates', 'news', 'articles', 'publications', 'events', 'social', 'about']),
           enabled: z.boolean().optional(),
 
           // Hero overrides (used when type === 'hero')
@@ -265,6 +267,8 @@ const homepageEnCollection = defineCollection({
     featuredPublicationsCount: z.number().optional(),
     featuredEventsCount: z.number().optional(),
     featuredNewsCount: z.number().optional(),
+    updatesCount: z.number().optional(),
+    updatesSectionTitle: z.string().optional(),
     newsSectionTitle: z.string().optional(),
     articlesSectionTitle: z.string().optional(),
     publicationsSectionTitle: z.string().optional(),
@@ -274,7 +278,7 @@ const homepageEnCollection = defineCollection({
     sections: z
       .array(
         z.object({
-          type: z.enum(['hero', 'brand', 'news', 'articles', 'publications', 'events', 'social', 'about']),
+          type: z.enum(['hero', 'brand', 'updates', 'news', 'articles', 'publications', 'events', 'social', 'about']),
           enabled: z.boolean().optional(),
           heroBackgroundImage: z.string().optional(),
           heroOverlayOpacity: z.number().optional(),

@@ -664,6 +664,8 @@ collections:
           - {label: "Numero Pubblicazioni in Evidenza", name: "featuredPublicationsCount", widget: "number", required: false, hint: "Quante pubblicazioni mostrare nella homepage"}
           - {label: "Numero Eventi in Evidenza", name: "featuredEventsCount", widget: "number", required: false, hint: "Quanti eventi mostrare nella homepage"}
           - {label: "Numero News in Evidenza", name: "featuredNewsCount", widget: "number", required: false, hint: "Quante news mostrare nella homepage"}
+          - {label: "Numero Elementi Feed", name: "updatesCount", widget: "number", required: false, hint: "Quanti elementi mostrare nel feed aggiornamenti (consigliato 6)"}
+          - {label: "Titolo Feed Aggiornamenti", name: "updatesSectionTitle", widget: "string", required: false, hint: "Titolo della sezione feed aggiornamenti"}
           - {label: "Titolo Sezione News", name: "newsSectionTitle", widget: "string", required: false, hint: "Titolo della sezione news"}
           - {label: "Titolo Sezione Articoli", name: "articlesSectionTitle", widget: "string", required: false, hint: "Titolo della sezione articoli"}
           - {label: "Titolo Sezione Pubblicazioni", name: "publicationsSectionTitle", widget: "string", required: false, hint: "Titolo della sezione pubblicazioni"}
@@ -704,6 +706,13 @@ collections:
                   - { label: "Mostra Testo", name: "showLogoText", widget: "boolean", default: true }
                   - { label: "Allineamento", name: "align", widget: "select", options: ["left","center","right"], default: "center" }
                   - { label: "Max Width", name: "maxWidth", widget: "select", options: ["sm","md","lg"], default: "md" }
+
+              - label: "Aggiornamenti"
+                name: "updates"
+                widget: "object"
+                summary: "Aggiornamenti ({{fields.enabled}})"
+                fields:
+                  - { label: "Abilitata", name: "enabled", widget: "boolean", default: true }
 
               - label: "News"
                 name: "news"
@@ -1395,6 +1404,8 @@ collections:
           - {label: "Featured Publications Count", name: "featuredPublicationsCount", widget: "number", required: false}
           - {label: "Featured Events Count", name: "featuredEventsCount", widget: "number", required: false}
           - {label: "Featured News Count", name: "featuredNewsCount", widget: "number", required: false}
+          - {label: "Updates Feed Count", name: "updatesCount", widget: "number", required: false}
+          - {label: "Updates Feed Title", name: "updatesSectionTitle", widget: "string", required: false}
           - {label: "News Section Title", name: "newsSectionTitle", widget: "string", required: false}
           - {label: "Articles Section Title", name: "articlesSectionTitle", widget: "string", required: false}
           - {label: "Publications Section Title", name: "publicationsSectionTitle", widget: "string", required: false}
@@ -1432,6 +1443,12 @@ collections:
                   - { label: "Show Text", name: "showLogoText", widget: "boolean", default: true }
                   - { label: "Alignment", name: "align", widget: "select", options: ["left","center","right"], default: "center" }
                   - { label: "Max Width", name: "maxWidth", widget: "select", options: ["sm","md","lg"], default: "md" }
+              - label: "Updates"
+                name: "updates"
+                widget: "object"
+                summary: "Updates ({{fields.enabled}})"
+                fields:
+                  - { label: "Enabled", name: "enabled", widget: "boolean", default: true }
               - label: "News"
                 name: "news"
                 widget: "object"

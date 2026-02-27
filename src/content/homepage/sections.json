@@ -24,19 +24,7 @@
       "showLogoText": true
     },
     {
-      "type": "news",
-      "enabled": true
-    },
-    {
-      "type": "articles",
-      "enabled": true
-    },
-    {
-      "type": "publications",
-      "enabled": true
-    },
-    {
-      "type": "events",
+      "type": "updates",
       "enabled": true
     },
     {

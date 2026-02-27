@@ -15,7 +15,7 @@ try {
 
 const settings = homepageSettings.length > 0 ? homepageSettings[0]?.data : null;
 
-// Get featured articles, publications and events
+// Get recent content for updates feed
 const allArticles = await getCollection('articoli');
 const allPublications = await getCollection('pubblicazioni');
 const allEvents = await getCollection('eventi');
@@ -26,6 +26,7 @@ const articlesCount = settings?.featuredArticlesCount || 3;
 const publicationsCount = settings?.featuredPublicationsCount || 3;
 const eventsCount = settings?.featuredEventsCount || 3;
 const newsCount = settings?.featuredNewsCount || 3;
+const updatesCount = settings?.updatesCount || 6;
 
 // Sort by date and get latest
 const featuredArticles = allArticles
@@ -51,15 +52,13 @@ const publicationsTitle = settings?.publicationsSectionTitle || 'Pubblicazioni R
 const eventsTitle = settings?.eventsSectionTitle || 'Prossimi Eventi';
 const socialMediaTitle = settings?.socialMediaTitle || 'Seguici sui Social';
 const newsTitle = settings?.newsSectionTitle || 'News';
+const updatesTitle = settings?.updatesSectionTitle || 'Aggiornamenti Recenti';
 
 // Compute ordered sections from settings.sections (fallback to default order if not set)
 const defaultOrder = [
   { type: 'hero', enabled: true },
   { type: 'brand', enabled: true },
-  { type: 'news', enabled: true },
-  { type: 'articles', enabled: true },
-  { type: 'publications', enabled: true },
-  { type: 'events', enabled: true },
+  { type: 'updates', enabled: true },
   { type: 'social', enabled: settings?.showSocialMedia !== false },
   { type: 'about', enabled: settings?.showAboutSection !== false },
 ];
@@ -98,6 +97,91 @@ const sectionsOrder: Array<Record<string, any>> = Array.isArray(settings?.sectio
                   showLogoText={s?.showLogoText !== false}
                   siteName={settings?.heroTitle || 'Rete Italiana Studi Curdi'}
                 />
+              </div>
+            </div>
+          </section>
+        );
+      case 'updates':
+        const updates = [
+          ...allNews.map((item) => ({
+            type: 'News',
+            date: item.data.pubDate,
+            title: item.data.title,
+            description: item.data.description || item.body.slice(0, 140) + '...',
+            heroImage: item.data.heroImage,
+            url: `/news/${item.slug}`,
+            featured: !!item.data.featured,
+          })),
+          ...allEvents.map((item) => ({
+            type: 'Evento',
+            date: item.data.eventDate,
+            title: item.data.title,
+            description: item.data.description || item.body.slice(0, 140) + '...',
+            heroImage: item.data.heroImage,
+            url: `/eventi/${item.slug}`,
+            featured: !!item.data.featured,
+          })),
+          ...allArticles.map((item) => ({
+            type: 'Articolo',
+            date: item.data.pubDate,
+            title: item.data.title,
+            description: item.data.description || item.body.slice(0, 140) + '...',
+            heroImage: item.data.heroImage,
+            url: `/articoli/${item.slug}`,
+            featured: !!item.data.featured,
+          })),
+          ...allPublications.map((item) => ({
+            type: 'Pubblicazione',
+            date: item.data.pubDate,
+            title: item.data.title,
+            description: item.data.abstract || item.body.slice(0, 140) + '...',
+            heroImage: item.data.heroImage,
+            url: `/pubblicazioni/${item.slug}`,
+            featured: !!item.data.featured,
+          })),
+        ]
+          .sort((a, b) => {
+            if (a.featured !== b.featured) return a.featured ? -1 : 1;
+            return b.date.getTime() - a.date.getTime();
+          })
+          .slice(0, updatesCount);
+
+        return updates.length > 0 && (
+          <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div class="flex items-center justify-between mb-8">
+                <h2 class="text-3xl font-bold text-gray-900">{updatesTitle}</h2>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {updates.map((item) => (
+                  <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    {item.heroImage && (
+                      <div class="w-full aspect-[16/9] bg-gray-50 overflow-hidden">
+                        <img
+                          src={item.heroImage}
+                          alt={item.title}
+                          class="w-full h-full object-contain"
+                        />
+                      </div>
+                    )}
+                    <div class="p-6">
+                      <div class="inline-flex items-center mb-3">
+                        <span class="text-xs font-semibold uppercase tracking-wide bg-red-100 text-red-700 px-3 py-1 rounded-full">
+                          {item.type}
+                        </span>
+                      </div>
+                      <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        <a href={item.url} class="hover:text-red-600 transition-colors">
+                          {item.title}
+                        </a>
+                      </h3>
+                      <p class="text-gray-600 text-sm mb-4">{item.description}</p>
+                      <div class="text-sm text-gray-500">
+                        {item.date.toLocaleDateString('it-IT')}
+                      </div>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           </section>
