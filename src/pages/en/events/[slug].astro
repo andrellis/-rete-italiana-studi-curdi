@@ -75,11 +75,13 @@ const hasSections = Array.isArray(event.data.sections) && event.data.sections.le
       </div>
 
       {event.data.heroImage && (
-        <img 
-          src={event.data.heroImage} 
-          alt={event.data.title}
-          class="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
-        />
+        <div class="w-full aspect-[3/4] bg-gray-50 overflow-hidden rounded-lg mb-8">
+          <img 
+            src={event.data.heroImage} 
+            alt={event.data.title}
+            class="w-full h-full object-contain"
+          />
+        </div>
       )}
     </header>
 
