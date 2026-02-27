@@ -40,6 +40,8 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
   <li>Nome Cognome — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
 </ul>
 
+<div class="mt-6"></div>
+
 ## Come Partecipare
 
 Per unirti alla mailing list e partecipare agli eventi, inviaci il tuo curriculum e un breve messaggio di presentazione.

@@ -40,6 +40,8 @@ The network was created to promote rigorous academic exchange and discussion. It
   <li>Full Name — <a href="#">Google Scholar</a> · <a href="#">Personal website</a> · <a href="#">LinkedIn</a></li>
 </ul>
 
+<div class="mt-6"></div>
+
 ## How to Join
 
 To join the mailing list and participate in events, please send us your CV and a brief introductory message.
