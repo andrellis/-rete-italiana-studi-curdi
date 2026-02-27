@@ -49,11 +49,13 @@ const hasSections = Array.isArray(item.data.sections) && item.data.sections.leng
       )}
 
       {item.data.heroImage && (
-        <img 
-          src={item.data.heroImage} 
-          alt={item.data.title}
-          class="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
-        />
+        <div class="w-full aspect-[16/9] bg-gray-50 overflow-hidden rounded-lg mb-8">
+          <img 
+            src={item.data.heroImage} 
+            alt={item.data.title}
+            class="w-full h-full object-contain"
+          />
+        </div>
       )}
     </header>
 
