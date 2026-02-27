@@ -2,7 +2,7 @@
 title: "PACO Special Issue 18(2) 2025: Exploring the Kurdish Movement"
 description: "The PACO special issue on the Kurdish movement is out, with contributions on power, ideology, and mobilization."
 pubDate: 2025-07-15
-heroImage: /images/1500x500.jpg
+heroImage: /images/paco-banner.png
 tags:
   - paco
   - kurdish movement
