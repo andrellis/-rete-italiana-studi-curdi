@@ -33,12 +33,25 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
 
 **Membri Attuali**
 
-<ul class="list-disc pl-6">
-  <li>Andrea Novellis — <a href="https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en">Google Scholar</a> · <a href="https://andreanovellis.com">Sito personale</a> · <a href="https://www.linkedin.com/in/andrea-novellis-39175b213/">LinkedIn</a></li>
-  <li>Nome Cognome — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
-  <li>Nome Cognome — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
-  <li>Nome Cognome — <a href="#">Google Scholar</a> · <a href="#">Sito personale</a> · <a href="#">LinkedIn</a></li>
-</ul>
+<div class="grid gap-4 md:grid-cols-2">
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Andrea Novellis</h3>
+    <p class="text-sm text-slate-700">Ricercatore post‑doc all’Università di Napoli “L’Orientale” e Research Fellow (non‑resident) al Centre for the Comparative Study of Civil Wars, University of York. Dottore di ricerca in Scienze Politiche (Università di Milano). Si occupa di conflitti etnici, istituzioni politiche ribelli e governance in Siria nord‑orientale e Sri Lanka, con attenzione agli studi curdi.</p>
+    <p class="mt-3 text-sm">
+      <a href="https://scholar.google.it/citations?user=wgVwbM4AAAAJ&hl=en">Google Scholar</a> ·
+      <a href="https://andreanovellis.com">Sito personale</a> ·
+      <a href="https://www.linkedin.com/in/andrea-novellis-39175b213/">LinkedIn</a>
+    </p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Francesco Ventura</h3>
+    <p class="text-sm text-slate-700">Ricercatore (RTD‑A) al Dipartimento SAGAS dell’Università di Firenze, PhD presso l’University College of Dublin. Principal Investigator di un progetto triennale sulla diplomazia della diaspora curda (2025–2028). I suoi interessi includono geografia politica e geopolitica critica; negli studi curdi si concentra sul Kurdish Freedom Movement e sulle geografie post‑statuali.</p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Veronica Buffon</h3>
+    <p class="text-sm text-slate-700">Docente di Antropologia all’Università di Messina e post‑doc nel progetto InMigHealth. PhD presso l’Università di Exeter; ricerca etnografica su donne curde, salute, conflitto e pratiche di cura a Diyarbakır/Amed. Si occupa di antropologia della salute, genere e parentela, violenza e migrazioni forzate.</p>
+  </div>
+</div>
 
 <div class="mt-6"></div>
 
