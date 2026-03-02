@@ -417,7 +417,9 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
       const first = track.children[0];
       const second = track.children[1];
       if (first && second) {
-        return Math.max(1, second.offsetLeft - first.offsetLeft);
+        const firstRect = first.getBoundingClientRect();
+        const secondRect = second.getBoundingClientRect();
+        return Math.max(1, Math.round(secondRect.left - firstRect.left));
       }
       if (first) {
         return Math.max(1, Math.round(first.getBoundingClientRect().width));
