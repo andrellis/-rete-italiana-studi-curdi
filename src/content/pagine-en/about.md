@@ -1,7 +1,7 @@
 ---
 title: About Us
 description: Learn about the mission and members of the Italian Network of Kurdish Studies
-updatedDate: 2025-10-29
+updatedDate: 2026-03-03
 heroImage: ""
 backgroundImage: /images/backgrounds/landscape-hero.jpg
 backgroundOverlay: 60
@@ -50,6 +50,18 @@ The network was created to promote rigorous academic exchange and discussion. It
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Veronica Buffon</h3>
     <p class="text-sm text-slate-700">Lecturer in Anthropology at the University of Messina and postdoctoral researcher in the InMigHealth project. PhD from the University of Exeter; ethnographic fieldwork on Kurdish women, health, conflict, and care in Diyarbakır/Amed. Her work centers on the anthropology of health, gender and kinship, violence, and forced migration.</p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Sevgi Doğan</h3>
+    <p class="text-sm text-slate-700">PhD in Political Philosophy from the Scuola Normale Superiore di Pisa. Postdoctoral researcher focused on academic freedom in democratic and authoritarian regimes, with interests in the Kurdish question, gender studies, and Marxist and Hegelian thought. Author of Marx and Hegel: On the Dialectic of the Individual and the Social (2018), La grande malattia dell’Europa (2023), and La libertà accademica nell’era dei mostri: Rischi e sfide (2025). Member of RISC since 2021.</p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Shilan Fuad Hussain</h3>
+    <p class="text-sm text-slate-700">Researcher and analyst focused on gender equality and women’s rights. UNESCO Fellow, editor for Routledge, and Research Fellow at the Integrity Centre. PhD in Cultural Analysis (University of Urbino) and MA in Middle Eastern Studies (University of Bologna). Her work examines cultural representation, violence against women (including FGM and forced marriages), women’s human rights, and the social impacts of patriarchy in diaspora contexts.</p>
+    <p class="mt-3 text-sm">
+      <a href="https://urbinoc.academia.edu/ShilanFuadHussain">Academia.edu</a> ·
+      <a href="https://www.linkedin.com/in/shilan-fuad-hussain-11a5b6176/">LinkedIn</a>
+    </p>
   </div>
 </div>
 

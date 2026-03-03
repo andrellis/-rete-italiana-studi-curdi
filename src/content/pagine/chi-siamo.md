@@ -1,7 +1,7 @@
 ---
 title: Chi Siamo
 description: Scopri la missione e i membri della Rete Italiana Studi Curdi
-updatedDate: 2025-10-29
+updatedDate: 2026-03-03
 heroImage: ""
 backgroundImage: /images/backgrounds/landscape-hero.jpg
 backgroundOverlay: 60
@@ -50,6 +50,18 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Veronica Buffon</h3>
     <p class="text-sm text-slate-700">Docente di Antropologia all’Università di Messina e post‑doc nel progetto InMigHealth. PhD presso l’Università di Exeter; ricerca etnografica su donne curde, salute, conflitto e pratiche di cura a Diyarbakır/Amed. Si occupa di antropologia della salute, genere e parentela, violenza e migrazioni forzate.</p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Sevgi Doğan</h3>
+    <p class="text-sm text-slate-700">Dottore di ricerca in Filosofia politica presso la Scuola Normale Superiore di Pisa. Ricercatrice post‑doc con un focus sulla libertà accademica nei regimi democratici e autoritari; i suoi interessi includono la questione curda, gli studi di genere e il pensiero marxiano ed hegeliano. Autrice di Marx and Hegel: On the Dialectic of the Individual and the Social (2018), La grande malattia dell’Europa (2023) e La libertà accademica nell’era dei mostri: Rischi e sfide (2025). Membro della RISC dal 2021.</p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Shilan Fuad Hussain</h3>
+    <p class="text-sm text-slate-700">Ricercatrice e analista impegnata su uguaglianza di genere e diritti delle donne. UNESCO Fellow, editor per Routledge e Research Fellow presso l’Integrity Centre. PhD in Cultural Analysis (Università di Urbino) e laurea magistrale in Middle Eastern Studies (Università di Bologna). La sua ricerca affronta rappresentazioni culturali, violenza contro le donne (incluse MGF e matrimoni forzati), diritti umani delle donne e gli impatti sociali del patriarcato nei contesti diasporici.</p>
+    <p class="mt-3 text-sm">
+      <a href="https://urbinoc.academia.edu/ShilanFuadHussain">Academia.edu</a> ·
+      <a href="https://www.linkedin.com/in/shilan-fuad-hussain-11a5b6176/">LinkedIn</a>
+    </p>
   </div>
 </div>
 
