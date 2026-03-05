@@ -40,7 +40,7 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Nicola Degli Esposti</h3>
-    <p class="text-sm text-slate-700">Università di Bologna</p>
+    <p class="text-sm text-slate-700">Si occupa di storia e politica internazionale. Dal 2025 è titolare di una borsa di ricerca presso l’Università di Padova finanziata dalla Fondazione Gerda Henkel sul progetto “Restructuring the Middle East: The West and the politics of loans and conditionalities (1977–1994)”. Dal 2024 insegna corsi di storia e politica internazionale presso l’Università di Bologna. Ha conseguito il dottorato alla London School of Economics nel 2020 con una ricerca sul movimento nazionale curdo basata su lavoro sul campo nel Kurdistan iracheno. Dal 2020 al 2021 è stato International Relations Fellow alla LSE; dal 2021 al 2024 assegnista di ricerca all’Università di Padova.</p>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Sevgi Doğan</h3>

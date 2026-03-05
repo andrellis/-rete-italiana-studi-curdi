@@ -40,7 +40,7 @@ The network was created to promote rigorous academic exchange and discussion. It
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Nicola Degli Esposti</h3>
-    <p class="text-sm text-slate-700">University of Bologna</p>
+    <p class="text-sm text-slate-700">Researcher in history and international politics. Since 2025 he has held a research grant at the University of Padua funded by the Gerda Henkel Foundation on the project “Restructuring the Middle East: The West and the Politics of Loans and Conditionalities (1977–1994).” Since 2024 he has taught international history and politics at the University of Bologna. He earned his PhD at the London School of Economics in 2020 with a dissertation on the Kurdish national movement based on fieldwork in Iraqi Kurdistan. From 2020 to 2021 he was an International Relations Fellow at LSE, and from 2021 to 2024 a postdoctoral research fellow at the University of Padua.</p>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Sevgi Doğan</h3>
