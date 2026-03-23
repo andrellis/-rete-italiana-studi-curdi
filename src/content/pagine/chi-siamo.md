@@ -68,6 +68,18 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
     </p>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Orkide Izci</h3>
+    <p class="text-sm text-slate-700">Research fellow in sociologia presso il Dipartimento delle Arti dell'Universita di Bologna. Ha conseguito un PhD in Sociologia con una tesi sulla nozione di "home" e sui processi di appartenenza nelle comunita diasporiche. I suoi interessi di ricerca si collocano all'intersezione tra cultura e societa, con particolare attenzione a genere, diaspora, memoria, migrazione e costruzione dell'identita.</p>
+    <p class="mt-3 text-sm">
+      <a href="mailto:orkide.izci@unibo.it">orkide.izci@unibo.it</a>
+    </p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Gabriele Leone</h3>
+    <p class="text-sm text-slate-700">Ricercatore presso la University of Lapland, si occupa di filosofia politica e biopolitica con particolare attenzione al trattamento della minoranza curda in Turchia. La sua ricerca analizza i rapporti di potere tra Stato-nazione turco e popolazione curda, con focus su governance biopolitica, identita nazionale, diritti delle minoranze e democrazia. Nel 2024-2025 e Visiting Fellow al Centre for Southeast European Studies e tutor del corso "International Cooperation, Sustainability, and Peace" all'Universita della Calabria.</p>
+    <p class="mt-3 text-sm">Articolo recente: <em>Performing Peace, Reframing Power: Ocalan's Ceasefire Call and the Post-Conflict Imaginary in Kurdish Politics</em>.</p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Alessandro Tinti</h3>
     <p class="text-sm text-slate-700">Università di ???</p>
   </div>
@@ -88,3 +100,5 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
 Per unirti alla mailing list e partecipare agli eventi, inviaci il tuo curriculum e un breve messaggio di presentazione.
 
 Email: rete.italiana.studi.curdi@gmail.com
+
+

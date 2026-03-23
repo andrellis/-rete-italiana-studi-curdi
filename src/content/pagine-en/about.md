@@ -68,6 +68,18 @@ The network was created to promote rigorous academic exchange and discussion. It
     </p>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Orkide Izci</h3>
+    <p class="text-sm text-slate-700">Research fellow in sociology at the Department of the Arts of the University of Bologna. She holds a PhD in Sociology focused on the notion of "home" and processes of belonging within diasporic communities. Her research lies at the intersection of culture and society, with particular attention to gender, diaspora, memory, migration, and identity construction.</p>
+    <p class="mt-3 text-sm">
+      <a href="mailto:orkide.izci@unibo.it">orkide.izci@unibo.it</a>
+    </p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <h3 class="mb-2 text-lg font-semibold">Gabriele Leone</h3>
+    <p class="text-sm text-slate-700">Researcher at the University of Lapland, he works on political philosophy and biopolitics with a focus on Turkey's treatment of its Kurdish minority. His research examines power relations between the Turkish nation-state and the Kurdish population, with particular attention to biopolitical governance, national identity, minority rights, and democratic rule. In 2024-2025 he is a Visiting Fellow at the Centre for Southeast European Studies and a tutor for the course "International Cooperation, Sustainability, and Peace" at the University of Calabria.</p>
+    <p class="mt-3 text-sm">Recent article: <em>Performing Peace, Reframing Power: Ocalan's Ceasefire Call and the Post-Conflict Imaginary in Kurdish Politics</em>.</p>
+  </div>
+  <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Alessandro Tinti</h3>
     <p class="text-sm text-slate-700">University of ???</p>
   </div>
@@ -88,3 +100,5 @@ The network was created to promote rigorous academic exchange and discussion. It
 To join the mailing list and participate in events, please send us your CV and a brief introductory message.
 
 Email: rete.italiana.studi.curdi@gmail.com
+
+
