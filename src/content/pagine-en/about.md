@@ -81,7 +81,10 @@ The network was created to promote rigorous academic exchange and discussion. It
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Alessandro Tinti</h3>
-    <p class="text-sm text-slate-700">University of ???</p>
+    <p class="text-sm text-slate-700">Postdoctoral researcher with an interdisciplinary background in international relations, political ecology, and environmental anthropology. His research has examined the relationship between extractivism and identity formation in the Kurdistan Region of Iraq. He earned a PhD in Political Science and International Relations from the Sant’Anna School of Advanced Studies and has been a research fellow at the American University of Iraq – Sulaimani and the Autonomous University of Barcelona. As a consultant, he coordinated the research component of the UNODC project “STRIVE Juvenile” in Iraq and collaborated with the European Commission’s Knowledge Centre on Migration and Demography.</p>
+    <p class="mt-3 text-sm">
+      <a href="mailto:alessandro.tinti@unito.it">alessandro.tinti@unito.it</a>
+    </p>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Francesco Ventura</h3>
@@ -89,7 +92,7 @@ The network was created to promote rigorous academic exchange and discussion. It
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Federico Venturini</h3>
-    <p class="text-sm text-slate-700">University of Udine</p>
+    <p class="text-sm text-slate-700">Research Associate at the University of Udine. His current research focuses on Zero Waste, river contracts, and participatory processes. He earned his PhD at the University of Leeds in 2016, where he examined relations between contemporary cities and urban social movements through participatory and militant research approaches and the lens of social ecology, drawing on fieldwork in Rio de Janeiro. He has served on the Advisory Board of the Transnational Institute of Social Ecology since 2013 and on the International Imrali Peace Delegation since 2016. He has also co-edited volumes on Abdullah Ocalan, the Kurdish question, and urban social ecology.</p>
   </div>
 </div>
 
@@ -100,5 +103,7 @@ The network was created to promote rigorous academic exchange and discussion. It
 To join the mailing list and participate in events, please send us your CV and a brief introductory message.
 
 Email: rete.italiana.studi.curdi@gmail.com
+
+
 
 

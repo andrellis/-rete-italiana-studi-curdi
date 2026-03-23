@@ -81,7 +81,10 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Alessandro Tinti</h3>
-    <p class="text-sm text-slate-700">Università di ???</p>
+    <p class="text-sm text-slate-700">Ricercatore post‑doc con una formazione interdisciplinare in relazioni internazionali, ecologia politica e antropologia ambientale. La sua ricerca ha esplorato il rapporto tra estrattivismo e formazione dell’identità nel Kurdistan Region dell’Iraq. Ha conseguito un PhD in Scienza politica e Relazioni internazionali presso la Scuola Superiore Sant’Anna ed è stato research fellow presso l’American University of Iraq – Sulaimani e l’Universitat Autònoma de Barcelona. Come consulente ha coordinato la componente di ricerca del progetto UNODC “STRIVE Juvenile” in Iraq e ha collaborato con il Knowledge Centre on Migration and Demography della Commissione europea.</p>
+    <p class="mt-3 text-sm">
+      <a href="mailto:alessandro.tinti@unito.it">alessandro.tinti@unito.it</a>
+    </p>
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Francesco Ventura</h3>
@@ -89,7 +92,7 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
   </div>
   <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
     <h3 class="mb-2 text-lg font-semibold">Federico Venturini</h3>
-    <p class="text-sm text-slate-700">Università di Udine</p>
+    <p class="text-sm text-slate-700">Research Associate presso l'Universita di Udine. Le sue ricerche attuali si concentrano su Zero Waste, contratti di fiume e processi partecipativi. Ha conseguito il PhD all'Universita di Leeds nel 2016 con una ricerca sui rapporti tra citta contemporanee e movimenti sociali urbani a Rio de Janeiro, attraverso approcci partecipativi e militanti e la prospettiva dell'ecologia sociale. Fa parte dell'Advisory Board del Transnational Institute of Social Ecology dal 2013 e dell'International Imrali Peace Delegation dal 2016. Ha inoltre co-curato volumi su Abdullah Ocalan, la questione curda e l'ecologia sociale urbana.</p>
   </div>
 </div>
 
@@ -100,5 +103,7 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
 Per unirti alla mailing list e partecipare agli eventi, inviaci il tuo curriculum e un breve messaggio di presentazione.
 
 Email: rete.italiana.studi.curdi@gmail.com
+
+
 
 
