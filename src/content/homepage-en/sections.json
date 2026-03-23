@@ -28,10 +28,11 @@
     },
 
     {
-      "type": "updates",
-      "enabled": true
-    },    {
       "type": "events",
+      "enabled": true
+    },
+    {
+      "type": "updates",
       "enabled": true
     },
     {
@@ -55,6 +56,7 @@
   "heroTitle": "Italian Network of Kurdish Studies",
   "ctaButton2Url": ""
 }
+
 
 
 

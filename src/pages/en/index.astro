@@ -330,12 +330,12 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
         const spotlightEvent = upcomingEvents[0];
         const otherUpcomingEvents = upcomingEvents.slice(1);
         return spotlightEvent && (
-          <section class="py-20 bg-white">
+          <section class="py-16 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div class="flex items-end justify-between gap-6 mb-8">
                 <div>
                   <p class="text-sm font-semibold uppercase tracking-[0.2em] text-red-600 mb-2">Spotlight</p>
-                  <h2 class="text-4xl font-bold text-gray-900">{eventsTitle}</h2>
+                  <h2 class="text-[2.15rem] font-bold text-gray-900">{eventsTitle}</h2>
                 </div>
                 <a href="/en/events" class="hidden sm:inline-flex bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                   View All Events
@@ -353,17 +353,17 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
                     </div>
                   </div>
                 )}
-                <div class="p-8 lg:p-10 flex flex-col justify-center">
+                <div class="p-7 lg:p-8 flex flex-col justify-center">
                   <div class="inline-flex w-fit items-center rounded-full bg-red-100 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-red-700">Upcoming Event</div>
-                  <h3 class="mt-4 text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+                  <h3 class="mt-4 text-3xl lg:text-[2.15rem] font-bold text-gray-900 leading-tight">
                     <a href={`/en/events/${spotlightEvent.slug}`} class="hover:text-red-600 transition-colors">
                       {spotlightEvent.data.title}
                     </a>
                   </h3>
-                  <p class="mt-5 text-base lg:text-lg leading-8 text-gray-700">
+                  <p class="mt-5 text-[0.98rem] lg:text-[1.02rem] leading-7 text-gray-700">
                     {spotlightEvent.data.description || toWordExcerpt(spotlightEvent.body, 70)}
                   </p>
-                  <div class="mt-6 space-y-3 text-sm lg:text-base text-gray-600">
+                  <div class="mt-6 space-y-3 text-sm lg:text-[0.98rem] text-gray-600">
                     <p><strong class="text-gray-900">When:</strong> {spotlightEvent.data.eventDate.toLocaleDateString('en-GB')}{spotlightEvent.data.endDate ? ` - ${spotlightEvent.data.endDate.toLocaleDateString('en-GB')}` : ''}</p>
                     {spotlightEvent.data.location && <p><strong class="text-gray-900">Where:</strong> {spotlightEvent.data.location}</p>}
                   </div>
@@ -504,4 +504,5 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
     });
   });
 </script>
+
 
