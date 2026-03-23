@@ -64,6 +64,11 @@ This document captures what has been done so far, the current state of the site,
   - Andrea Novellis (bio from CV)
   - Francesco Ventura (bio from doc)
   - Veronica Buffon (bio from doc)
+  - Shilan Fuad Hussain
+  - Orkide Izci
+  - Gabriele Leone
+- Member-page updates for Orkide Izci and Gabriele Leone were pushed to `master`
+  - Commit: `8438d60` — `Add Orkide Izci and Gabriele Leone bios`
 
 ## Homepage
 Order is explicitly:
@@ -86,4 +91,5 @@ Earlier build failures were due to TS checks in inline scripts; now fixed by rem
 - Content: `src/content`
 - Images: `public/images`
 - PDFs: `public/files/publications`
+
 
