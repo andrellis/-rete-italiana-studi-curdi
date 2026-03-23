@@ -333,33 +333,72 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
           </section>
         );
       case 'events':
-        return (upcomingEvents.length > 0) && (
-          <section class="py-16 bg-gray-50">
+        const spotlightEvent = upcomingEvents[0];
+        const otherUpcomingEvents = upcomingEvents.slice(1);
+        return spotlightEvent && (
+          <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">{eventsTitle}</h2>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {upcomingEvents.map((event) => (
-                  <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">
-                      <a href={`/eventi/${event.slug}`} class="hover:text-red-600 transition-colors">
-                        {event.data.title}
-                      </a>
-                    </h3>
-                    <p class="text-gray-600 text-sm mb-4">
-                      {event.data.description || event.body.slice(0, 150) + '...'}
-                    </p>
-                    <div class="text-sm text-gray-500 space-y-1">
-                      <p>📅 {event.data.eventDate.toLocaleDateString('it-IT')}</p>
-                      {event.data.location && <p>📍 {event.data.location}</p>}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div class="text-center mt-8">
-                <a href="/eventi" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+              <div class="flex items-end justify-between gap-6 mb-8">
+                <div>
+                  <p class="text-sm font-semibold uppercase tracking-[0.2em] text-red-600 mb-2">In Evidenza</p>
+                  <h2 class="text-4xl font-bold text-gray-900">{eventsTitle}</h2>
+                </div>
+                <a href="/eventi" class="hidden sm:inline-flex bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                   Vedi Tutti gli Eventi
                 </a>
               </div>
+              <article class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-0 overflow-hidden rounded-3xl border border-red-100 bg-gradient-to-br from-red-50 via-white to-amber-50 shadow-xl">
+                {spotlightEvent.data.heroImage && (
+                  <div class="bg-white/70 p-6 lg:p-8">
+                    <div class="overflow-hidden rounded-2xl border border-red-100 bg-white shadow-sm">
+                      <img
+                        src={spotlightEvent.data.heroImage}
+                        alt={spotlightEvent.data.title}
+                        class="w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
+                )}
+                <div class="p-8 lg:p-10 flex flex-col justify-center">
+                  <div class="inline-flex w-fit items-center rounded-full bg-red-100 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-red-700">Prossimo Evento</div>
+                  <h3 class="mt-4 text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+                    <a href={`/eventi/${spotlightEvent.slug}`} class="hover:text-red-600 transition-colors">
+                      {spotlightEvent.data.title}
+                    </a>
+                  </h3>
+                  <p class="mt-5 text-base lg:text-lg leading-8 text-gray-700">
+                    {spotlightEvent.data.description || toWordExcerpt(spotlightEvent.body, 70)}
+                  </p>
+                  <div class="mt-6 space-y-3 text-sm lg:text-base text-gray-600">
+                    <p><strong class="text-gray-900">Quando:</strong> {spotlightEvent.data.eventDate.toLocaleDateString('it-IT')}{spotlightEvent.data.endDate ? ` - ${spotlightEvent.data.endDate.toLocaleDateString('it-IT')}` : ''}</p>
+                    {spotlightEvent.data.location && <p><strong class="text-gray-900">Dove:</strong> {spotlightEvent.data.location}</p>}
+                  </div>
+                  <div class="mt-8 flex flex-wrap gap-4">
+                    <a href={`/eventi/${spotlightEvent.slug}`} class="inline-flex bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                      Apri l'evento
+                    </a>
+                    <a href="/eventi" class="inline-flex border border-red-200 text-red-700 px-6 py-3 rounded-lg font-semibold hover:bg-red-50 transition-colors sm:hidden">
+                      Vedi Tutti gli Eventi
+                    </a>
+                  </div>
+                </div>
+              </article>
+              {otherUpcomingEvents.length > 0 && (
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                  {otherUpcomingEvents.map((event) => (
+                    <article class="bg-gray-50 rounded-2xl border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                      <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                        <a href={`/eventi/${event.slug}`} class="hover:text-red-600 transition-colors">{event.data.title}</a>
+                      </h3>
+                      <p class="text-gray-600 text-sm mb-4">{event.data.description || toWordExcerpt(event.body, 35)}</p>
+                      <div class="text-sm text-gray-500 space-y-1">
+                        <p>📅 {event.data.eventDate.toLocaleDateString('it-IT')}</p>
+                        {event.data.location && <p>📍 {event.data.location}</p>}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
         );
@@ -471,3 +510,5 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
     });
   });
 </script>
+
+

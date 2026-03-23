@@ -26,8 +26,12 @@
       "showLogoImage": true,
       "showLogoText": true
     },
+
     {
       "type": "updates",
+      "enabled": true
+    },    {
+      "type": "events",
       "enabled": true
     },
     {
@@ -51,3 +55,6 @@
   "heroTitle": "Rete Italiana Studi Curdi",
   "ctaButton2Url": ""
 }
+
+
+
