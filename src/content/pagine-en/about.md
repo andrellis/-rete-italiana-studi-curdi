@@ -22,7 +22,7 @@ The network was created to promote rigorous academic exchange and discussion. It
 <ul class="list-disc pl-6">
   <li>Nicola Degli Esposti — University of Padua</li>
   <li>Sevgi Doğan — Scuola Normale Superiore</li>
-  <li>Davide Grasso — International University College</li>
+  <li>Davide Grasso — University of Turin</li>
   <li>Camilla Insom — Sapienza University of Rome</li>
   <li>Andrea Novellis — University of Milan</li>
   <li>Alessandro Tinti — University of Turin</li>
@@ -103,6 +103,7 @@ The network was created to promote rigorous academic exchange and discussion. It
 To join the mailing list and participate in events, please send us your CV and a brief introductory message.
 
 Email: rete.italiana.studi.curdi@gmail.com
+
 
 
 

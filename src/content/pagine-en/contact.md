@@ -10,6 +10,4 @@ order: 2
 If you have questions, collaboration ideas, or would like to join the network, please get in touch.
 
 Email: rete.italiana.studi.curdi@gmail.com  
-Website: www.reteitalianastudicurdi.it
-
-We usually reply within 24–48 hours on weekdays.
+Website: www.reteitalianastudicurdi.eu

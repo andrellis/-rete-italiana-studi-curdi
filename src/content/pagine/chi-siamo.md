@@ -22,7 +22,7 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
 <ul class="list-disc pl-6">
   <li>Nicola Degli Esposti — Università di Padova</li>
   <li>Sevgi Doğan — Scuola Normale Superiore</li>
-  <li>Davide Grasso — International University College</li>
+  <li>Davide Grasso — Università di Torino</li>
   <li>Camilla Insom — Università di Roma “La Sapienza”</li>
   <li>Andrea Novellis — Università di Milano</li>
   <li>Alessandro Tinti — Università di Torino</li>
@@ -103,6 +103,7 @@ Il network nasce per promuovere un confronto e una discussione accademica rigoro
 Per unirti alla mailing list e partecipare agli eventi, inviaci il tuo curriculum e un breve messaggio di presentazione.
 
 Email: rete.italiana.studi.curdi@gmail.com
+
 
 
 
