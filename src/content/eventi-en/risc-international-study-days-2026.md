@@ -5,7 +5,7 @@ eventDate: 2026-03-26
 endDate: 2026-03-27
 location: "University of Turin, Luigi Einaudi Campus (Sala Lauree Blu / Aula Magna)"
 heroImage: /images/risc-international-study-days-2026-day1.jpg
-featured: true
+featured: false
 ---
 
 The 2026 international study days of the Italian Network of Kurdish Studies examine the Kurdish Freedom Movement at a critical crossroads, bringing together historical research, political sociology, gender studies, political theory, and conflict analysis. The programme focuses on the movement's historical roots, the ideological shifts that have shaped it, and ongoing reconfiguration processes across Syria, Turkey, Iran, and diasporic networks.

@@ -5,7 +5,7 @@ eventDate: 2026-03-26
 endDate: 2026-03-27
 location: "Università di Torino, Campus Luigi Einaudi (Sala Lauree Blu / Aula Magna)"
 heroImage: /images/risc-international-study-days-2026-day1.jpg
-featured: true
+featured: false
 ---
 
 Le giornate internazionali di studio 2026 della Rete Italiana di Studi Curdi affrontano il Kurdish Freedom Movement in una fase di snodo, mettendo in dialogo ricerca storica, sociologia politica, studi di genere, teoria politica e analisi dei conflitti. Il programma si concentra sulle radici storiche del movimento, sugli spostamenti ideologici che lo hanno attraversato e sui processi di riconfigurazione in corso in Siria, Turchia, Iran e nelle reti diasporiche.
