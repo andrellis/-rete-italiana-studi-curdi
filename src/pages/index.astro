@@ -19,6 +19,8 @@ const allArticles = await getCollection('articoli');
 const allPublications = await getCollection('pubblicazioni');
 const allEvents = await getCollection('eventi');
 const allNews = await getCollection('news');
+const homepageExcludedNewsSlugs = new Set(['comunicato-visti-garmian-2026']);
+const homepageNews = allNews.filter((item) => !homepageExcludedNewsSlugs.has(item.slug));
 
 // Get counts from settings or use defaults
 const articlesCount = settings?.featuredArticlesCount || 3;
@@ -41,7 +43,7 @@ const upcomingEvents = allEvents
   .sort((a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime())
   .slice(0, eventsCount);
 
-const latestNews = allNews
+const latestNews = homepageNews
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
   .slice(0, newsCount);
 
@@ -111,7 +113,7 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
         );
       case 'updates':
         const updates = [
-          ...allNews.map((item) => ({
+          ...homepageNews.map((item) => ({
             type: 'News',
             date: item.data.pubDate,
             title: item.data.title,
@@ -510,6 +512,4 @@ const toWordExcerpt = (text: string, maxWords = 50) => {
     });
   });
 </script>
-
-
 
