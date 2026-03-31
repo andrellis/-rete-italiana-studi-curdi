@@ -6,16 +6,19 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
     "cms": "decap-server",
     "dev:cms": "concurrently \"npm:cms\" \"npm:dev\"",
     "verify": "node scripts/verify-deployment.cjs",
     "deploy:prep": "node scripts/deploy-prep.cjs",
-    "deploy:checklist": "node scripts/deployment-checklist.cjs"
+    "deploy:checklist": "node scripts/deployment-checklist.cjs",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "11",
     "@astrojs/tailwind": "^5.1.0",
     "astro": "^4.15.12",
     "tailwindcss": "^3.4.15",
@@ -24,6 +27,7 @@
   "devDependencies": {
     "@types/node": "^22.10.2",
     "concurrently": "^9.0.1",
-    "decap-server": "^3.0.0"
+    "decap-server": "^3.0.0",
+    "wrangler": "^4.79.0"
   }
 }
